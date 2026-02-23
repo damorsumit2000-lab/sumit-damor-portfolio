@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumit Damor - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --bg: #ecf0f1;
+            --text: #2c3e50;
+            --light: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .nav-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 20px;
+            box-shadow: 0 4px 12px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .nav-toggle:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .drawer {
+            position: fixed;
+            left: -300px;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: var(--primary);
+            transition: left 0.3s ease;
+            z-index: 999;
+            padding: 80px 0 20px;
+            box-shadow: 4px 0 20px var(--shadow);
+        }
+
+        .drawer.open {
+            left: 0;
+        }
+
+        .drawer nav a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 16px 30px;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .drawer nav a:hover,
+        .drawer nav a.active {
+            background: rgba(255, 255, 255, 0.1);
+            border-left-color: var(--secondary);
+            padding-left: 40px;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 998;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 80px 40px;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 24px var(--shadow);
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .contact-info {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .contact-info a:hover {
+            opacity: 1;
+        }
+
+        .section {
+            background: white;
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px var(--shadow);
+        }
+
+        .section h2 {
+            color: var(--primary);
+            margin-bottom: 30px;
+            font-size: 2em;
+            font-weight: 300;
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 10px;
+        }
+
+        .experience-card {
+            margin-bottom: 30px;
+            padding: 25px;
+            border-left: 4px solid var(--secondary);
+            background: var(--bg);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .experience-card:hover {
+            transform: translateX(10px);
+        }
+
+        .experience-card h3 {
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .experience-card .company {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .experience-card .date {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .experience-card ul {
+            margin-left: 20px;
+        }
+
+        .experience-card li {
+            margin-bottom: 8px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: var(--bg);
+            padding: 20px;
+            border-radius: 8px;
+            border-top: 4px solid var(--secondary);
+        }
+
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .project-card {
+            background: var(--bg);
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .project-card h3 {
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .project-card .date {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .education-card {
+            background: var(--bg);
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .education-card h3 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .education-card .institution {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .achievement-card {
+            background: var(--bg);
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #27ae60;
+        }
+
+        .achievement-card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .blog-card {
+            background: var(--bg);
+            padding: 25px;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .blog-card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .blog-card .blog-date {
+            color: #7f8c8d;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+        }
+
+        .admin-login {
+            max-width: 400px;
+            margin: 100px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .admin-login h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--bg);
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .btn-danger {
+            background: var(--accent);
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+
+        .admin-controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .admin-controls .btn {
+            width: auto;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .section {
+                padding: 25px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .success-message {
+            background: #27ae60;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <button class="nav-toggle" onclick="toggleDrawer()">☰</button>
+
+    <div class="drawer" id="drawer">
+        <nav>
+            <a href="#" class="active" onclick="showPage('home')">Home</a>
+            <a href="#" onclick="showPage('experience')">Experience</a>
+            <a href="#" onclick="showPage('projects')">Projects</a>
+            <a href="#" onclick="showPage('education')">Education</a>
+            <a href="#" onclick="showPage('skills')">Skills</a>
+            <a href="#" onclick="showPage('blog')">Blog</a>
+            <a href="#" onclick="showPage('admin')">Admin Panel</a>
+        </nav>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="toggleDrawer()"></div>
+
+    <div class="container">
+        <div class="page active" id="home">
+            <div class="header">
+                <h1>Sumit Damor</h1>
+                <p class="subtitle">Operations professional with experience in corporate client management, subscription lifecycle handling, and revenue operations within a fintech environment at Groww. Currently pursuing an MBA with a background in Economics and strong skills in data analysis, and process optimization.</p>
+                <div class="contact-info">
+                    <a href="mailto:sumitrd22@nsb.edu.in">📧 sumitrd22@nsb.edu.in</a>
+                    <a href="tel:+918200168197">📱 (+91) 82001-68197</a>
+                    <a href="#">📍 Bangalore, India</a>
+                    <a href="https://linkedin.com/in/sumit-damor-918b33184" target="_blank">💼 LinkedIn</a>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>About Me</h2>
+                <p>I'm an operations professional currently working at Groww Invest-Tech Private Limited, where I manage end-to-end corporate client operations for Groww Cloud subscriptions. With a strong foundation in Economics and currently pursuing an MBA in Marketing, I bring a unique blend of analytical thinking and business acumen to every project.</p>
+                <p style="margin-top: 15px;">My expertise spans across client management, revenue operations, data analysis, and process optimization. I'm passionate about leveraging technology and data-driven insights to improve operational efficiency and enhance client experiences.</p>
+            </div>
+
+            <div class="section">
+                <h2>Achievements</h2>
+                <div class="achievement-card">
+                    <h3>🏆 AAGMAN - The Marketing Fest</h3>
+                    <p>Won the marketing fest AAGMAN at NSB, showcasing my skills and earning the top prize. This accolade highlights my innovative approach and bolsters my confidence in my marketing abilities.</p>
+                </div>
+                <div class="achievement-card">
+                    <h3>♻️ Recycle Mania</h3>
+                    <p>Won a product design event using waste materials, showcasing creativity and sustainability. This victory demonstrated my design skills and commitment to environmental responsibility.</p>
+                </div>
+                <div class="achievement-card">
+                    <h3>🎉 Annual College Fest</h3>
+                    <p>Led a team for the college's largest event, overseeing the design and implementation of various games to be featured during the annual college fest.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Languages</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>English</h3>
+                        <p>Full Professional Proficiency</p>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Hindi</h3>
+                        <p>Native or Bilingual Proficiency</p>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Gujarati</h3>
+                        <p>Native or Bilingual Proficiency</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page" id="experience">
+            <div class="section">
+                <h2>Work Experience</h2>
+                <div class="experience-card">
+                    <h3>Order Processing & Revenue Operations Associate — Corporate Cloud Subscription Clients</h3>
+                    <div class="company">Groww Invest-Tech Private Limited</div>
+                    <div class="date">07/2024 - Present, Bangalore, India</div>
+                    <p style="margin-bottom: 15px; font-style: italic;">Groww is an online investment platform that offers mutual funds, tax planning, investment management, and financial information services.</p>
+                    <ul>
+                        <li>Managed end-to-end corporate client tickets for Groww Cloud subscriptions, supporting brokers, companies, and proprietary traders across onboarding, activation, and ongoing operations.</li>
+                        <li>Validated corporate onboarding requests including documentation and account verification, and coordinated subscription provisioning and platform setup in collaboration with technical teams.</li>
+                        <li>Acted as the primary support contact for corporate clients, resolving execution issues, system errors, connectivity problems, and account configuration queries within SLA timelines.</li>
+                        <li>Supported revenue operations by monitoring subscription usage, renewals, and cancellations, while maintaining dashboards and collaborating with product, engineering, and finance teams to improve workflows and client experience.</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>Tools & Platforms:</strong> Groww Cloud, Freshdesk, Jira, Google Sheets, Internal OMS</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="page" id="projects">
+            <div class="section">
+                <h2>Projects</h2>
+                <div class="project-card">
+                    <h3>A study on the impact of website quality on payment modes and online compulsive buying behavior</h3>
+                    <div class="date">01/2024 - 03/2024</div>
+                    <ul>
+                        <li>Identified various factors related to website quality for online purchases.</li>
+                        <li>Analyzed the impact of identified website quality factors on compulsive buying behavior.</li>
+                    </ul>
+                </div>
+                <div class="project-card">
+                    <h3>A study of Digital India Movement - Market Analysis</h3>
+                    <div class="date">02/2022 - 03/2022</div>
+                    <ul>
+                        <li>Aggregated data from authentic sources on the new Digital UPI Platforms.</li>
+                        <li>Built visualizations in Tableau to demonstrate which are the main UPI platforms in India.</li>
+                    </ul>
+                </div>
+                <div class="project-card">
+                    <h3>MERN Project - News Website</h3>
+                    <div class="date">11/2021 - 12/2021</div>
+                    <ul>
+                        <li>Wrote the code in JavaScript, and used libraries like ReactJS, ExpressJS, NodeJS.</li>
+                        <li>Deployed the website on Heroku Server for a specific timeline.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="page" id="education">
+            <div class="section">
+                <h2>Education</h2>
+                <div class="education-card">
+                    <h3>Masters of Business Administration (MBA) - Marketing</h3>
+                    <div class="institution">National School of Business</div>
+                    <div class="date">08/2022 - Present, Bangalore, India</div>
+                </div>
+                <div class="education-card">
+                    <h3>Bachelor of Arts, Economics</h3>
+                    <div class="institution">Indira Gandhi National Open School</div>
+                    <div class="date">08/2019 - 05/2022, New Delhi, India</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Certificates</h2>
+                <div class="achievement-card">
+                    <h3>Digital Marketing by Curtin University</h3>
+                    <p>Provides an introduction to digital marketing strategies, including content marketing, social media marketing, and online advertising.</p>
+                </div>
+                <div class="achievement-card">
+                    <h3>Customer Relationship Management for Marketers by Curtin University</h3>
+                    <p>Explores CRM systems, customer retention strategies, and relationship marketing. Emphasizes data-driven decision-making and customer insights.</p>
+                </div>
+                <div class="achievement-card">
+                    <h3>Introduction to Project Management</h3>
+                    <p>Provides an overview of key project management concepts, tools, and techniques. Designed for beginners and those new to project management.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="page" id="skills">
+            <div class="section">
+                <h2>Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Technical Skills</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Excel</span>
+                            <span class="skill-tag">PowerPoint</span>
+                            <span class="skill-tag">Freshdesk</span>
+                            <span class="skill-tag">Jira</span>
+                            <span class="skill-tag">Google Sheets</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Analytical Skills</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Data Collection</span>
+                            <span class="skill-tag">Market Research</span>
+                            <span class="skill-tag">Data Analysis</span>
+                            <span class="skill-tag">Critical Thinking</span>
+                            <span class="skill-tag">Logical Thinking</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Business Skills</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Project Management</span>
+                            <span class="skill-tag">Customer Retention</span>
+                            <span class="skill-tag">Sales</span>
+                            <span class="skill-tag">Email Marketing</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Interests</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Stocks</span>
+                            <span class="skill-tag">Investments</span>
+                            <span class="skill-tag">Fintech</span>
+                            <span class="skill-tag">Marketing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page" id="blog">
+            <div class="section">
+                <h2>Personal Blog</h2>
+                <div id="blogContainer" class="blog-grid">
+                    <div class="blog-card">
+                        <h3>Welcome to My Blog</h3>
+                        <div class="blog-date">February 2026</div>
+                        <div class="blog-excerpt">
+                            <p>Welcome to my personal blog! Here I'll be sharing insights about fintech, operations management, marketing strategies, and my journey in the tech industry. Stay tuned for more updates!</p>
+                        </div>
+                    </div>
+                    <div class="blog-card">
+                        <h3>The Future of Fintech in India</h3>
+                        <div class="blog-date">February 2026</div>
+                        <div class="blog-excerpt">
+                            <p>India's fintech landscape is evolving rapidly. From UPI to digital lending, the transformation is remarkable. In this post, I explore the trends shaping the future of financial technology in India.</p>
+                        </div>
+                    </div>
+                    <div class="blog-card">
+                        <h3>Lessons from Revenue Operations</h3>
+                        <div class="blog-date">January 2026</div>
+                        <div class="blog-excerpt">
+                            <p>Working in revenue operations has taught me valuable lessons about client management, process optimization, and the importance of data-driven decision making.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page" id="admin">
+            <div id="adminLogin" class="admin-login">
+                <h2>Admin Login</h2>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="adminPassword" placeholder="Enter admin password">
+                </div>
+                <button class="btn" onclick="adminLogin()">Login</button>
+                <p style="margin-top: 20px; text-align: center; color: #7f8c8d; font-size: 0.9em;">Default password: admin123</p>
+            </div>
+
+            <div id="adminDashboard" style="display: none;">
+                <div class="section">
+                    <h2>Admin Dashboard</h2>
+                    <div class="success-message" id="successMessage">Changes saved successfully!</div>
+                    
+                    <div class="admin-controls">
+                        <button class="btn" onclick="showEditSection('profile')">Edit Profile</button>
+                        <button class="btn" onclick="showEditSection('experience')">Edit Experience</button>
+                        <button class="btn" onclick="showEditSection('blog')">Manage Blog</button>
+                        <button class="btn btn-danger" onclick="adminLogout()">Logout</button>
+                    </div>
+
+                    <div id="editProfile" style="display: none;">
+                        <h3 style="margin-bottom: 20px; color: var(--primary);">Edit Profile Information</h3>
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" id="editName" value="Sumit Damor">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="editEmail" value="sumitrd22@nsb.edu.in">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="text" id="editPhone" value="(+91) 82001-68197">
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" id="editLocation" value="Bangalore, India">
+                        </div>
+                        <div class="form-group">
+                            <label>LinkedIn</label>
+                            <input type="text" id="editLinkedin" value="https://linkedin.com/in/sumit-damor-918b33184">
+                        </div>
+                        <div class="form-group">
+                            <label>About Me</label>
+                            <textarea id="editAbout">Operations professional with experience in corporate client management, subscription lifecycle handling, and revenue operations within a fintech environment at Groww. Currently pursuing an MBA with a background in Economics and strong skills in data analysis, and process optimization.</textarea>
+                        </div>
+                        <button class="btn" onclick="saveProfile()">Save Profile</button>
+                    </div>
+
+                    <div id="editExperience" style="display: none;">
+                        <h3 style="margin-bottom: 20px; color: var(--primary);">Edit Work Experience</h3>
+                        <div class="form-group">
+                            <label>Job Title</label>
+                            <input type="text" id="editJobTitle" value="Order Processing & Revenue Operations Associate — Corporate Cloud Subscription Clients">
+                        </div>
+                        <div class="form-group">
+                            <label>Company</label>
+                            <input type="text" id="editCompany" value="Groww Invest-Tech Private Limited">
+                        </div>
+                        <div class="form-group">
+                            <label>Duration</label>
+                            <input type="text" id="editDuration" value="07/2024 - Present, Bangalore, India">
+                        </div>
+                        <div class="form-group">
+                            <label>Responsibilities (one per line)</label>
+                            <textarea id="editResponsibilities" rows="8">Managed end-to-end corporate client tickets for Groww Cloud subscriptions
+Validated corporate onboarding requests including documentation
+Acted as the primary support contact for corporate clients
+Supported revenue operations by monitoring subscription usage</textarea>
+                        </div>
+                        <button class="btn" onclick="saveExperience()">Save Experience</button>
+                    </div>
+
+                    <div id="editBlog" style="display: none;">
+                        <h3 style="margin-bottom: 20px; color: var(--primary);">Add New Blog Post</h3>
+                        <div class="form-group">
+                            <label>Blog Title</label>
+                            <input type="text" id="blogTitle" placeholder="Enter blog title">
+                        </div>
+                        <div class="form-group">
+                            <label>Blog Date</label>
+                            <input type="text" id="blogDate" placeholder="e.g., February 2026">
+                        </div>
+                        <div class="form-group">
+                            <label>Blog Content</label>
+                            <textarea id="blogContent" placeholder="Enter blog content"></textarea>
+                        </div>
+                        <button class="btn" onclick="addBlogPost()">Add Blog Post</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDrawer() {
+            const drawer = document.getElementById('drawer');
+            const overlay = document.getElementById('overlay');
+            drawer.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        function showPage(pageName) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageName).classList.add('active');
+
+            const navLinks = document.querySelectorAll('.drawer nav a');
+            navLinks.forEach(link => link.classList.remove('active'));
+            event.target.classList.add('active');
+
+            toggleDrawer();
+        }
+
+        function adminLogin() {
+            const password = document.getElementById('adminPassword').value;
+            if (password === 'admin123') {
+                document.getElementById('adminLogin').style.display = 'none';
+                document.getElementById('adminDashboard').style.display = 'block';
+            } else {
+                alert('Incorrect password!');
+            }
+        }
+
+        function adminLogout() {
+            document.getElementById('adminLogin').style.display = 'block';
+            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('adminPassword').value = '';
+            hideAllEditSections();
+        }
+
+        function showEditSection(section) {
+            hideAllEditSections();
+            if (section === 'profile') {
+                document.getElementById('editProfile').style.display = 'block';
+            } else if (section === 'experience') {
+                document.getElementById('editExperience').style.display = 'block';
+            } else if (section === 'blog') {
+                document.getElementById('editBlog').style.display = 'block';
+            }
+        }
+
+        function hideAllEditSections() {
+            document.getElementById('editProfile').style.display = 'none';
+            document.getElementById('editExperience').style.display = 'none';
+            document.getElementById('editBlog').style.display = 'none';
+        }
+
+        function showSuccessMessage() {
+            const msg = document.getElementById('successMessage');
+            msg.classList.add('show');
+            setTimeout(() => msg.classList.remove('show'), 3000);
+        }
+
+        function saveProfile() {
+            const profileData = {
+                name: document.getElementById('editName').value,
+                email: document.getElementById('editEmail').value,
+                phone: document.getElementById('editPhone').value,
+                location: document.getElementById('editLocation').value,
+                linkedin: document.getElementById('editLinkedin').value,
+                about: document.getElementById('editAbout').value
+            };
+            
+            localStorage.setItem('profileData', JSON.stringify(profileData));
+            updateProfileUI(profileData);
+            showSuccessMessage();
+        }
+
+        function updateProfileUI(data) {
+            document.querySelector('.header h1').textContent = data.name;
+            document.querySelector('.header .subtitle').textContent = data.about;
+            
+            const contactInfo = document.querySelector('.contact-info');
+            contactInfo.innerHTML = `
+                <a href="mailto:${data.email}">📧 ${data.email}</a>
+                <a href="tel:${data.phone.replace(/[^0-9+]/g, '')}">📱 ${data.phone}</a>
+                <a href="#">📍 ${data.location}</a>
+                <a href="${data.linkedin}" target="_blank">💼 LinkedIn</a>
+            `;
+        }
+
+        function saveExperience() {
+            const experienceData = {
+                title: document.getElementById('editJobTitle').value,
+                company: document.getElementById('editCompany').value,
+                duration: document.getElementById('editDuration').value,
+                responsibilities: document.getElementById('editResponsibilities').value.split('\n')
+            };
+            
+            localStorage.setItem('experienceData', JSON.stringify(experienceData));
+            updateExperienceUI(experienceData);
+            showSuccessMessage();
+        }
+
+        function updateExperienceUI(data) {
+            const experienceCard = document.querySelector('.experience-card');
+            let responsibilitiesHTML = '<ul>';
+            data.responsibilities.forEach(resp => {
+                if (resp.trim()) {
+                    responsibilitiesHTML += `<li>${resp}</li>`;
+                }
+            });
+            responsibilitiesHTML += '</ul>';
+
+            experienceCard.innerHTML = `
+                <h3>${data.title}</h3>
+                <div class="company">${data.company}</div>
+                <div class="date">${data.duration}</div>
+                ${responsibilitiesHTML}
+            `;
+        }
+
+        function addBlogPost() {
+            const title = document.getElementById('blogTitle').value;
+            const date = document.getElementById('blogDate').value;
+            const content = document.getElementById('blogContent').value;
+
+            if (!title || !date || !content) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            const blogCard = document.createElement('div');
+            blogCard.className = 'blog-card';
+            blogCard.innerHTML = `
+                <h3>${title}</h3>
+                <div class="blog-date">${date}</div>
+                <div class="blog-excerpt">
+                    <p>${content}</p>
+                </div>
+            `;
+
+            const blogPosts = JSON.parse(localStorage.getItem('blogPosts') || '[]');
+            blogPosts.unshift({title, date, content});
+            localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
+
+            document.getElementById('blogContainer').insertBefore(
+                blogCard, 
+                document.getElementById('blogContainer').firstChild
+            );
+
+            document.getElementById('blogTitle').value = '';
+            document.getElementById('blogDate').value = '';
+            document.getElementById('blogContent').value = '';
+
+            showSuccessMessage();
+        }
+
+        window.addEventListener('load', () => {
+            const savedProfile = localStorage.getItem('profileData');
+            if (savedProfile) {
+                const profileData = JSON.parse(savedProfile);
+                updateProfileUI(profileData);
+                
+                document.getElementById('editName').value = profileData.name;
+                document.getElementById('editEmail').value = profileData.email;
+                document.getElementById('editPhone').value = profileData.phone;
+                document.getElementById('editLocation').value = profileData.location;
+                document.getElementById('editLinkedin').value = profileData.linkedin;
+                document.getElementById('editAbout').value = profileData.about;
+            }
+
+            const savedExperience = localStorage.getItem('experienceData');
+            if (savedExperience) {
+                updateExperienceUI(JSON.parse(savedExperience));
+            }
+
+            const savedBlogs = localStorage.getItem('blogPosts');
+            if (savedBlogs) {
+                const blogs = JSON.parse(savedBlogs);
+                const container = document.getElementById('blogContainer');
+                container.innerHTML = '';
+                blogs.forEach(blog => {
+                    const blogCard = document.createElement('div');
+                    blogCard.className = 'blog-card';
+                    blogCard.innerHTML = `
+                        <h3>${blog.title}</h3>
+                        <div class="blog-date">${blog.date}</div>
+                        <div class="blog-excerpt">
+                            <p>${blog.content}</p>
+                        </div>
+                    `;
+                    container.appendChild(blogCard);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
