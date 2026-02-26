@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inline Chatbot Demo - Sumit Damor</title>
-    
-    <!-- Chatbot Styles -->
+    <title>AI Chatbot Demo - Inline Mode</title>
     <link rel="stylesheet" href="chatbot.css">
-    
     <style>
         * {
             margin: 0;
@@ -15,265 +12,203 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --primary: #1a1a1a;
-            --secondary: #0066cc;
-            --accent: #00ab6b;
-            --bg: #ffffff;
-            --surface: #f7f7f7;
-            --text: #242424;
-            --text-secondary: #6b6b6b;
-            --border: #e6e6e6;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
         }
 
-        .container {
-            max-width: 1200px;
+        .demo-container {
+            max-width: 800px;
             margin: 0 auto;
-            padding: 40px 24px;
         }
 
-        .hero {
+        .demo-header {
             text-align: center;
-            padding: 60px 24px 40px;
-            background: linear-gradient(135deg, var(--secondary), var(--accent));
             color: white;
+            margin-bottom: 40px;
         }
 
-        .hero h1 {
+        .demo-header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
-        .hero p {
-            font-size: 1.2em;
+        .demo-header p {
+            font-size: 1.1em;
             opacity: 0.9;
         }
 
-        .section {
-            margin: 60px 0;
+        .demo-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
         }
 
-        .section-title {
-            font-size: 2em;
-            text-align: center;
-            margin-bottom: 10px;
-            color: var(--text);
+        .demo-card h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8em;
         }
 
-        .section-description {
-            text-align: center;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-            font-size: 1.1em;
+        .demo-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
         }
 
-        .info-box {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 24px;
+        .feature-list {
+            list-style: none;
             margin: 20px 0;
         }
 
-        .info-box h3 {
-            color: var(--secondary);
-            margin-bottom: 12px;
+        .feature-list li {
+            padding: 10px 0;
+            color: #555;
+            display: flex;
+            align-items: center;
         }
 
-        .info-box ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .info-box li {
-            padding: 8px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .info-box li:last-child {
-            border-bottom: none;
-        }
-
-        .info-box li::before {
-            content: "✅ ";
-            color: var(--accent);
-        }
-
-        .sample-questions {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 16px;
-            margin: 30px 0;
-        }
-
-        .question-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 16px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .question-card:hover {
-            border-color: var(--secondary);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .question-card::before {
-            content: "💬 ";
+        .feature-list li:before {
+            content: "✓";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
             font-size: 1.2em;
         }
 
-        .badge {
+        .sample-questions {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .sample-questions h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .question-tag {
             display: inline-block;
-            background: var(--accent);
+            background: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin: 5px;
+            color: #667eea;
+            font-size: 0.9em;
+            border: 1px solid #667eea;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .question-tag:hover {
+            background: #667eea;
             color: white;
-            padding: 4px 12px;
-            border-radius: 12px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
             font-size: 0.85em;
-            font-weight: 600;
-            margin: 0 4px;
+            margin-left: 10px;
         }
 
-        .footer {
+        .back-link {
             text-align: center;
-            padding: 40px 24px;
-            background: var(--surface);
-            margin-top: 60px;
+            margin-top: 30px;
         }
 
-        .footer a {
-            color: var(--secondary);
+        .back-link a {
+            color: white;
             text-decoration: none;
+            font-size: 1.1em;
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 8px;
+            display: inline-block;
+            transition: all 0.3s;
         }
 
-        .footer a:hover {
-            text-decoration: underline;
+        .back-link a:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .demo-header h1 {
+                font-size: 2em;
+            }
+
+            .demo-card {
+                padding: 25px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <div class="hero">
-        <h1>🤖 Inline AI Chatbot Demo</h1>
-        <p>See how the chatbot looks embedded in your portfolio</p>
-    </div>
-
-    <!-- Info Section -->
-    <div class="container">
-        <div class="info-box">
-            <h3>✅ What's New</h3>
-            <ul>
-                <li>API Key Updated: <code>AIzaSyDxf8nuTU55NOhjP5AejmeBxIJgsayGESI</code></li>
-                <li>Inline Mode: Chatbot embedded in page (not floating)</li>
-                <li>Always Visible: No toggle button needed</li>
-                <li>Responsive Design: Works on all devices</li>
-                <li>Dark Mode Support: Matches your site theme</li>
-            </ul>
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1>🤖 AI Chatbot Demo</h1>
+            <p>Experience the inline chatbot that will be embedded in the portfolio</p>
         </div>
 
-        <!-- Sample Questions -->
-        <div class="section">
-            <h2 class="section-title">💡 Try These Questions</h2>
-            <p class="section-description">Click any question to copy it, then paste in the chat below</p>
+        <div class="demo-card">
+            <h2>About This Demo <span class="status-badge">✓ Fixed & Working</span></h2>
+            <p>This is a live demonstration of the AI chatbot that will be integrated into Sumit Damor's portfolio homepage. The chatbot uses Google's Gemini AI to answer questions about Sumit's experience, skills, and projects.</p>
             
+            <ul class="feature-list">
+                <li>Always visible (no toggle button needed)</li>
+                <li>Embedded directly in the page</li>
+                <li>Powered by Google Gemini 1.5 Flash</li>
+                <li>Trained on portfolio content</li>
+                <li>Instant, intelligent responses</li>
+                <li>Mobile-friendly design</li>
+            </ul>
+
             <div class="sample-questions">
-                <div class="question-card" onclick="copyQuestion(this)">
-                    What is Sumit's current role?
-                </div>
-                <div class="question-card" onclick="copyQuestion(this)">
-                    Tell me about his experience at Groww
-                </div>
-                <div class="question-card" onclick="copyQuestion(this)">
-                    What skills does he have?
-                </div>
-                <div class="question-card" onclick="copyQuestion(this)">
-                    What projects has he worked on?
-                </div>
-                <div class="question-card" onclick="copyQuestion(this)">
-                    What is his educational background?
-                </div>
-                <div class="question-card" onclick="copyQuestion(this)">
-                    How can I contact Sumit?
-                </div>
+                <h3>💡 Try These Sample Questions:</h3>
+                <span class="question-tag" onclick="askQuestion('What is Sumit\'s current role?')">What is Sumit's current role?</span>
+                <span class="question-tag" onclick="askQuestion('Tell me about his experience at Groww')">Tell me about Groww</span>
+                <span class="question-tag" onclick="askQuestion('What skills does he have?')">What skills does he have?</span>
+                <span class="question-tag" onclick="askQuestion('What projects has he worked on?')">What projects?</span>
+                <span class="question-tag" onclick="askQuestion('How can I contact him?')">Contact information</span>
             </div>
         </div>
 
-        <!-- AI Assistant Section -->
-        <section id="ai-assistant" class="section">
-            <h2 class="section-title">💬 Ask Me Anything</h2>
-            <p class="section-description">
-                This is how the chatbot will appear on your homepage
-                <span class="badge">Inline Mode</span>
-                <span class="badge">Always Visible</span>
-            </p>
+        <div class="demo-card">
+            <h2>💬 Try the Chatbot Below</h2>
+            <p style="margin-bottom: 30px;">The chatbot is now fully functional with the fixed API endpoint. Ask any question about Sumit's portfolio!</p>
             
-            <!-- Chatbot Container -->
+            <!-- Chatbot will be inserted here -->
             <div id="chatbot-inline-container"></div>
-        </section>
+        </div>
 
-        <!-- Integration Guide -->
-        <div class="info-box">
-            <h3>📝 How to Add to Your Portfolio</h3>
-            <p style="margin-bottom: 16px;">Add this code to your <code>index.html</code> where you want the chatbot to appear:</p>
-            <pre style="background: #f5f5f5; padding: 16px; border-radius: 8px; overflow-x: auto; font-size: 0.9em;"><code>&lt;!-- AI Assistant Section --&gt;
-&lt;section id="ai-assistant" class="section"&gt;
-    &lt;div class="container"&gt;
-        &lt;h2 class="section-title"&gt;💬 Ask Me Anything&lt;/h2&gt;
-        &lt;div id="chatbot-inline-container"&gt;&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/section&gt;
-
-&lt;!-- Load Chatbot Files --&gt;
-&lt;link rel="stylesheet" href="chatbot.css"&gt;
-&lt;script src="chatbot.js"&gt;&lt;/script&gt;</code></pre>
+        <div class="back-link">
+            <a href="index.html">← Back to Portfolio</a>
         </div>
     </div>
 
-    <!-- Footer -->
-    <div class="footer">
-        <p>
-            <strong>Ready to integrate?</strong><br>
-            Read the full guide: <a href="INLINE_INTEGRATION_GUIDE.md" target="_blank">INLINE_INTEGRATION_GUIDE.md</a>
-        </p>
-        <p style="margin-top: 20px; color: var(--text-secondary);">
-            Portfolio: <a href="https://damorsumit2000-lab.github.io/sumit-damor-portfolio/" target="_blank">damorsumit2000-lab.github.io/sumit-damor-portfolio</a>
-        </p>
-    </div>
-
-    <!-- Load Chatbot -->
     <script src="chatbot.js"></script>
-
     <script>
-        function copyQuestion(element) {
-            const text = element.textContent.trim();
+        function askQuestion(question) {
             const input = document.getElementById('chat-input');
-            
             if (input) {
-                input.value = text;
+                input.value = question;
                 input.focus();
-                
-                // Visual feedback
-                element.style.background = 'var(--accent)';
-                element.style.color = 'white';
+                // Optionally auto-send
                 setTimeout(() => {
-                    element.style.background = '';
-                    element.style.color = '';
+                    const sendBtn = document.getElementById('chat-send');
+                    if (sendBtn) sendBtn.click();
                 }, 300);
-            } else {
-                // Fallback: copy to clipboard
-                navigator.clipboard.writeText(text).then(() => {
-                    alert('Question copied! Paste it in the chat below.');
-                });
             }
         }
     </script>
