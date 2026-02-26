@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumit Damor - Portfolio with AI Assistant</title>
+    
+    <!-- Original Portfolio Styles -->
+    <link rel="stylesheet" href="https://damorsumit2000-lab.github.io/sumit-damor-portfolio/index.html" />
+    
+    <!-- AI Chatbot Styles -->
+    <link rel="stylesheet" href="chatbot.css">
+</head>
+<body>
+    <!-- This page loads your original portfolio and adds the chatbot -->
+    <script>
+        // Load original portfolio content
+        fetch('https://damorsumit2000-lab.github.io/sumit-damor-portfolio/')
+            .then(response => response.text())
+            .then(html => {
+                // Extract body content from original page
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const bodyContent = doc.body.innerHTML;
+                
+                // Insert into current page
+                document.body.innerHTML = bodyContent;
+                
+                // Re-execute any scripts from original page
+                const scripts = doc.querySelectorAll('script');
+                scripts.forEach(script => {
+                    const newScript = document.createElement('script');
+                    if (script.src) {
+                        newScript.src = script.src;
+                    } else {
+                        newScript.textContent = script.textContent;
+                    }
+                    document.body.appendChild(newScript);
+                });
+                
+                // Load chatbot after portfolio is loaded
+                const chatbotScript = document.createElement('script');
+                chatbotScript.src = 'chatbot.js';
+                document.body.appendChild(chatbotScript);
+            });
+    </script>
+</body>
+</html>
