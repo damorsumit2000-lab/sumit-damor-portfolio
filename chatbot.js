@@ -4,7 +4,7 @@
 class PortfolioChatbot {
     constructor(options = {}) {
         this.apiKey = 'AIzaSyDxf8nuTU55NOhjP5AejmeBxIJgsayGESI';
-        this.apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
+        this.apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
         this.conversationHistory = [];
         this.isOpen = false;
         this.isTyping = false;
@@ -225,10 +225,12 @@ Answer questions naturally and conversationally. Keep responses concise and help
             let errorMsg = 'Sorry, I encountered an error. ';
             if (error.message.includes('429')) {
                 errorMsg += 'API rate limit reached. Please try again in a moment.';
-            } else if (error.message.includes('403')) {
-                errorMsg += 'API key issue. Please check the configuration.';
+            } else if (error.message.includes('403') || error.message.includes('API_KEY')) {
+                errorMsg += 'API key issue. Please contact the site administrator.';
             } else if (error.message.includes('400')) {
                 errorMsg += 'Invalid request. Please try rephrasing your question.';
+            } else if (error.message.includes('SAFETY')) {
+                errorMsg += 'Your question was blocked by safety filters. Please rephrase.';
             } else {
                 errorMsg += 'Please try again or rephrase your question.';
             }
@@ -257,8 +259,8 @@ Answer questions naturally and conversationally. Keep responses concise and help
                 }],
                 generationConfig: {
                     temperature: 0.7,
-                    maxOutputTokens: 400,
-                    topP: 0.8,
+                    maxOutputTokens: 500,
+                    topP: 0.9,
                     topK: 40
                 },
                 safetySettings: [
@@ -268,6 +270,14 @@ Answer questions naturally and conversationally. Keep responses concise and help
                     },
                     {
                         category: "HARM_CATEGORY_HATE_SPEECH",
+                        threshold: "BLOCK_MEDIUM_AND_ABOVE"
+                    },
+                    {
+                        category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                        threshold: "BLOCK_MEDIUM_AND_ABOVE"
+                    },
+                    {
+                        category: "HARM_CATEGORY_DANGEROUS_CONTENT",
                         threshold: "BLOCK_MEDIUM_AND_ABOVE"
                     }
                 ]
@@ -283,16 +293,44 @@ Answer questions naturally and conversationally. Keep responses concise and help
             
             if (!response.ok) {
                 const errorData = await response.json().catch(() => ({}));
-                console.error('API Error:', errorData);
+                console.error('API Error Response:', errorData);
+                
+                // Handle specific error cases
+                if (response.status === 400) {
+                    if (errorData.error?.message?.includes('API_KEY')) {
+                        throw new Error('API_KEY_INVALID');
+                    }
+                    throw new Error(`Bad Request: ${errorData.error?.message || 'Invalid request format'}`);
+                } else if (response.status === 403) {
+                    throw new Error('API_KEY_FORBIDDEN: API key is invalid or doesn\'t have permission');
+                } else if (response.status === 429) {
+                    throw new Error('Rate limit exceeded. Please try again later.');
+                }
+                
                 throw new Error(`API request failed: ${response.status} - ${errorData.error?.message || 'Unknown error'}`);
             }
             
             const data = await response.json();
             
             // Check if response has the expected structure
-            if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+            if (!data.candidates || !data.candidates[0]) {
                 console.error('Unexpected API response:', data);
+                
+                // Check for safety blocking
+                if (data.promptFeedback?.blockReason) {
+                    throw new Error(`SAFETY: Content blocked due to ${data.promptFeedback.blockReason}`);
+                }
+                
                 throw new Error('Invalid API response structure');
+            }
+            
+            // Check if content was blocked
+            if (data.candidates[0].finishReason === 'SAFETY') {
+                throw new Error('SAFETY: Response blocked by safety filters');
+            }
+            
+            if (!data.candidates[0].content || !data.candidates[0].content.parts) {
+                throw new Error('No content in API response');
             }
             
             const botResponse = data.candidates[0].content.parts[0].text;
