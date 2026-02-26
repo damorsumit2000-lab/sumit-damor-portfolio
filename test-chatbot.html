@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Test - Sumit Damor</title>
+    <link rel="stylesheet" href="chatbot.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .status {
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .test-button {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        .test-button:hover {
+            background: #0052a3;
+        }
+        #test-result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #0066cc;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        .instructions {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .instructions h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+        .instructions ol {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .instructions li {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🤖 Chatbot API Test</h1>
+        <p>This page tests if the Gemini API is working correctly.</p>
+        
+        <div class="status success">
+            ✅ API Key: Configured
+        </div>
+        
+        <div class="status info">
+            ℹ️ Model: gemini-1.5-flash (Latest)
+        </div>
+        
+        <div class="instructions">
+            <h3>📋 Test Instructions</h3>
+            <ol>
+                <li>Click "Test API Connection" to verify the API is working</li>
+                <li>If successful, click "Open Chatbot" to test the full interface</li>
+                <li>Try asking: "What is Sumit's current role?"</li>
+                <li>If everything works, the chatbot is ready for your portfolio!</li>
+            </ol>
+        </div>
+        
+        <button class="test-button" onclick="testAPI()">🔍 Test API Connection</button>
+        <button class="test-button" onclick="openChatbot()">💬 Open Chatbot</button>
+        <button class="test-button" onclick="clearResult()">🗑️ Clear Results</button>
+        
+        <div id="test-result"></div>
+    </div>
+
+    <!-- Chatbot Integration -->
+    <script src="chatbot.js"></script>
+    
+    <script>
+        async function testAPI() {
+            const resultDiv = document.getElementById('test-result');
+            resultDiv.textContent = '⏳ Testing API connection...\n';
+            
+            try {
+                const apiKey = 'AIzaSyDk9k2wT_MOUgeMAMqza3tXqKi20D9UqaI';
+                const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
+                
+                const requestBody = {
+                    contents: [{
+                        parts: [{
+                            text: 'Say "Hello! The API is working correctly." in a friendly way.'
+                        }]
+                    }],
+                    generationConfig: {
+                        temperature: 0.7,
+                        maxOutputTokens: 100
+                    }
+                };
+                
+                const response = await fetch(`${apiUrl}?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`API Error ${response.status}: ${JSON.stringify(errorData, null, 2)}`);
+                }
+                
+                const data = await response.json();
+                const aiResponse = data.candidates[0].content.parts[0].text;
+                
+                resultDiv.textContent = '✅ API TEST SUCCESSFUL!\n\n';
+                resultDiv.textContent += 'API Response:\n';
+                resultDiv.textContent += aiResponse + '\n\n';
+                resultDiv.textContent += 'Full Response Data:\n';
+                resultDiv.textContent += JSON.stringify(data, null, 2);
+                
+            } catch (error) {
+                resultDiv.textContent = '❌ API TEST FAILED!\n\n';
+                resultDiv.textContent += 'Error Details:\n';
+                resultDiv.textContent += error.message + '\n\n';
+                resultDiv.textContent += 'Possible Solutions:\n';
+                resultDiv.textContent += '1. Check if API key is valid\n';
+                resultDiv.textContent += '2. Verify API key has Gemini API enabled\n';
+                resultDiv.textContent += '3. Check if you have exceeded free tier limits\n';
+                resultDiv.textContent += '4. Try generating a new API key at https://ai.google.dev\n';
+            }
+        }
+        
+        function openChatbot() {
+            const toggleBtn = document.getElementById('chat-toggle');
+            if (toggleBtn) {
+                toggleBtn.click();
+            } else {
+                alert('Chatbot not loaded. Please refresh the page and try again.');
+            }
+        }
+        
+        function clearResult() {
+            document.getElementById('test-result').textContent = '';
+        }
+        
+        // Auto-test on page load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                console.log('Page loaded. Chatbot should be available.');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
