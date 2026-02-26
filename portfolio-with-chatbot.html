@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumit Damor - Portfolio with AI Assistant</title>
+    
+    <!-- Chatbot Styles -->
+    <link rel="stylesheet" href="chatbot.css">
+    
+    <script>
+        // This script loads your original portfolio and adds the chatbot
+        window.addEventListener('DOMContentLoaded', function() {
+            // Fetch the original index.html
+            fetch('https://raw.githubusercontent.com/damorsumit2000-lab/sumit-damor-portfolio/main/index.html')
+                .then(response => response.text())
+                .then(html => {
+                    // Parse the HTML
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    
+                    // Copy the head content (styles, meta tags, etc.)
+                    const headContent = doc.head.innerHTML;
+                    document.head.innerHTML = headContent + document.head.innerHTML;
+                    
+                    // Copy the body content
+                    const bodyContent = doc.body.innerHTML;
+                    document.body.innerHTML = bodyContent;
+                    
+                    // Re-execute inline scripts from the original page
+                    const scripts = doc.querySelectorAll('script');
+                    scripts.forEach(oldScript => {
+                        const newScript = document.createElement('script');
+                        if (oldScript.src) {
+                            newScript.src = oldScript.src;
+                        } else {
+                            newScript.textContent = oldScript.textContent;
+                        }
+                        document.body.appendChild(newScript);
+                    });
+                    
+                    // Load the chatbot after everything else
+                    setTimeout(() => {
+                        const chatbotScript = document.createElement('script');
+                        chatbotScript.src = 'chatbot.js';
+                        document.body.appendChild(chatbotScript);
+                        console.log('✅ Chatbot loaded successfully!');
+                    }, 1000);
+                })
+                .catch(error => {
+                    console.error('Error loading portfolio:', error);
+                    document.body.innerHTML = '<h1>Error loading portfolio. Please refresh the page.</h1>';
+                });
+        });
+    </script>
+</head>
+<body>
+    <div style="text-align: center; padding: 50px;">
+        <h2>Loading portfolio with AI assistant...</h2>
+        <p>Please wait a moment...</p>
+    </div>
+</body>
+</html>
