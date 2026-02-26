@@ -3,15 +3,14 @@
 
 class PortfolioChatbot {
     constructor() {
-        this.apiKey = 'AIzaSyDk9k2wT_MOUgeMAMqza3tXqKi20D9UqaI'; // Gemini API key
-        this.apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
+        this.apiKey = 'AIzaSyDk9k2wT_MOUgeMAMqza3tXqKi20D9UqaI';
+        this.apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
         this.conversationHistory = [];
         this.isOpen = false;
         this.isTyping = false;
         
         // Portfolio context - trained on your website content
-        this.portfolioContext = `
-You are an AI assistant for Sumit Damor's portfolio website. You should answer questions about Sumit professionally and helpfully.
+        this.portfolioContext = `You are an AI assistant for Sumit Damor's portfolio website. Answer questions professionally and helpfully.
 
 ABOUT SUMIT DAMOR:
 - Current Role: Order Processing & Revenue Operations Associate at Groww Invest-Tech Private Limited (July 2024 - Present)
@@ -49,8 +48,7 @@ CERTIFICATES:
 - Customer Relationship Management for Marketers by Curtin University
 - Introduction to Project Management
 
-Answer questions naturally and conversationally. If asked about something not in this context, politely say you don't have that information but can help with questions about Sumit's experience, skills, education, or projects.
-`;
+Answer questions naturally and conversationally. Keep responses concise and helpful.`;
         
         this.init();
     }
@@ -166,58 +164,100 @@ Answer questions naturally and conversationally. If asked about something not in
             this.addMessage(response, 'bot');
         } catch (error) {
             this.hideTypingIndicator();
-            this.addMessage('Sorry, I encountered an error. Please try again.', 'bot');
             console.error('Chatbot error:', error);
+            
+            // More helpful error message
+            let errorMsg = 'Sorry, I encountered an error. ';
+            if (error.message.includes('429')) {
+                errorMsg += 'API rate limit reached. Please try again in a moment.';
+            } else if (error.message.includes('403')) {
+                errorMsg += 'API key issue. Please check the configuration.';
+            } else if (error.message.includes('400')) {
+                errorMsg += 'Invalid request. Please try rephrasing your question.';
+            } else {
+                errorMsg += 'Please try again or rephrase your question.';
+            }
+            
+            this.addMessage(errorMsg, 'bot');
         }
     }
     
     async callGeminiAPI(userMessage) {
-        // Build conversation context
-        const conversationContext = this.conversationHistory
-            .map(msg => `${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.content}`)
-            .join('\n');
-        
-        const fullPrompt = `${this.portfolioContext}\n\nConversation History:\n${conversationContext}\n\nUser: ${userMessage}\n\nAssistant:`;
-        
-        const requestBody = {
-            contents: [{
-                parts: [{
-                    text: fullPrompt
-                }]
-            }],
-            generationConfig: {
-                temperature: 0.7,
-                maxOutputTokens: 500,
+        try {
+            // Build conversation context
+            const conversationContext = this.conversationHistory
+                .slice(-6) // Only use last 6 messages for context
+                .map(msg => `${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.content}`)
+                .join('\n');
+            
+            const fullPrompt = conversationContext 
+                ? `${this.portfolioContext}\n\nConversation History:\n${conversationContext}\n\nUser: ${userMessage}\n\nAssistant:`
+                : `${this.portfolioContext}\n\nUser: ${userMessage}\n\nAssistant:`;
+            
+            const requestBody = {
+                contents: [{
+                    parts: [{
+                        text: fullPrompt
+                    }]
+                }],
+                generationConfig: {
+                    temperature: 0.7,
+                    maxOutputTokens: 400,
+                    topP: 0.8,
+                    topK: 40
+                },
+                safetySettings: [
+                    {
+                        category: "HARM_CATEGORY_HARASSMENT",
+                        threshold: "BLOCK_MEDIUM_AND_ABOVE"
+                    },
+                    {
+                        category: "HARM_CATEGORY_HATE_SPEECH",
+                        threshold: "BLOCK_MEDIUM_AND_ABOVE"
+                    }
+                ]
+            };
+            
+            const response = await fetch(`${this.apiUrl}?key=${this.apiKey}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestBody)
+            });
+            
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                console.error('API Error:', errorData);
+                throw new Error(`API request failed: ${response.status} - ${errorData.error?.message || 'Unknown error'}`);
             }
-        };
-        
-        const response = await fetch(`${this.apiUrl}?key=${this.apiKey}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestBody)
-        });
-        
-        if (!response.ok) {
-            throw new Error(`API request failed: ${response.status}`);
+            
+            const data = await response.json();
+            
+            // Check if response has the expected structure
+            if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+                console.error('Unexpected API response:', data);
+                throw new Error('Invalid API response structure');
+            }
+            
+            const botResponse = data.candidates[0].content.parts[0].text;
+            
+            // Save to conversation history
+            this.conversationHistory.push({ role: 'user', content: userMessage });
+            this.conversationHistory.push({ role: 'bot', content: botResponse });
+            
+            // Keep only last 10 messages to manage context size
+            if (this.conversationHistory.length > 10) {
+                this.conversationHistory = this.conversationHistory.slice(-10);
+            }
+            
+            this.saveChatHistory();
+            
+            return botResponse;
+        } catch (error) {
+            console.error('Error in callGeminiAPI:', error);
+            throw error;
         }
-        
-        const data = await response.json();
-        const botResponse = data.candidates[0].content.parts[0].text;
-        
-        // Save to conversation history
-        this.conversationHistory.push({ role: 'user', content: userMessage });
-        this.conversationHistory.push({ role: 'bot', content: botResponse });
-        
-        // Keep only last 10 messages to manage context size
-        if (this.conversationHistory.length > 10) {
-            this.conversationHistory = this.conversationHistory.slice(-10);
-        }
-        
-        this.saveChatHistory();
-        
-        return botResponse;
     }
     
     addMessage(text, sender) {
@@ -225,9 +265,14 @@ Answer questions naturally and conversationally. If asked about something not in
         const messageDiv = document.createElement('div');
         messageDiv.className = `message ${sender}-message`;
         
+        // Convert markdown-style formatting to HTML
+        let formattedText = this.escapeHtml(text);
+        formattedText = formattedText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        formattedText = formattedText.replace(/\n/g, '<br>');
+        
         messageDiv.innerHTML = `
             <div class="message-content">
-                <p>${this.escapeHtml(text)}</p>
+                <p>${formattedText}</p>
             </div>
         `;
         
@@ -267,13 +312,22 @@ Answer questions naturally and conversationally. If asked about something not in
     }
     
     saveChatHistory() {
-        localStorage.setItem('chatHistory', JSON.stringify(this.conversationHistory));
+        try {
+            localStorage.setItem('chatHistory', JSON.stringify(this.conversationHistory));
+        } catch (e) {
+            console.warn('Could not save chat history:', e);
+        }
     }
     
     loadChatHistory() {
-        const saved = localStorage.getItem('chatHistory');
-        if (saved) {
-            this.conversationHistory = JSON.parse(saved);
+        try {
+            const saved = localStorage.getItem('chatHistory');
+            if (saved) {
+                this.conversationHistory = JSON.parse(saved);
+            }
+        } catch (e) {
+            console.warn('Could not load chat history:', e);
+            this.conversationHistory = [];
         }
     }
 }
