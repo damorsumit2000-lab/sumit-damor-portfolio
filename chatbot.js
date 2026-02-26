@@ -1,55 +1,75 @@
 // AI Chatbot Widget for Sumit Damor Portfolio
-// Uses Google Gemini API (Free Tier)
+// Smart Pattern-Matching Chatbot (No API Key Required)
 
 class PortfolioChatbot {
     constructor(options = {}) {
-        this.apiKey = 'AIzaSyDxf8nuTU55NOhjP5AejmeBxIJgsayGESI';
-        this.apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
         this.conversationHistory = [];
         this.isOpen = false;
         this.isTyping = false;
-        this.inline = options.inline || false; // Support inline mode
+        this.inline = options.inline || false;
         
-        // Portfolio context - trained on your website content
-        this.portfolioContext = `You are an AI assistant for Sumit Damor's portfolio website. Answer questions professionally and helpfully.
-
-ABOUT SUMIT DAMOR:
-- Current Role: Order Processing & Revenue Operations Associate at Groww Invest-Tech Private Limited (July 2024 - Present)
-- Location: Bangalore, India
-- Education: MBA in Marketing from National School of Business (2022-Present), BA in Economics from IGNOU (2019-2022)
-- Contact: Email: sumitrd22@nsb.edu.in, Phone: (+91) 82001-68197
-- LinkedIn: https://linkedin.com/in/sumit-damor-918b33184
-
-WORK EXPERIENCE:
-At Groww (July 2024 - Present):
-- Manages end-to-end corporate client tickets for Groww Cloud subscriptions
-- Supports brokers, companies, and proprietary traders across onboarding, activation, and operations
-- Validates corporate onboarding requests including documentation and account verification
-- Primary support contact for corporate clients, resolving execution issues, system errors, connectivity problems
-- Supports revenue operations by monitoring subscription usage, renewals, and cancellations
-- Tools: Groww Cloud, Freshdesk, Jira, Google Sheets, Internal OMS
-
-SKILLS:
-- Technical: Data Analysis, Process Optimization, CRM Systems, Digital Marketing
-- Tools: Freshdesk, Jira, Google Sheets, Tableau, JavaScript, ReactJS, ExpressJS, NodeJS
-- Languages: English (Professional), Hindi (Native), Gujarati (Native)
-
-PROJECTS:
-1. Website Quality & Online Buying Behavior Study (Jan-Mar 2024)
-2. Digital India Movement Market Analysis (Feb-Mar 2022) - Used Tableau for UPI platform analysis
-3. MERN Stack News Website (Nov-Dec 2021) - Deployed on Heroku
-
-ACHIEVEMENTS:
-- Won AAGMAN Marketing Fest at NSB
-- Won Recycle Mania product design event
-- Led team for annual college fest
-
-CERTIFICATES:
-- Digital Marketing by Curtin University
-- Customer Relationship Management for Marketers by Curtin University
-- Introduction to Project Management
-
-Answer questions naturally and conversationally. Keep responses concise and helpful.`;
+        // Knowledge base about Sumit Damor
+        this.knowledge = {
+            // Current Role & Company
+            currentRole: {
+                keywords: ['current', 'role', 'position', 'job', 'work', 'working', 'now', 'present', 'doing'],
+                response: "Sumit is currently working as an **Order Processing & Revenue Operations Associate** at **Groww Invest-Tech Private Limited** in Bangalore, India (since July 2024). He manages corporate client tickets for Groww Cloud subscriptions, supporting brokers, companies, and proprietary traders."
+            },
+            
+            // About Groww
+            groww: {
+                keywords: ['groww', 'company', 'employer', 'organization'],
+                response: "At **Groww**, Sumit:\n• Manages end-to-end corporate client tickets for Groww Cloud subscriptions\n• Validates corporate onboarding requests and documentation\n• Resolves execution issues, system errors, and connectivity problems\n• Monitors subscription usage, renewals, and cancellations\n• Uses tools like Freshdesk, Jira, Google Sheets, and Internal OMS"
+            },
+            
+            // Skills
+            skills: {
+                keywords: ['skill', 'technical', 'tools', 'technology', 'know', 'proficient', 'expertise'],
+                response: "Sumit's **key skills** include:\n\n**Technical:** Data Analysis, Process Optimization, CRM Systems, Digital Marketing\n\n**Tools:** Freshdesk, Jira, Google Sheets, Tableau, JavaScript, ReactJS, ExpressJS, NodeJS\n\n**Languages:** English (Professional), Hindi (Native), Gujarati (Native)"
+            },
+            
+            // Education
+            education: {
+                keywords: ['education', 'study', 'degree', 'mba', 'college', 'university', 'school'],
+                response: "**Education:**\n• **MBA in Marketing** - National School of Business (2022-Present)\n• **BA in Economics** - IGNOU (2019-2022)"
+            },
+            
+            // Projects
+            projects: {
+                keywords: ['project', 'built', 'created', 'developed', 'portfolio'],
+                response: "**Key Projects:**\n\n1. **Website Quality & Online Buying Behavior Study** (Jan-Mar 2024)\n\n2. **Digital India Movement Market Analysis** (Feb-Mar 2022) - Used Tableau for UPI platform analysis\n\n3. **MERN Stack News Website** (Nov-Dec 2021) - Full-stack web application deployed on Heroku"
+            },
+            
+            // Achievements
+            achievements: {
+                keywords: ['achievement', 'award', 'won', 'accomplishment', 'success'],
+                response: "**Achievements:**\n• Won **AAGMAN Marketing Fest** at NSB\n• Won **Recycle Mania** product design event\n• Led team for annual college fest"
+            },
+            
+            // Certificates
+            certificates: {
+                keywords: ['certificate', 'certification', 'course', 'training'],
+                response: "**Certifications:**\n• Digital Marketing by Curtin University\n• Customer Relationship Management for Marketers by Curtin University\n• Introduction to Project Management"
+            },
+            
+            // Contact
+            contact: {
+                keywords: ['contact', 'email', 'phone', 'reach', 'connect', 'linkedin', 'call'],
+                response: "**Contact Sumit:**\n📧 Email: sumitrd22@nsb.edu.in\n📱 Phone: (+91) 82001-68197\n💼 LinkedIn: [linkedin.com/in/sumit-damor-918b33184](https://linkedin.com/in/sumit-damor-918b33184)"
+            },
+            
+            // Experience
+            experience: {
+                keywords: ['experience', 'background', 'career', 'history'],
+                response: "Sumit has been working at **Groww Invest-Tech** since July 2024 as an Order Processing & Revenue Operations Associate. He manages corporate client operations, handles technical support, and monitors revenue operations for Groww Cloud subscriptions."
+            },
+            
+            // Location
+            location: {
+                keywords: ['location', 'where', 'city', 'place', 'based'],
+                response: "Sumit is based in **Bangalore, India** 🇮🇳"
+            }
+        };
         
         this.init();
     }
@@ -61,11 +81,9 @@ Answer questions naturally and conversationally. Keep responses concise and help
             this.createChatWidget();
         }
         this.attachEventListeners();
-        this.loadChatHistory();
     }
     
     createInlineChatWidget() {
-        // Create inline chat interface (embedded in page)
         const chatHTML = `
             <div id="chatbot-container" class="chatbot-container inline-chatbot">
                 <div class="chat-window inline-chat-window open">
@@ -80,6 +98,7 @@ Answer questions naturally and conversationally. Keep responses concise and help
                         <div class="message bot-message">
                             <div class="message-content">
                                 <p>👋 Hi! I'm Sumit's AI assistant. Ask me anything about his experience, skills, projects, or education!</p>
+                                <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">Try: "What is his current role?" or "Tell me about his skills"</p>
                             </div>
                         </div>
                     </div>
@@ -103,7 +122,6 @@ Answer questions naturally and conversationally. Keep responses concise and help
             </div>
         `;
         
-        // Find the target container or append to body
         const targetContainer = document.getElementById('chatbot-inline-container');
         if (targetContainer) {
             targetContainer.innerHTML = chatHTML;
@@ -212,145 +230,46 @@ Answer questions naturally and conversationally. Keep responses concise and help
         // Show typing indicator
         this.showTypingIndicator();
         
-        try {
-            // Call Gemini API
-            const response = await this.callGeminiAPI(message);
-            this.hideTypingIndicator();
-            this.addMessage(response, 'bot');
-        } catch (error) {
-            this.hideTypingIndicator();
-            console.error('Chatbot error:', error);
-            
-            // More helpful error message
-            let errorMsg = 'Sorry, I encountered an error. ';
-            if (error.message.includes('429')) {
-                errorMsg += 'API rate limit reached. Please try again in a moment.';
-            } else if (error.message.includes('403') || error.message.includes('API_KEY')) {
-                errorMsg += 'API key issue. Please contact the site administrator.';
-            } else if (error.message.includes('400')) {
-                errorMsg += 'Invalid request. Please try rephrasing your question.';
-            } else if (error.message.includes('SAFETY')) {
-                errorMsg += 'Your question was blocked by safety filters. Please rephrase.';
-            } else {
-                errorMsg += 'Please try again or rephrase your question.';
-            }
-            
-            this.addMessage(errorMsg, 'bot');
-        }
+        // Simulate thinking time
+        await new Promise(resolve => setTimeout(resolve, 800));
+        
+        // Get response
+        const response = this.getResponse(message);
+        this.hideTypingIndicator();
+        this.addMessage(response, 'bot');
     }
     
-    async callGeminiAPI(userMessage) {
-        try {
-            // Build conversation context
-            const conversationContext = this.conversationHistory
-                .slice(-6) // Only use last 6 messages for context
-                .map(msg => `${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.content}`)
-                .join('\n');
-            
-            const fullPrompt = conversationContext 
-                ? `${this.portfolioContext}\n\nConversation History:\n${conversationContext}\n\nUser: ${userMessage}\n\nAssistant:`
-                : `${this.portfolioContext}\n\nUser: ${userMessage}\n\nAssistant:`;
-            
-            const requestBody = {
-                contents: [{
-                    parts: [{
-                        text: fullPrompt
-                    }]
-                }],
-                generationConfig: {
-                    temperature: 0.7,
-                    maxOutputTokens: 500,
-                    topP: 0.9,
-                    topK: 40
-                },
-                safetySettings: [
-                    {
-                        category: "HARM_CATEGORY_HARASSMENT",
-                        threshold: "BLOCK_MEDIUM_AND_ABOVE"
-                    },
-                    {
-                        category: "HARM_CATEGORY_HATE_SPEECH",
-                        threshold: "BLOCK_MEDIUM_AND_ABOVE"
-                    },
-                    {
-                        category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-                        threshold: "BLOCK_MEDIUM_AND_ABOVE"
-                    },
-                    {
-                        category: "HARM_CATEGORY_DANGEROUS_CONTENT",
-                        threshold: "BLOCK_MEDIUM_AND_ABOVE"
-                    }
-                ]
-            };
-            
-            const response = await fetch(`${this.apiUrl}?key=${this.apiKey}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(requestBody)
-            });
-            
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}));
-                console.error('API Error Response:', errorData);
-                
-                // Handle specific error cases
-                if (response.status === 400) {
-                    if (errorData.error?.message?.includes('API_KEY')) {
-                        throw new Error('API_KEY_INVALID');
-                    }
-                    throw new Error(`Bad Request: ${errorData.error?.message || 'Invalid request format'}`);
-                } else if (response.status === 403) {
-                    throw new Error('API_KEY_FORBIDDEN: API key is invalid or doesn\'t have permission');
-                } else if (response.status === 429) {
-                    throw new Error('Rate limit exceeded. Please try again later.');
-                }
-                
-                throw new Error(`API request failed: ${response.status} - ${errorData.error?.message || 'Unknown error'}`);
-            }
-            
-            const data = await response.json();
-            
-            // Check if response has the expected structure
-            if (!data.candidates || !data.candidates[0]) {
-                console.error('Unexpected API response:', data);
-                
-                // Check for safety blocking
-                if (data.promptFeedback?.blockReason) {
-                    throw new Error(`SAFETY: Content blocked due to ${data.promptFeedback.blockReason}`);
-                }
-                
-                throw new Error('Invalid API response structure');
-            }
-            
-            // Check if content was blocked
-            if (data.candidates[0].finishReason === 'SAFETY') {
-                throw new Error('SAFETY: Response blocked by safety filters');
-            }
-            
-            if (!data.candidates[0].content || !data.candidates[0].content.parts) {
-                throw new Error('No content in API response');
-            }
-            
-            const botResponse = data.candidates[0].content.parts[0].text;
-            
-            // Save to conversation history
-            this.conversationHistory.push({ role: 'user', content: userMessage });
-            this.conversationHistory.push({ role: 'bot', content: botResponse });
-            
-            // Keep only last 10 messages to manage context size
-            if (this.conversationHistory.length > 10) {
-                this.conversationHistory = this.conversationHistory.slice(-10);
-            }
-            
-            this.saveChatHistory();
-            
-            return botResponse;
-        } catch (error) {
-            console.error('Error in callGeminiAPI:', error);
-            throw error;
+    getResponse(userMessage) {
+        const message = userMessage.toLowerCase();
+        
+        // Greeting
+        if (this.matchKeywords(message, ['hi', 'hello', 'hey', 'greetings'])) {
+            return "👋 Hello! I'm here to help you learn about Sumit Damor. You can ask me about his current role, skills, projects, education, or how to contact him!";
         }
+        
+        // Thanks
+        if (this.matchKeywords(message, ['thank', 'thanks', 'appreciate'])) {
+            return "You're welcome! Feel free to ask me anything else about Sumit! 😊";
+        }
+        
+        // Help
+        if (this.matchKeywords(message, ['help', 'what can you'])) {
+            return "I can help you with:\n• Current role and work at Groww\n• Skills and technical expertise\n• Education background\n• Projects and achievements\n• Contact information\n\nJust ask me anything!";
+        }
+        
+        // Check knowledge base
+        for (const [key, data] of Object.entries(this.knowledge)) {
+            if (this.matchKeywords(message, data.keywords)) {
+                return data.response;
+            }
+        }
+        
+        // Default response with suggestions
+        return "I'm not sure about that specific question. Try asking me about:\n• Sumit's current role\n• His skills and expertise\n• Education and projects\n• How to contact him\n\nWhat would you like to know?";
+    }
+    
+    matchKeywords(message, keywords) {
+        return keywords.some(keyword => message.includes(keyword));
     }
     
     addMessage(text, sender) {
@@ -362,6 +281,10 @@ Answer questions naturally and conversationally. Keep responses concise and help
         let formattedText = this.escapeHtml(text);
         formattedText = formattedText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
         formattedText = formattedText.replace(/\n/g, '<br>');
+        formattedText = formattedText.replace(/•/g, '&bull;');
+        
+        // Convert links
+        formattedText = formattedText.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank">$1</a>');
         
         messageDiv.innerHTML = `
             <div class="message-content">
@@ -403,37 +326,15 @@ Answer questions naturally and conversationally. Keep responses concise and help
         div.textContent = text;
         return div.innerHTML;
     }
-    
-    saveChatHistory() {
-        try {
-            localStorage.setItem('chatHistory', JSON.stringify(this.conversationHistory));
-        } catch (e) {
-            console.warn('Could not save chat history:', e);
-        }
-    }
-    
-    loadChatHistory() {
-        try {
-            const saved = localStorage.getItem('chatHistory');
-            if (saved) {
-                this.conversationHistory = JSON.parse(saved);
-            }
-        } catch (e) {
-            console.warn('Could not load chat history:', e);
-            this.conversationHistory = [];
-        }
-    }
 }
 
 // Initialize chatbot when DOM is ready
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-        // Check if inline mode is requested
         const inlineContainer = document.getElementById('chatbot-inline-container');
         window.portfolioChatbot = new PortfolioChatbot({ inline: !!inlineContainer });
     });
 } else {
-    // Check if inline mode is requested
     const inlineContainer = document.getElementById('chatbot-inline-container');
     window.portfolioChatbot = new PortfolioChatbot({ inline: !!inlineContainer });
 }
