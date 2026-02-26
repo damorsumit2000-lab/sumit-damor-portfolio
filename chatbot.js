@@ -2,12 +2,13 @@
 // Uses Google Gemini API (Free Tier)
 
 class PortfolioChatbot {
-    constructor() {
-        this.apiKey = 'AIzaSyDk9k2wT_MOUgeMAMqza3tXqKi20D9UqaI';
+    constructor(options = {}) {
+        this.apiKey = 'AIzaSyDxf8nuTU55NOhjP5AejmeBxIJgsayGESI';
         this.apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
         this.conversationHistory = [];
         this.isOpen = false;
         this.isTyping = false;
+        this.inline = options.inline || false; // Support inline mode
         
         // Portfolio context - trained on your website content
         this.portfolioContext = `You are an AI assistant for Sumit Damor's portfolio website. Answer questions professionally and helpfully.
@@ -54,9 +55,61 @@ Answer questions naturally and conversationally. Keep responses concise and help
     }
     
     init() {
-        this.createChatWidget();
+        if (this.inline) {
+            this.createInlineChatWidget();
+        } else {
+            this.createChatWidget();
+        }
         this.attachEventListeners();
         this.loadChatHistory();
+    }
+    
+    createInlineChatWidget() {
+        // Create inline chat interface (embedded in page)
+        const chatHTML = `
+            <div id="chatbot-container" class="chatbot-container inline-chatbot">
+                <div class="chat-window inline-chat-window open">
+                    <div class="chat-header">
+                        <div class="chat-header-info">
+                            <h3>💬 Ask Me Anything</h3>
+                            <p class="chat-status">AI Assistant • Online</p>
+                        </div>
+                    </div>
+                    
+                    <div id="chat-messages" class="chat-messages">
+                        <div class="message bot-message">
+                            <div class="message-content">
+                                <p>👋 Hi! I'm Sumit's AI assistant. Ask me anything about his experience, skills, projects, or education!</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-input-container">
+                        <input 
+                            type="text" 
+                            id="chat-input" 
+                            class="chat-input" 
+                            placeholder="Ask about Sumit's experience..."
+                            autocomplete="off"
+                        />
+                        <button id="chat-send" class="chat-send-btn" aria-label="Send message">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Find the target container or append to body
+        const targetContainer = document.getElementById('chatbot-inline-container');
+        if (targetContainer) {
+            targetContainer.innerHTML = chatHTML;
+        } else {
+            document.body.insertAdjacentHTML('beforeend', chatHTML);
+        }
     }
     
     createChatWidget() {
@@ -123,12 +176,14 @@ Answer questions naturally and conversationally. Keep responses concise and help
         const sendBtn = document.getElementById('chat-send');
         const input = document.getElementById('chat-input');
         
-        toggleBtn.addEventListener('click', () => this.toggleChat());
-        closeBtn.addEventListener('click', () => this.toggleChat());
-        sendBtn.addEventListener('click', () => this.sendMessage());
-        input.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') this.sendMessage();
-        });
+        if (toggleBtn) toggleBtn.addEventListener('click', () => this.toggleChat());
+        if (closeBtn) closeBtn.addEventListener('click', () => this.toggleChat());
+        if (sendBtn) sendBtn.addEventListener('click', () => this.sendMessage());
+        if (input) {
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') this.sendMessage();
+            });
+        }
     }
     
     toggleChat() {
@@ -139,7 +194,7 @@ Answer questions naturally and conversationally. Keep responses concise and help
         container.classList.toggle('open');
         
         if (this.isOpen) {
-            badge.style.display = 'none';
+            if (badge) badge.style.display = 'none';
             document.getElementById('chat-input').focus();
         }
     }
@@ -335,8 +390,12 @@ Answer questions naturally and conversationally. Keep responses concise and help
 // Initialize chatbot when DOM is ready
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-        window.portfolioChatbot = new PortfolioChatbot();
+        // Check if inline mode is requested
+        const inlineContainer = document.getElementById('chatbot-inline-container');
+        window.portfolioChatbot = new PortfolioChatbot({ inline: !!inlineContainer });
     });
 } else {
-    window.portfolioChatbot = new PortfolioChatbot();
+    // Check if inline mode is requested
+    const inlineContainer = document.getElementById('chatbot-inline-container');
+    window.portfolioChatbot = new PortfolioChatbot({ inline: !!inlineContainer });
 }
