@@ -3,7 +3,7 @@
 
 class PortfolioChatbot {
     constructor() {
-        this.apiKey = 'YOUR_GEMINI_API_KEY_HERE'; // Replace with your actual API key
+        this.apiKey = 'AIzaSyDk9k2wT_MOUgeMAMqza3tXqKi20D9UqaI'; // Gemini API key
         this.apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
         this.conversationHistory = [];
         this.isOpen = false;
