@@ -8,6 +8,27 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
+/* Inline Mode - Embedded in page */
+.chatbot-container.inline-chatbot {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    z-index: 1;
+    width: 100%;
+    max-width: 100%;
+}
+
+.inline-chat-window {
+    position: relative !important;
+    bottom: auto !important;
+    right: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 600px !important;
+    display: flex !important;
+    margin: 0 auto;
+}
+
 /* Toggle Button */
 .chat-toggle {
     width: 60px;
@@ -22,6 +43,10 @@
     justify-content: center;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
+}
+
+.inline-chatbot .chat-toggle {
+    display: none; /* Hide toggle button in inline mode */
 }
 
 .chat-toggle:hover {
@@ -108,6 +133,10 @@
     align-items: center;
 }
 
+.inline-chatbot .chat-header {
+    border-radius: 16px 16px 0 0;
+}
+
 .chat-header-info h3 {
     margin: 0;
     font-size: 18px;
@@ -131,6 +160,10 @@
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease;
+}
+
+.inline-chatbot .chat-close-btn {
+    display: none; /* Hide close button in inline mode */
 }
 
 .chat-close-btn:hover {
@@ -267,6 +300,10 @@
     gap: 8px;
 }
 
+.inline-chatbot .chat-input-container {
+    border-radius: 0 0 16px 16px;
+}
+
 .chat-input {
     flex: 1;
     padding: 12px 16px;
@@ -346,4 +383,14 @@
         right: 16px;
         bottom: 16px;
     }
+    
+    .inline-chat-window {
+        height: 500px !important;
+    }
+}
+
+/* Inline chatbot container styling */
+#chatbot-inline-container {
+    width: 100%;
+    margin: 40px 0;
 }
