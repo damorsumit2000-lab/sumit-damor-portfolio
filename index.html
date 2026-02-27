@@ -22,6 +22,7 @@
             --border: #e6e6e6;
             --shadow: rgba(0, 0, 0, 0.08);
             --shadow-hover: rgba(0, 0, 0, 0.12);
+            --header-glow: rgba(255, 255, 255, 0);
         }
 
         [data-theme="dark"] {
@@ -35,6 +36,7 @@
             --border: #2d2d2d;
             --shadow: rgba(0, 0, 0, 0.3);
             --shadow-hover: rgba(0, 0, 0, 0.5);
+            --header-glow: rgba(77, 159, 255, 0.3);
         }
 
         body {
@@ -45,7 +47,7 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Fixed Black Header */
+        /* Fixed Black Header with Glow Effect */
         .fixed-header {
             position: fixed;
             top: 0;
@@ -58,6 +60,25 @@
             align-items: center;
             padding: 0 20px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Glowing light effect from bottom of header */
+        .fixed-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                var(--header-glow) 20%, 
+                var(--header-glow) 80%, 
+                transparent 100%);
+            box-shadow: 0 0 20px var(--header-glow),
+                        0 0 40px var(--header-glow),
+                        0 0 60px var(--header-glow);
+            transition: all 0.3s ease;
         }
 
         .nav-toggle {
@@ -81,31 +102,40 @@
             transform: scale(1.05);
         }
 
-        /* Navigation Drawer */
+        /* Glassmorphism Navigation Drawer */
         .drawer {
             position: fixed;
             left: -320px;
             top: 0;
             width: 300px;
             height: 100vh;
-            background: var(--surface);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
             transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1002;
-            box-shadow: 4px 0 24px var(--shadow);
-            border-right: 1px solid var(--border);
+            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.1);
+            border-right: 1px solid rgba(255, 255, 255, 0.3);
             overflow-y: auto;
             display: flex;
             flex-direction: column;
+        }
+
+        [data-theme="dark"] .drawer {
+            background: rgba(26, 26, 26, 0.7);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .drawer.open {
             left: 0;
         }
 
-        /* Drawer Header - Black */
+        /* Drawer Header - Black with glassmorphism */
         .drawer-header {
             height: 60px;
-            background: #000000;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             display: flex;
             align-items: center;
             padding: 0 24px;
@@ -143,12 +173,12 @@
         }
 
         .drawer nav a:hover {
-            background: var(--bg);
+            background: rgba(0, 102, 204, 0.1);
             border-left-color: var(--secondary);
         }
 
         .drawer nav a.active {
-            background: var(--bg);
+            background: rgba(0, 171, 107, 0.1);
             border-left-color: var(--accent);
             font-weight: 500;
         }
@@ -162,14 +192,21 @@
         .theme-toggle {
             margin: 16px 24px;
             padding: 12px 16px;
-            background: var(--bg);
-            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 8px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: space-between;
             transition: all 0.2s ease;
+        }
+
+        [data-theme="dark"] .theme-toggle {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .theme-toggle:hover {
@@ -342,24 +379,19 @@
             font-size: 1.05em;
         }
 
-        /* AI Assistant Section */
+        /* AI Assistant Section - Original Styling */
         .ai-assistant-section {
-            background: linear-gradient(135deg, var(--surface) 0%, var(--bg) 100%);
-            padding: 40px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
             margin-bottom: 60px;
         }
 
         .ai-intro {
-            font-size: 1.1em;
+            font-size: 1.05em;
             color: var(--text-secondary);
             margin-bottom: 24px;
-            text-align: center;
         }
 
         .ai-container {
-            background: var(--bg);
+            background: var(--surface);
             border-radius: 8px;
             padding: 20px;
             border: 1px solid var(--border);
@@ -767,10 +799,6 @@
                 grid-template-columns: 1fr;
                 gap: 32px;
             }
-
-            .ai-assistant-section {
-                padding: 24px;
-            }
         }
 
         /* Page Visibility */
@@ -806,12 +834,12 @@
     
 </head>
 <body>
-    <!-- Fixed Black Header -->
+    <!-- Fixed Black Header with Glow Effect -->
     <div class="fixed-header">
         <button class="nav-toggle" onclick="toggleDrawer()">☰</button>
     </div>
 
-    <!-- Navigation Drawer -->
+    <!-- Glassmorphism Navigation Drawer -->
     <div class="drawer" id="drawer">
         <div class="drawer-header">
             <h2>Sumit Damor</h2>
