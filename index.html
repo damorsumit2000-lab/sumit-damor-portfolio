@@ -23,6 +23,7 @@
             --shadow: rgba(0, 0, 0, 0.08);
             --shadow-hover: rgba(0, 0, 0, 0.12);
             --header-glow: rgba(255, 255, 255, 0);
+            --header-glow-intense: rgba(255, 255, 255, 0);
         }
 
         [data-theme="dark"] {
@@ -36,7 +37,8 @@
             --border: #2d2d2d;
             --shadow: rgba(0, 0, 0, 0.3);
             --shadow-hover: rgba(0, 0, 0, 0.5);
-            --header-glow: rgba(77, 159, 255, 0.3);
+            --header-glow: rgba(77, 159, 255, 0.8);
+            --header-glow-intense: rgba(135, 206, 250, 1);
         }
 
         body {
@@ -47,7 +49,7 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Fixed Black Header with Glow Effect */
+        /* Fixed Black Header with Intense Bulb-like Glow Effect */
         .fixed-header {
             position: fixed;
             top: 0;
@@ -62,22 +64,61 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
 
-        /* Glowing light effect from bottom of header */
+        /* Intense bulb-like glowing light effect from bottom of header */
         .fixed-header::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -2px;
             left: 0;
             right: 0;
-            height: 1px;
+            height: 4px;
             background: linear-gradient(90deg, 
                 transparent 0%, 
+                var(--header-glow-intense) 10%,
                 var(--header-glow) 20%, 
-                var(--header-glow) 80%, 
+                var(--header-glow-intense) 50%, 
+                var(--header-glow) 80%,
+                var(--header-glow-intense) 90%, 
                 transparent 100%);
-            box-shadow: 0 0 20px var(--header-glow),
-                        0 0 40px var(--header-glow),
-                        0 0 60px var(--header-glow);
+            box-shadow: 
+                0 0 10px var(--header-glow),
+                0 0 20px var(--header-glow),
+                0 0 40px var(--header-glow),
+                0 0 60px var(--header-glow-intense),
+                0 0 80px var(--header-glow-intense),
+                0 0 100px var(--header-glow),
+                0 0 120px var(--header-glow),
+                0 2px 140px var(--header-glow-intense);
+            filter: blur(1px);
+            animation: pulseGlow 3s ease-in-out infinite;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                opacity: 1;
+                transform: scaleY(1);
+            }
+            50% {
+                opacity: 0.85;
+                transform: scaleY(1.1);
+            }
+        }
+
+        /* Additional ambient glow layer */
+        .fixed-header::before {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: radial-gradient(ellipse at center top, 
+                var(--header-glow-intense) 0%, 
+                var(--header-glow) 20%, 
+                transparent 70%);
+            opacity: 0.6;
+            pointer-events: none;
             transition: all 0.3s ease;
         }
 
@@ -392,8 +433,9 @@
 
         .ai-container {
             background: var(--surface);
-    border-radius: 8px;
-    padding: 0px;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid var(--border);
         }
 
         /* Skills */
@@ -833,7 +875,7 @@
     
 </head>
 <body>
-    <!-- Fixed Black Header with Glow Effect -->
+    <!-- Fixed Black Header with Intense Bulb-like Glow Effect -->
     <div class="fixed-header">
         <button class="nav-toggle" onclick="toggleDrawer()">☰</button>
     </div>
@@ -1112,6 +1154,7 @@
                         <h3>Data-Driven Decision Making: A Practical Guide</h3>
                         <div class="blog-date">Coming Soon</div>
                         <p class="blog-excerpt">Learn how to leverage data analytics and visualization tools to make informed business decisions...</p>
+                    </p>
                     </div>
 
                     <div class="blog-card">
