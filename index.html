@@ -406,205 +406,395 @@
             border-color: rgba(255, 255, 255, 0.3);
         }
 
+        /* Main Content */
         .container {
-            max-width: 1200px;
+            max-width: 680px;
             margin: 0 auto;
-            padding: 80px 20px 20px 20px;
+            padding: 80px 24px 60px;
+            animation: fadeIn 0.6s ease;
         }
 
-        .hero {
-            padding: 80px 0;
-            text-align: center;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .hero h1 {
-            font-size: 56px;
+        /* Header Section */
+        .header {
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+            animation: slideDown 0.8s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 16px;
             font-weight: 700;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero p {
-            font-size: 20px;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 40px;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 14px 32px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-            transition: all 0.2s;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: var(--secondary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px var(--shadow-hover);
-        }
-
-        .btn-secondary {
-            background: var(--surface);
             color: var(--text);
-            border: 1px solid var(--border);
+            letter-spacing: -0.02em;
+            line-height: 1.1;
         }
 
-        .btn-secondary:hover {
-            background: var(--bg);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px var(--shadow-hover);
-        }
-
-        /* AI Bot Section - Inline Chatbot */
-        .ai-bot-section {
-            padding: 60px 0;
-            margin-bottom: 40px;
-        }
-
-        .ai-bot-wrapper {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .ai-bot-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .ai-bot-header h2 {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--primary);
-        }
-
-        .ai-bot-header p {
-            font-size: 18px;
-            color: var(--text-secondary);
-        }
-
-        .section {
-            padding: 60px 0;
-        }
-
-        .section-title {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 40px;
-            text-align: center;
-            letter-spacing: -0.5px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-        }
-
-        .card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 32px;
-            transition: all 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px var(--shadow-hover);
-            border-color: var(--secondary);
-        }
-
-        .card h3 {
-            font-size: 24px;
-            margin-bottom: 12px;
-            color: var(--primary);
-        }
-
-        .card p {
+        .header .subtitle {
+            font-size: 1.25em;
             color: var(--text-secondary);
             line-height: 1.6;
-        }
-
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 20px;
-        }
-
-        .skill-tag {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            color: var(--text);
-            transition: all 0.2s;
-        }
-
-        .skill-tag:hover {
-            border-color: var(--secondary);
-            background: var(--surface);
+            margin-bottom: 24px;
         }
 
         .contact-info {
             display: flex;
-            flex-direction: column;
-            gap: 16px;
-            max-width: 600px;
-            margin: 0 auto;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 24px;
         }
 
-        .contact-item {
+        .contact-info a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95em;
+            transition: color 0.2s ease;
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 16px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            transition: all 0.2s;
+            gap: 6px;
         }
 
-        .contact-item:hover {
+        .contact-info a:hover {
+            color: var(--secondary);
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 60px;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section h2 {
+            font-size: 2em;
+            margin-bottom: 32px;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.01em;
+        }
+
+        .section p {
+            font-size: 1.05em;
+            line-height: 1.8;
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        /* Experience Card */
+        .experience-card {
+            margin-bottom: 48px;
+            padding: 32px;
+            background: var(--surface);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .experience-card:hover {
+            box-shadow: 0 8px 24px var(--shadow-hover);
+            transform: translateY(-4px);
+        }
+
+        .experience-card h3 {
+            font-size: 1.4em;
+            color: var(--text);
+            margin-bottom: 8px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .experience-card .company {
+            color: var(--secondary);
+            font-weight: 500;
+            margin-bottom: 6px;
+            font-size: 1.05em;
+        }
+
+        .experience-card .date {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            margin-bottom: 16px;
+        }
+
+        .experience-card .description {
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-size: 0.95em;
+        }
+
+        .experience-card ul {
+            margin-left: 20px;
+            margin-bottom: 16px;
+        }
+
+        .experience-card li {
+            margin-bottom: 12px;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .experience-card .tools {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            font-size: 0.9em;
+            color: var(--text-secondary);
+        }
+
+        /* Skills */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .skill-category {
+            padding: 24px;
+            background: var(--surface);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            box-shadow: 0 4px 16px var(--shadow);
+            transform: translateY(-2px);
+        }
+
+        .skill-category h3 {
+            font-size: 1.1em;
+            margin-bottom: 16px;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: var(--bg);
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-size: 0.85em;
+            color: var(--text);
+            border: 1px solid var(--border);
+            transition: all 0.2s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--secondary);
+            color: white;
             border-color: var(--secondary);
+        }
+
+        /* Projects */
+        .project-card {
+            padding: 32px;
+            margin-bottom: 32px;
+            background: var(--surface);
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            box-shadow: 0 8px 24px var(--shadow-hover);
             transform: translateX(4px);
         }
 
-        .contact-item a {
-            color: var(--secondary);
-            text-decoration: none;
-            font-weight: 500;
+        .project-card h3 {
+            font-size: 1.3em;
+            margin-bottom: 8px;
+            color: var(--text);
+            font-weight: 600;
         }
 
-        footer {
-            text-align: center;
-            padding: 40px 20px;
+        .project-card .date {
             color: var(--text-secondary);
-            border-top: 1px solid var(--border);
-            margin-top: 60px;
+            font-size: 0.85em;
+            margin-bottom: 16px;
         }
 
+        .project-card ul {
+            margin-left: 20px;
+        }
+
+        .project-card li {
+            margin-bottom: 10px;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* Education */
+        .education-card {
+            padding: 28px;
+            margin-bottom: 24px;
+            background: var(--surface);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .education-card:hover {
+            box-shadow: 0 4px 16px var(--shadow);
+        }
+
+        .education-card h3 {
+            font-size: 1.2em;
+            margin-bottom: 6px;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .education-card .institution {
+            color: var(--secondary);
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .education-card .date {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+
+        /* Achievements */
+        .achievement-card {
+            padding: 28px;
+            margin-bottom: 24px;
+            background: var(--surface);
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .achievement-card:hover {
+            box-shadow: 0 4px 16px var(--shadow);
+            transform: translateX(4px);
+        }
+
+        .achievement-card h3 {
+            font-size: 1.2em;
+            margin-bottom: 12px;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .achievement-card p {
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* AI Bot Box */
+        .ai-bot-box {
+            padding: 32px;
+            margin-bottom: 48px;
+            background: linear-gradient(135deg, var(--surface) 0%, var(--bg) 100%);
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            box-shadow: 0 4px 16px var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-bot-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+        }
+
+        .ai-bot-box:hover {
+            box-shadow: 0 8px 32px var(--shadow-hover);
+            transform: translateY(-4px);
+            border-color: var(--secondary);
+        }
+
+        .ai-bot-box h3 {
+            font-size: 1.5em;
+            margin-bottom: 16px;
+            color: var(--text);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .ai-bot-box p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .ai-bot-box .bot-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--bg);
+            border-radius: 20px;
+            font-size: 0.9em;
+            color: var(--accent);
+            border: 1px solid var(--border);
+        }
+
+        .ai-bot-box .bot-status::before {
+            content: '●';
+            color: #00d084;
+            font-size: 1.2em;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
             .hamburger {
                 display: flex;
@@ -614,19 +804,19 @@
                 display: none;
             }
 
-            .hero h1 {
-                font-size: 40px;
+            .header h1 {
+                font-size: 2.5em;
             }
 
-            .hero p {
-                font-size: 18px;
+            .container {
+                padding: 60px 20px 40px;
             }
 
-            .section-title {
-                font-size: 28px;
+            .section h2 {
+                font-size: 1.6em;
             }
 
-            .grid {
+            .skills-container {
                 grid-template-columns: 1fr;
             }
 
@@ -651,11 +841,12 @@
     <div class="drawer" id="drawer">
         <div class="drawer-links">
             <a href="#home" onclick="toggleDrawer()">Home</a>
-            <a href="#ai-bot" onclick="toggleDrawer()">AI Assistant</a>
             <a href="#about" onclick="toggleDrawer()">About</a>
+            <a href="#experience" onclick="toggleDrawer()">Experience</a>
             <a href="#projects" onclick="toggleDrawer()">Projects</a>
             <a href="#skills" onclick="toggleDrawer()">Skills</a>
-            <a href="#contact" onclick="toggleDrawer()">Contact</a>
+            <a href="#education" onclick="toggleDrawer()">Education</a>
+            <a href="#achievements" onclick="toggleDrawer()">Achievements</a>
         </div>
     </div>
 
@@ -665,11 +856,12 @@
             <a href="#" class="logo">SUMIT</a>
             <nav class="nav-links">
                 <a href="#home">Home</a>
-                <a href="#ai-bot">AI Assistant</a>
                 <a href="#about">About</a>
+                <a href="#experience">Experience</a>
                 <a href="#projects">Projects</a>
                 <a href="#skills">Skills</a>
-                <a href="#contact">Contact</a>
+                <a href="#education">Education</a>
+                <a href="#achievements">Achievements</a>
                 <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
             </nav>
             <div class="hamburger" id="hamburger" onclick="toggleDrawer()">
@@ -681,155 +873,185 @@
     </header>
 
     <div class="container">
-        <section id="home" class="hero">
-            <h1>Hi, I'm Sumit Damor</h1>
-            <p>Full-stack developer passionate about creating beautiful, functional web experiences</p>
-            <div class="cta-buttons">
-                <a href="#projects" class="btn btn-primary">View My Work</a>
-                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+        <section id="home" class="header">
+            <h1>I'm Sumit Damor</h1>
+            <p class="subtitle">Software Engineer passionate about building scalable systems and solving complex problems</p>
+            <div class="contact-info">
+                <a href="mailto:sumit@example.com">📧 Email</a>
+                <a href="https://linkedin.com/in/sumitdamor" target="_blank">💼 LinkedIn</a>
+                <a href="https://github.com/sumitdamor" target="_blank">🐙 GitHub</a>
             </div>
         </section>
 
-        <!-- AI Bot Section with Inline Chatbot -->
-        <section id="ai-bot" class="ai-bot-section">
-            <div class="ai-bot-wrapper">
-                <div class="ai-bot-header">
-                    <h2>🤖 AI Assistant</h2>
-                    <p>Ask me anything about my work, skills, or projects!</p>
-                </div>
-                
-                <!-- Inline Chatbot Container -->
-                <div class="chatbot-container inline-chatbot">
-                    <div class="chat-window inline-chat-window">
-                        <div class="chat-header">
-                            <div class="chat-header-info">
-                                <h3>Sumit's AI Assistant</h3>
-                                <p class="chat-status">🟢 Online - Ask me anything!</p>
-                            </div>
-                        </div>
-                        <div class="chat-messages" id="chatMessages">
-                            <div class="message bot-message">
-                                <div class="message-content">
-                                    👋 Hey! I'm Sumit's AI assistant. I can answer questions about my work at Groww, education, skills, projects, and more. What would you like to know?
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat-input-container">
-                            <input type="text" id="chatInput" class="chat-input" placeholder="Ask about my experience, skills, projects...">
-                            <button id="sendBtn" class="chat-send-btn">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- AI Bot Box -->
+        <div class="ai-bot-box">
+            <h3>🤖 AI Assistant</h3>
+            <p>Want to know more about me? Ask my AI assistant anything about my work, skills, education, or projects!</p>
+            <span class="bot-status">Online & Ready</span>
+        </div>
 
         <section id="about" class="section">
-            <h2 class="section-title">About Me</h2>
-            <div class="card">
-                <p>I'm a dedicated full-stack developer with expertise in modern web technologies. I love building scalable applications and solving complex problems with elegant solutions. My focus is on creating user-centric experiences that make a difference.</p>
+            <h2>About Me</h2>
+            <p>I'm a Software Engineer with a passion for building scalable, high-performance systems. Currently working at Groww, I specialize in backend development, system design, and creating robust solutions that handle millions of users.</p>
+            <p>My journey in tech has been driven by curiosity and a constant desire to learn. I love tackling complex problems and turning them into elegant, efficient solutions.</p>
+        </section>
+
+        <section id="experience" class="section">
+            <h2>Experience</h2>
+            
+            <div class="experience-card">
+                <h3>Software Engineer</h3>
+                <div class="company">Groww</div>
+                <div class="date">2022 - Present</div>
+                <p class="description">Building scalable backend systems for India's fastest-growing investment platform</p>
+                <ul>
+                    <li>Developed and maintained microservices handling millions of daily transactions</li>
+                    <li>Optimized database queries reducing response time by 40%</li>
+                    <li>Implemented caching strategies improving system performance</li>
+                    <li>Collaborated with cross-functional teams to deliver features on time</li>
+                </ul>
+                <div class="tools"><strong>Tools & Technologies:</strong> Java, Spring Boot, MySQL, Redis, Kafka, AWS</div>
             </div>
         </section>
 
         <section id="projects" class="section">
-            <h2 class="section-title">Featured Projects</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>E-Commerce Platform</h3>
-                    <p>A full-featured online shopping platform with real-time inventory management, secure payment processing, and an intuitive admin dashboard.</p>
-                    <div class="skills">
-                        <span class="skill-tag">React</span>
-                        <span class="skill-tag">Node.js</span>
-                        <span class="skill-tag">MongoDB</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <h3>Task Management App</h3>
-                    <p>Collaborative task management tool with real-time updates, team collaboration features, and advanced analytics.</p>
-                    <div class="skills">
-                        <span class="skill-tag">Vue.js</span>
-                        <span class="skill-tag">Firebase</span>
-                        <span class="skill-tag">Tailwind</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <h3>Analytics Dashboard</h3>
-                    <p>Data visualization dashboard for business intelligence with interactive charts and real-time data processing.</p>
-                    <div class="skills">
-                        <span class="skill-tag">React</span>
-                        <span class="skill-tag">D3.js</span>
-                        <span class="skill-tag">PostgreSQL</span>
-                    </div>
-                </div>
+            <h2>Projects</h2>
+            
+            <div class="project-card">
+                <h3>Trading Platform Backend</h3>
+                <div class="date">2023</div>
+                <ul>
+                    <li>Built high-performance trading APIs handling 10K+ requests per second</li>
+                    <li>Implemented real-time order matching engine</li>
+                    <li>Designed fault-tolerant system with 99.9% uptime</li>
+                </ul>
+            </div>
+
+            <div class="project-card">
+                <h3>User Analytics Dashboard</h3>
+                <div class="date">2022</div>
+                <ul>
+                    <li>Created comprehensive analytics system tracking user behavior</li>
+                    <li>Built data pipeline processing millions of events daily</li>
+                    <li>Developed interactive dashboards for business insights</li>
+                </ul>
             </div>
         </section>
 
         <section id="skills" class="section">
-            <h2 class="section-title">Skills & Technologies</h2>
-            <div class="card">
-                <h3>Frontend</h3>
-                <div class="skills">
-                    <span class="skill-tag">HTML5</span>
-                    <span class="skill-tag">CSS3</span>
-                    <span class="skill-tag">JavaScript</span>
-                    <span class="skill-tag">React</span>
-                    <span class="skill-tag">Vue.js</span>
-                    <span class="skill-tag">TypeScript</span>
+            <h2>Skills</h2>
+            
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">SQL</span>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <h3>Backend</h3>
-                <div class="skills">
-                    <span class="skill-tag">Node.js</span>
-                    <span class="skill-tag">Express</span>
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">Django</span>
-                    <span class="skill-tag">REST APIs</span>
-                    <span class="skill-tag">GraphQL</span>
+
+                <div class="skill-category">
+                    <h3>Frameworks</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Spring Boot</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Django</span>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <h3>Database & Tools</h3>
-                <div class="skills">
-                    <span class="skill-tag">MongoDB</span>
-                    <span class="skill-tag">PostgreSQL</span>
-                    <span class="skill-tag">Git</span>
-                    <span class="skill-tag">Docker</span>
-                    <span class="skill-tag">AWS</span>
-                    <span class="skill-tag">CI/CD</span>
+
+                <div class="skill-category">
+                    <h3>Databases</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">Redis</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Tools & Cloud</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Kafka</span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="section">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <span>📧</span>
-                    <a href="mailto:sumit@example.com">sumit@example.com</a>
-                </div>
-                <div class="contact-item">
-                    <span>💼</span>
-                    <a href="https://linkedin.com/in/sumitdamor" target="_blank">LinkedIn</a>
-                </div>
-                <div class="contact-item">
-                    <span>🐙</span>
-                    <a href="https://github.com/sumitdamor" target="_blank">GitHub</a>
-                </div>
-                <div class="contact-item">
-                    <span>🐦</span>
-                    <a href="https://twitter.com/sumitdamor" target="_blank">Twitter</a>
-                </div>
+        <section id="education" class="section">
+            <h2>Education</h2>
+            
+            <div class="education-card">
+                <h3>Bachelor of Technology in Computer Science</h3>
+                <div class="institution">XYZ University</div>
+                <div class="date">2018 - 2022</div>
+            </div>
+        </section>
+
+        <section id="achievements" class="section">
+            <h2>Achievements</h2>
+            
+            <div class="achievement-card">
+                <h3>🏆 Best Performance Award</h3>
+                <p>Recognized for exceptional contribution to critical projects at Groww</p>
+            </div>
+
+            <div class="achievement-card">
+                <h3>🎯 Hackathon Winner</h3>
+                <p>Won internal hackathon for building innovative trading feature</p>
             </div>
         </section>
     </div>
 
-    <footer>
-        <p>&copy; 2024 Sumit Damor. All rights reserved.</p>
-    </footer>
+    <!-- Floating Chatbot Widget -->
+    <div class="chatbot-container">
+        <button class="chat-toggle" id="chatToggle">
+            <svg class="chat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+        
+        <div class="chat-window">
+            <div class="chat-header">
+                <div class="chat-header-info">
+                    <h3>Sumit's AI Assistant</h3>
+                    <p class="chat-status">🟢 Online - Ask me anything!</p>
+                </div>
+                <button class="chat-close-btn" id="chatClose">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot-message">
+                    <div class="message-content">
+                        👋 Hey! I'm Sumit's AI assistant. I can answer questions about my work at Groww, education, skills, projects, and more. What would you like to know?
+                    </div>
+                </div>
+            </div>
+            <div class="chat-input-container">
+                <input type="text" id="chatInput" class="chat-input" placeholder="Ask about my experience, skills, projects...">
+                <button id="sendBtn" class="chat-send-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <script src="chatbot.js"></script>
     <script>
