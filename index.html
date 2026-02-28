@@ -42,7 +42,6 @@
             --header-glow-intense: rgba(255, 255, 0, 1);
         }
 
-        /* Animated Gradient Mesh Background */
         .animated-background {
             position: fixed;
             top: 0;
@@ -83,21 +82,12 @@
         }
 
         @keyframes meshMove {
-            0%, 100% {
-                transform: translate(0, 0) rotate(0deg) scale(1);
-            }
-            25% {
-                transform: translate(-5%, 5%) rotate(2deg) scale(1.05);
-            }
-            50% {
-                transform: translate(5%, -5%) rotate(-2deg) scale(0.95);
-            }
-            75% {
-                transform: translate(-3%, -3%) rotate(1deg) scale(1.02);
-            }
+            0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            25% { transform: translate(-5%, 5%) rotate(2deg) scale(1.05); }
+            50% { transform: translate(5%, -5%) rotate(-2deg) scale(0.95); }
+            75% { transform: translate(-3%, -3%) rotate(1deg) scale(1.02); }
         }
 
-        /* Glowing Moving Lights */
         .particles-container {
             position: absolute;
             width: 100%;
@@ -127,31 +117,16 @@
             opacity: 0.6;
         }
 
-        [data-theme="dark"] .particle {
-            opacity: 1;
-        }
+        [data-theme="dark"] .particle { opacity: 1; }
 
         @keyframes lightFloat {
-            0% {
-                transform: translateY(110vh) translateX(0) scale(0);
-                opacity: 0;
-            }
-            5% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 1;
-            }
-            95% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-10vh) translateX(var(--drift)) scale(1);
-                opacity: 0;
-            }
+            0% { transform: translateY(110vh) translateX(0) scale(0); opacity: 0; }
+            5% { opacity: 1; }
+            50% { opacity: 1; }
+            95% { opacity: 1; }
+            100% { transform: translateY(-10vh) translateX(var(--drift)) scale(1); opacity: 0; }
         }
 
-        /* Grid Pattern Overlay */
         .grid-overlay {
             position: absolute;
             width: 100%;
@@ -180,7 +155,6 @@
             position: relative;
         }
 
-        /* Fixed Black Header */
         .fixed-header {
             position: fixed;
             top: 0;
@@ -222,21 +196,9 @@
         }
 
         @keyframes breathingLight {
-            0% {
-                opacity: 0.7;
-                transform: scaleY(0.95);
-                filter: blur(2px) brightness(0.9);
-            }
-            50% {
-                opacity: 1;
-                transform: scaleY(1.05);
-                filter: blur(3px) brightness(1.1);
-            }
-            100% {
-                opacity: 0.7;
-                transform: scaleY(0.95);
-                filter: blur(2px) brightness(0.9);
-            }
+            0% { opacity: 0.7; transform: scaleY(0.95); filter: blur(2px) brightness(0.9); }
+            50% { opacity: 1; transform: scaleY(1.05); filter: blur(3px) brightness(1.1); }
+            100% { opacity: 0.7; transform: scaleY(0.95); filter: blur(2px) brightness(0.9); }
         }
 
         .header-content {
@@ -248,7 +210,6 @@
             margin: 0 auto;
         }
 
-        /* Aesthetic Sumit Logo */
         .logo {
             font-size: 28px;
             font-weight: 800;
@@ -277,11 +238,8 @@
             transition: transform 0.3s ease;
         }
 
-        .logo:hover::after {
-            transform: scaleX(1);
-        }
+        .logo:hover::after { transform: scaleX(1); }
 
-        /* Hamburger Menu */
         .hamburger {
             display: none;
             flex-direction: column;
@@ -299,19 +257,10 @@
             transition: all 0.3s ease;
         }
 
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
-        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
 
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-
-        /* Desktop Navigation */
         .nav-links {
             display: flex;
             gap: 30px;
@@ -327,11 +276,8 @@
             opacity: 0.9;
         }
 
-        .nav-links a:hover {
-            opacity: 1;
-        }
+        .nav-links a:hover { opacity: 1; }
 
-        /* Drawer Navigation */
         .drawer {
             position: fixed;
             top: 0;
@@ -346,9 +292,7 @@
             box-shadow: -5px 0 15px var(--shadow);
         }
 
-        .drawer.active {
-            right: 0;
-        }
+        .drawer.active { right: 0; }
 
         .drawer-links {
             display: flex;
@@ -406,37 +350,34 @@
             border-color: rgba(255, 255, 255, 0.3);
         }
 
+        .drawer-theme-toggle {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
 
-        /* Mobile Theme Toggle */
-.drawer-theme-toggle {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-}
+        .drawer-theme-toggle button {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 12px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
 
-.drawer-theme-toggle button {
-    width: 100%;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 12px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 500;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
+        .drawer-theme-toggle button:hover {
+            background: var(--surface);
+            border-color: var(--secondary);
+        }
 
-.drawer-theme-toggle button:hover {
-    background: var(--surface);
-    border-color: var(--secondary);
-}
-        
-        /* Main Content */
         .container {
             max-width: 680px;
             margin: 0 auto;
@@ -445,17 +386,10 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Header Section */
         .header {
             margin-bottom: 60px;
             padding-bottom: 40px;
@@ -464,14 +398,8 @@
         }
 
         @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .header h1 {
@@ -507,25 +435,16 @@
             gap: 6px;
         }
 
-        .contact-info a:hover {
-            color: var(--secondary);
-        }
+        .contact-info a:hover { color: var(--secondary); }
 
-        /* Section Styles */
         .section {
             margin-bottom: 60px;
             animation: fadeInUp 0.6s ease;
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .section h2 {
@@ -543,7 +462,6 @@
             margin-bottom: 20px;
         }
 
-        /* Experience Card */
         .experience-card {
             margin-bottom: 48px;
             padding: 32px;
@@ -605,7 +523,6 @@
             color: var(--text-secondary);
         }
 
-        /* Skills */
         .skills-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -654,7 +571,6 @@
             border-color: var(--secondary);
         }
 
-        /* Projects */
         .project-card {
             padding: 32px;
             margin-bottom: 32px;
@@ -682,9 +598,7 @@
             margin-bottom: 16px;
         }
 
-        .project-card ul {
-            margin-left: 20px;
-        }
+        .project-card ul { margin-left: 20px; }
 
         .project-card li {
             margin-bottom: 10px;
@@ -692,7 +606,6 @@
             line-height: 1.7;
         }
 
-        /* Education */
         .education-card {
             padding: 28px;
             margin-bottom: 24px;
@@ -702,9 +615,7 @@
             transition: all 0.3s ease;
         }
 
-        .education-card:hover {
-            box-shadow: 0 4px 16px var(--shadow);
-        }
+        .education-card:hover { box-shadow: 0 4px 16px var(--shadow); }
 
         .education-card h3 {
             font-size: 1.2em;
@@ -724,7 +635,6 @@
             font-size: 0.9em;
         }
 
-        /* Achievements */
         .achievement-card {
             padding: 28px;
             margin-bottom: 24px;
@@ -751,50 +661,26 @@
             line-height: 1.7;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .header h1 {
-                font-size: 2.5em;
-            }
-
-            .container {
-                padding: 60px 20px 40px;
-            }
-
-            .section h2 {
-                font-size: 1.6em;
-            }
-
-            .skills-container {
-                grid-template-columns: 1fr;
-            }
-
-            .logo {
-                font-size: 22px;
-            }
+            .hamburger { display: flex; }
+            .nav-links { display: none; }
+            .header h1 { font-size: 2.5em; }
+            .container { padding: 60px 20px 40px; }
+            .section h2 { font-size: 1.6em; }
+            .skills-container { grid-template-columns: 1fr; }
+            .logo { font-size: 22px; }
         }
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
     <div class="animated-background">
         <div class="gradient-mesh"></div>
         <div class="particles-container" id="particles"></div>
         <div class="grid-overlay"></div>
     </div>
 
-    <!-- Drawer Overlay -->
     <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
 
-    <!-- Drawer Navigation -->
     <div class="drawer" id="drawer">
         <div class="drawer-links">
             <a href="#home" onclick="toggleDrawer()">Home</a>
@@ -806,12 +692,11 @@
             <a href="#education" onclick="toggleDrawer()">Education</a>
             <a href="#achievements" onclick="toggleDrawer()">Achievements</a>
             <div class="drawer-theme-toggle">
-        <button class="mobile-theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
-    </div>
+                <button class="mobile-theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
+            </div>
         </div>
     </div>
 
-    <!-- Fixed Black Header -->
     <header class="fixed-header">
         <div class="header-content">
             <a href="#" class="logo">SUMIT</a>
@@ -872,7 +757,6 @@
 
         <section id="experience" class="section">
             <h2>Experience</h2>
-            
             <div class="experience-card">
                 <h3>Order Processing & Revenue Operations Associate</h3>
                 <div class="company">Groww Invest-Tech Private Limited</div>
@@ -890,7 +774,6 @@
 
         <section id="projects" class="section">
             <h2>Projects</h2>
-            
             <div class="project-card">
                 <h3>A study on the impact of website quality on payment modes and online compulsive buying behavior</h3>
                 <div class="date">January 2024 - March 2024</div>
@@ -899,7 +782,6 @@
                     <li>Analyzed the impact of identified website quality factors on compulsive buying behavior</li>
                 </ul>
             </div>
-
             <div class="project-card">
                 <h3>A study of Digital India Movement - Market Analysis</h3>
                 <div class="date">February 2022 - March 2022</div>
@@ -908,7 +790,6 @@
                     <li>Built visualizations in Tableau to demonstrate which are the main UPI platforms in India</li>
                 </ul>
             </div>
-
             <div class="project-card">
                 <h3>MERN Project - News Website</h3>
                 <div class="date">November 2021 - December 2021</div>
@@ -921,7 +802,6 @@
 
         <section id="skills" class="section">
             <h2>Skills</h2>
-            
             <div class="skills-container">
                 <div class="skill-category">
                     <h3>Technical Tools</h3>
@@ -933,7 +813,6 @@
                         <span class="skill-tag">Tableau</span>
                     </div>
                 </div>
-
                 <div class="skill-category">
                     <h3>Core Competencies</h3>
                     <div class="skill-tags">
@@ -943,7 +822,6 @@
                         <span class="skill-tag">Market Research</span>
                     </div>
                 </div>
-
                 <div class="skill-category">
                     <h3>Business Skills</h3>
                     <div class="skill-tags">
@@ -953,7 +831,6 @@
                         <span class="skill-tag">Email Marketing</span>
                     </div>
                 </div>
-
                 <div class="skill-category">
                     <h3>Interests</h3>
                     <div class="skill-tags">
@@ -968,13 +845,11 @@
 
         <section id="education" class="section">
             <h2>Education</h2>
-            
             <div class="education-card">
                 <h3>Masters of Business Administration (MBA) - Marketing</h3>
                 <div class="institution">National School of Business</div>
                 <div class="date">August 2022 - July 2024, Bangalore, India</div>
             </div>
-
             <div class="education-card">
                 <h3>Bachelor of Arts, Economics</h3>
                 <div class="institution">Indira Gandhi National Open School</div>
@@ -984,25 +859,22 @@
 
         <section id="achievements" class="section">
             <h2>Achievements</h2>
-            
             <div class="achievement-card">
                 <h3>🏆 AAGMAN - The Marketing Fest</h3>
                 <p>Won the marketing fest AAGMAN at NSB, showcasing my skills and earning the top prize. This accolade highlights my innovative approach and bolsters my confidence in my marketing abilities.</p>
             </div>
-
             <div class="achievement-card">
                 <h3>♻️ Recycle Mania</h3>
                 <p>Won a product design event using waste materials, showcasing creativity and sustainability. This victory demonstrated my design skills and commitment to environmental responsibility.</p>
             </div>
-
             <div class="achievement-card">
                 <h3>🎉 Annual College Fest</h3>
-                <p>Led a team for the college's largest event, overseeing the design and implementation of various games to be featured during the annual college fest. This involved coordinating with team members, ensuring creative and engaging game concepts, and managing the logistics to ensure smooth execution during the event.</p>
+                <p>Led a team for the college's largest event, overseeing the design and implementation of various games to be featured during the annual college fest.</p>
             </div>
         </section>
     </div>
 
-    <!-- Floating Chatbot Widget (Bottom Right) -->
+    <!-- Floating Chatbot Widget -->
     <div class="chatbot-container">
         <button class="chat-toggle" id="chatToggle">
             <svg class="chat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1013,7 +885,6 @@
                 <line x1="6" y1="6" x2="18" y2="18"/>
             </svg>
         </button>
-        
         <div class="chat-window">
             <div class="chat-header">
                 <div class="chat-header-info">
@@ -1030,7 +901,7 @@
             <div class="chat-messages" id="chatMessages">
                 <div class="message bot-message">
                     <div class="message-content">
-                        👋 Hey! I'm Sumit's AI assistant. I can answer questions about my work at Groww, education, skills, projects, and more. What would you like to know?
+                        👋 Hey! I'm Sumit's AI assistant. I can answer questions about his work at Groww, education, skills, projects, and more. What would you like to know?
                     </div>
                 </div>
             </div>
@@ -1043,25 +914,21 @@
                 </button>
             </div>
         </div>
-        
     </div>
 
-   <script src="chatbot-groq.js"></script>
+    <!-- Load Groq chatbot FIRST so getGroqResponse is available -->
+    <script src="chatbot-groq.js"></script>
     <script>
-        // Inline Chatbot Functionality
+        // ─── Inline Chatbot ───────────────────────────────────────────────────
         document.addEventListener('DOMContentLoaded', function() {
             const inlineSendBtn = document.getElementById('inlineSendBtn');
             const inlineChatInput = document.getElementById('inlineChatInput');
 
-            if (inlineSendBtn) {
-                inlineSendBtn.addEventListener('click', sendInlineMessage);
-            }
+            if (inlineSendBtn) inlineSendBtn.addEventListener('click', sendInlineMessage);
 
             if (inlineChatInput) {
                 inlineChatInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        sendInlineMessage();
-                    }
+                    if (e.key === 'Enter') sendInlineMessage();
                 });
             }
         });
@@ -1070,20 +937,16 @@
             const inlineChatInput = document.getElementById('inlineChatInput');
             const inlineChatMessages = document.getElementById('inlineChatMessages');
             const message = inlineChatInput.value.trim();
-
             if (!message) return;
 
-            // Add user message
             addInlineMessage(message, 'user');
             inlineChatInput.value = '';
 
-            // Show typing indicator
             const typingIndicator = addInlineTypingIndicator();
 
             try {
-                // Get AI response (reuse the same function from chatbot.js)
-                const response = await getGeminiResponse(message);
-                
+                // ✅ FIXED: was getGeminiResponse — now correctly calls getGroqResponse
+                const response = await getGroqResponse(message);
                 typingIndicator.remove();
                 addInlineMessage(response, 'bot');
             } catch (error) {
@@ -1099,144 +962,85 @@
             const inlineChatMessages = document.getElementById('inlineChatMessages');
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${sender}-message`;
-            
             const contentDiv = document.createElement('div');
             contentDiv.className = 'message-content';
             contentDiv.textContent = text;
-            
             messageDiv.appendChild(contentDiv);
             inlineChatMessages.appendChild(messageDiv);
             inlineChatMessages.scrollTop = inlineChatMessages.scrollHeight;
-            
             return messageDiv;
         }
 
-
-       function toggleTheme() {
-    const html = document.documentElement;
-    const currentTheme = html.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    html.setAttribute('data-theme', newTheme);
-    
-    // Update both desktop and mobile buttons
-    const desktopBtn = document.querySelector('.theme-toggle');
-    const mobileBtn = document.querySelector('.mobile-theme-toggle');
-    const buttonText = newTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
-    
-    if (desktopBtn) desktopBtn.textContent = buttonText;
-    if (mobileBtn) mobileBtn.textContent = buttonText;
-    
-    localStorage.setItem('theme', newTheme);
-}
-
-        
         function addInlineTypingIndicator() {
             const inlineChatMessages = document.getElementById('inlineChatMessages');
             const typingDiv = document.createElement('div');
             typingDiv.className = 'message bot-message typing-indicator';
-            typingDiv.innerHTML = `
-                <div class="message-content">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            `;
+            typingDiv.innerHTML = `<div class="message-content"><span></span><span></span><span></span></div>`;
             inlineChatMessages.appendChild(typingDiv);
             inlineChatMessages.scrollTop = inlineChatMessages.scrollHeight;
             return typingDiv;
         }
 
-        // Theme Toggle
+        // ─── Theme Toggle ─────────────────────────────────────────────────────
         function toggleTheme() {
             const html = document.documentElement;
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
             html.setAttribute('data-theme', newTheme);
-            
-            const btn = document.querySelector('.theme-toggle');
-            btn.textContent = newTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
-            
+            const buttonText = newTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+            const desktopBtn = document.querySelector('.theme-toggle');
+            const mobileBtn = document.querySelector('.mobile-theme-toggle');
+            if (desktopBtn) desktopBtn.textContent = buttonText;
+            if (mobileBtn) mobileBtn.textContent = buttonText;
             localStorage.setItem('theme', newTheme);
         }
 
         // Load saved theme
-      // Load saved theme
-const savedTheme = localStorage.getItem('theme') || 'light';
-document.documentElement.setAttribute('data-theme', savedTheme);
-const buttonText = savedTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        const buttonText = savedTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+        const desktopBtn = document.querySelector('.theme-toggle');
+        const mobileBtn = document.querySelector('.mobile-theme-toggle');
+        if (desktopBtn) desktopBtn.textContent = buttonText;
+        if (mobileBtn) mobileBtn.textContent = buttonText;
 
-const desktopBtn = document.querySelector('.theme-toggle');
-const mobileBtn = document.querySelector('.mobile-theme-toggle');
-if (desktopBtn) desktopBtn.textContent = buttonText;
-if (mobileBtn) mobileBtn.textContent = buttonText;
-
-        // Drawer Toggle
+        // ─── Drawer ───────────────────────────────────────────────────────────
         function toggleDrawer() {
-            const drawer = document.getElementById('drawer');
-            const overlay = document.getElementById('drawerOverlay');
-            const hamburger = document.getElementById('hamburger');
-            
-            drawer.classList.toggle('active');
-            overlay.classList.toggle('active');
-            hamburger.classList.toggle('active');
+            document.getElementById('drawer').classList.toggle('active');
+            document.getElementById('drawerOverlay').classList.toggle('active');
+            document.getElementById('hamburger').classList.toggle('active');
         }
 
-        // Create glowing moving lights
+        // ─── Glowing particles ────────────────────────────────────────────────
         function createGlowingLights() {
             const container = document.getElementById('particles');
-            const colors = [
-                '#4d9fff',
-                '#00d084',
-                '#00ab6b',
-                '#0066cc',
-                '#ffff00',
-                '#ff6b6b',
-                '#a78bfa',
-            ];
-            
+            const colors = ['#4d9fff','#00d084','#00ab6b','#0066cc','#ffff00','#ff6b6b','#a78bfa'];
             for (let i = 0; i < 50; i++) {
                 const light = document.createElement('div');
                 light.className = 'particle';
-                
                 const size = Math.random() * 5 + 3;
                 light.style.width = size + 'px';
                 light.style.height = size + 'px';
-                
                 const color = colors[Math.floor(Math.random() * colors.length)];
                 light.style.background = color;
                 light.style.boxShadow = `0 0 ${size * 2}px ${color}, 0 0 ${size * 4}px ${color}`;
-                
                 light.style.left = Math.random() * 100 + '%';
-                
                 const drift = (Math.random() - 0.5) * 200;
                 light.style.setProperty('--drift', drift + 'px');
-                
-                const duration = Math.random() * 15 + 10;
-                light.style.animationDuration = duration + 's';
-                
-                const delay = Math.random() * 20;
-                light.style.animationDelay = delay + 's';
-                
+                light.style.animationDuration = (Math.random() * 15 + 10) + 's';
+                light.style.animationDelay = (Math.random() * 20) + 's';
                 container.appendChild(light);
             }
         }
-
         createGlowingLights();
 
-        // Smooth scroll
+        // ─── Smooth scroll ────────────────────────────────────────────────────
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    const headerOffset = 80;
-                    const elementPosition = target.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
+                    const offsetPosition = target.getBoundingClientRect().top + window.pageYOffset - 80;
+                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
                 }
             });
         });
