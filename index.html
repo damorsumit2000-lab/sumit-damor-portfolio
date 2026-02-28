@@ -406,6 +406,36 @@
             border-color: rgba(255, 255, 255, 0.3);
         }
 
+
+        /* Mobile Theme Toggle */
+.drawer-theme-toggle {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+}
+
+.drawer-theme-toggle button {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 12px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.drawer-theme-toggle button:hover {
+    background: var(--surface);
+    border-color: var(--secondary);
+}
+        
         /* Main Content */
         .container {
             max-width: 680px;
@@ -450,7 +480,7 @@
             font-weight: 700;
             color: var(--text);
             letter-spacing: -0.02em;
-            line-height: 1.1;
+            line-height: 2.8;
         }
 
         .header .subtitle {
@@ -791,6 +821,9 @@
                 <a href="#skills">Skills</a>
                 <a href="#education">Education</a>
                 <a href="#achievements">Achievements</a>
+                        <div class="drawer-theme-toggle">
+            <button class="mobile-theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
+        </div>
                 <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
             </nav>
             <div class="hamburger" id="hamburger" onclick="toggleDrawer()">
@@ -1010,6 +1043,7 @@
                 </button>
             </div>
         </div>
+        
     </div>
 
     <script src="chatbot.js"></script>
@@ -1077,6 +1111,25 @@
             return messageDiv;
         }
 
+
+       function toggleTheme() {
+    const html = document.documentElement;
+    const currentTheme = html.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', newTheme);
+    
+    // Update both desktop and mobile buttons
+    const desktopBtn = document.querySelector('.theme-toggle');
+    const mobileBtn = document.querySelector('.mobile-theme-toggle');
+    const buttonText = newTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+    
+    if (desktopBtn) desktopBtn.textContent = buttonText;
+    if (mobileBtn) mobileBtn.textContent = buttonText;
+    
+    localStorage.setItem('theme', newTheme);
+}
+
+        
         function addInlineTypingIndicator() {
             const inlineChatMessages = document.getElementById('inlineChatMessages');
             const typingDiv = document.createElement('div');
@@ -1107,10 +1160,15 @@
         }
 
         // Load saved theme
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', savedTheme);
-        const btn = document.querySelector('.theme-toggle');
-        btn.textContent = savedTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+      // Load saved theme
+const savedTheme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', savedTheme);
+const buttonText = savedTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+
+const desktopBtn = document.querySelector('.theme-toggle');
+const mobileBtn = document.querySelector('.mobile-theme-toggle');
+if (desktopBtn) desktopBtn.textContent = buttonText;
+if (mobileBtn) mobileBtn.textContent = buttonText;
 
         // Drawer Toggle
         function toggleDrawer() {
