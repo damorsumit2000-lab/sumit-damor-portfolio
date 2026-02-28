@@ -49,7 +49,7 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Fixed Black Header with Intense Bulb-like Glow Effect */
+        /* Fixed Black Header with Realistic Downward Light Effect */
         .fixed-header {
             position: fixed;
             top: 0;
@@ -62,64 +62,162 @@
             align-items: center;
             padding: 0 20px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            overflow: visible;
         }
 
-        /* Intense bulb-like glowing light effect from bottom of header */
+        /* Light container - only shows light below header */
         .fixed-header::after {
             content: '';
             position: absolute;
-            bottom: -2px;
+            bottom: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                var(--header-glow-intense) 10%,
-                var(--header-glow) 20%, 
-                var(--header-glow-intense) 50%, 
-                var(--header-glow) 80%,
-                var(--header-glow-intense) 90%, 
-                transparent 100%);
-            box-shadow: 
-                0 0 10px var(--header-glow),
-                0 0 20px var(--header-glow),
-                0 0 40px var(--header-glow),
-                0 0 60px var(--header-glow-intense),
-                0 0 80px var(--header-glow-intense),
-                0 0 100px var(--header-glow),
-                0 0 120px var(--header-glow),
-                0 2px 140px var(--header-glow-intense);
-            filter: blur(1px);
-            animation: pulseGlow 3s ease-in-out infinite;
-            transition: all 0.3s ease;
+            height: 0;
+            pointer-events: none;
+            overflow: visible;
         }
 
-        @keyframes pulseGlow {
-            0%, 100% {
-                opacity: 1;
-                transform: scaleY(1);
-            }
-            50% {
-                opacity: 0.85;
-                transform: scaleY(1.1);
-            }
-        }
-
-        /* Additional ambient glow layer */
+        /* Main glowing light beam - downward only */
         .fixed-header::before {
             content: '';
             position: absolute;
-            bottom: -30px;
+            top: 60px; /* Starts exactly at bottom of header */
             left: 0;
             right: 0;
-            height: 60px;
-            background: radial-gradient(ellipse at center top, 
+            height: 120px;
+            background: radial-gradient(ellipse 100% 100% at center top, 
                 var(--header-glow-intense) 0%, 
-                var(--header-glow) 20%, 
-                transparent 70%);
-            opacity: 0.6;
+                var(--header-glow) 15%, 
+                rgba(77, 159, 255, 0.4) 35%,
+                rgba(77, 159, 255, 0.2) 55%,
+                rgba(77, 159, 255, 0.05) 75%,
+                transparent 100%);
+            opacity: 0;
             pointer-events: none;
-            transition: all 0.3s ease;
+            transition: opacity 0.3s ease;
+            filter: blur(2px);
+        }
+
+        /* Show light in dark mode */
+        [data-theme="dark"] .fixed-header::before {
+            opacity: 1;
+            animation: runningLight 4s ease-in-out infinite;
+        }
+
+        /* Running light animation - moves left to right */
+        @keyframes runningLight {
+            0% {
+                background: radial-gradient(ellipse 80% 100% at 20% top, 
+                    var(--header-glow-intense) 0%, 
+                    var(--header-glow) 15%, 
+                    rgba(77, 159, 255, 0.4) 35%,
+                    rgba(77, 159, 255, 0.2) 55%,
+                    rgba(77, 159, 255, 0.05) 75%,
+                    transparent 100%);
+            }
+            25% {
+                background: radial-gradient(ellipse 80% 100% at 40% top, 
+                    var(--header-glow-intense) 0%, 
+                    var(--header-glow) 15%, 
+                    rgba(77, 159, 255, 0.4) 35%,
+                    rgba(77, 159, 255, 0.2) 55%,
+                    rgba(77, 159, 255, 0.05) 75%,
+                    transparent 100%);
+            }
+            50% {
+                background: radial-gradient(ellipse 80% 100% at 60% top, 
+                    var(--header-glow-intense) 0%, 
+                    var(--header-glow) 15%, 
+                    rgba(77, 159, 255, 0.4) 35%,
+                    rgba(77, 159, 255, 0.2) 55%,
+                    rgba(77, 159, 255, 0.05) 75%,
+                    transparent 100%);
+            }
+            75% {
+                background: radial-gradient(ellipse 80% 100% at 80% top, 
+                    var(--header-glow-intense) 0%, 
+                    var(--header-glow) 15%, 
+                    rgba(77, 159, 255, 0.4) 35%,
+                    rgba(77, 159, 255, 0.2) 55%,
+                    rgba(77, 159, 255, 0.05) 75%,
+                    transparent 100%);
+            }
+            100% {
+                background: radial-gradient(ellipse 80% 100% at 20% top, 
+                    var(--header-glow-intense) 0%, 
+                    var(--header-glow) 15%, 
+                    rgba(77, 159, 255, 0.4) 35%,
+                    rgba(77, 159, 255, 0.2) 55%,
+                    rgba(77, 159, 255, 0.05) 75%,
+                    transparent 100%);
+            }
+        }
+
+        /* Light turn-on animation when switching to dark mode */
+        @keyframes lightTurnOn {
+            0% {
+                opacity: 0;
+                filter: blur(10px) brightness(0);
+            }
+            30% {
+                opacity: 0.3;
+                filter: blur(8px) brightness(0.5);
+            }
+            60% {
+                opacity: 0.7;
+                filter: blur(4px) brightness(1.2);
+            }
+            80% {
+                opacity: 1;
+                filter: blur(2px) brightness(1.5);
+            }
+            100% {
+                opacity: 1;
+                filter: blur(2px) brightness(1);
+            }
+        }
+
+        /* Apply turn-on animation class */
+        .fixed-header.light-turning-on::before {
+            animation: lightTurnOn 1.2s ease-out forwards, runningLight 4s ease-in-out 1.2s infinite;
+        }
+
+        /* Subtle glow line at header bottom edge */
+        .light-edge {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                var(--header-glow-intense) 20%,
+                var(--header-glow) 40%, 
+                var(--header-glow-intense) 50%, 
+                var(--header-glow) 60%,
+                var(--header-glow-intense) 80%, 
+                transparent 100%);
+            opacity: 0;
+            box-shadow: 
+                0 0 10px var(--header-glow),
+                0 0 20px var(--header-glow),
+                0 0 30px var(--header-glow-intense);
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        [data-theme="dark"] .light-edge {
+            opacity: 1;
+            animation: edgePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes edgePulse {
+            0%, 100% {
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 1;
+            }
         }
 
         .nav-toggle {
@@ -875,9 +973,10 @@
     
 </head>
 <body>
-    <!-- Fixed Black Header with Intense Bulb-like Glow Effect -->
+    <!-- Fixed Black Header with Realistic Downward Light Effect -->
     <div class="fixed-header">
         <button class="nav-toggle" onclick="toggleDrawer()">☰</button>
+        <div class="light-edge"></div>
     </div>
 
     <!-- Glassmorphism Navigation Drawer -->
@@ -1279,25 +1378,37 @@
     </footer>
 
     <script>
-        // Theme Toggle
+        // Theme Toggle with Light Turn-On Animation
         function toggleTheme() {
             const html = document.documentElement;
             const themeSwitch = document.getElementById('themeSwitch');
             const themeIcon = document.getElementById('themeIcon');
             const themeText = document.getElementById('themeText');
+            const header = document.querySelector('.fixed-header');
             
             if (html.getAttribute('data-theme') === 'dark') {
+                // Switching to light mode
                 html.removeAttribute('data-theme');
                 themeSwitch.classList.remove('active');
                 themeIcon.textContent = '🌙';
                 themeText.textContent = 'Dark Mode';
                 localStorage.setItem('theme', 'light');
+                header.classList.remove('light-turning-on');
             } else {
+                // Switching to dark mode - trigger light turn-on animation
                 html.setAttribute('data-theme', 'dark');
                 themeSwitch.classList.add('active');
                 themeIcon.textContent = '☀️';
                 themeText.textContent = 'Light Mode';
                 localStorage.setItem('theme', 'dark');
+                
+                // Add turn-on animation class
+                header.classList.add('light-turning-on');
+                
+                // Remove the class after animation completes to allow normal running animation
+                setTimeout(() => {
+                    header.classList.remove('light-turning-on');
+                }, 1200);
             }
         }
 
