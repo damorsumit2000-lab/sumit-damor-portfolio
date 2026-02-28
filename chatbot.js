@@ -1,6 +1,6 @@
 // Gemini AI Configuration
 const GEMINI_API_KEY = 'AIzaSyDxf8nuTU55NOhjP5AejmeBxIJgsayGESI';
-const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
+const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
 
 // Sumit's CV Data for Training
 const SUMIT_CV_DATA = `
@@ -168,9 +168,9 @@ async function sendMessage() {
         // Add bot response
         addMessage(response, 'bot');
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Chatbot Error:', error);
         typingIndicator.remove();
-        addMessage('Sorry, I encountered an error. Please try again.', 'bot');
+        addMessage('Sorry, I encountered an error. Please try again later.', 'bot');
     }
 
     // Scroll to bottom
@@ -215,68 +215,50 @@ function addTypingIndicator() {
 
 // Get response from Gemini AI
 async function getGeminiResponse(userMessage) {
-    // Build conversation context
-    const messages = [
-        {
-            role: 'user',
-            parts: [{ text: SYSTEM_PROMPT }]
-        },
-        {
-            role: 'model',
-            parts: [{ text: 'I understand. I will answer questions about Sumit Damor based only on his CV data, keeping responses short and simple (2-3 sentences max).' }]
+    try {
+        const requestBody = {
+            contents: [
+                {
+                    parts: [
+                        {
+                            text: `${SYSTEM_PROMPT}\n\nUser Question: ${userMessage}\n\nProvide a short, simple answer (2-3 sentences max) based only on Sumit's CV data above.`
+                        }
+                    ]
+                }
+            ],
+            generationConfig: {
+                temperature: 0.7,
+                maxOutputTokens: 150,
+                topP: 0.8,
+                topK: 40
+            }
+        };
+
+        const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestBody)
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('API Error:', errorData);
+            throw new Error(`API request failed: ${response.status} - ${errorData.error?.message || 'Unknown error'}`);
         }
-    ];
 
-    // Add conversation history
-    conversationHistory.forEach(msg => {
-        messages.push(msg);
-    });
-
-    // Add current user message
-    messages.push({
-        role: 'user',
-        parts: [{ text: userMessage }]
-    });
-
-    const requestBody = {
-        contents: messages,
-        generationConfig: {
-            temperature: 0.7,
-            maxOutputTokens: 150, // Limit response length for short answers
-            topP: 0.8,
-            topK: 40
+        const data = await response.json();
+        
+        if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+            throw new Error('Invalid response format from API');
         }
-    };
 
-    const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody)
-    });
+        const botResponse = data.candidates[0].content.parts[0].text;
+        return botResponse;
 
-    if (!response.ok) {
-        throw new Error(`API request failed: ${response.status}`);
+    } catch (error) {
+        console.error('Gemini API Error:', error);
+        throw error;
     }
-
-    const data = await response.json();
-    const botResponse = data.candidates[0].content.parts[0].text;
-
-    // Update conversation history
-    conversationHistory.push({
-        role: 'user',
-        parts: [{ text: userMessage }]
-    });
-    conversationHistory.push({
-        role: 'model',
-        parts: [{ text: botResponse }]
-    });
-
-    // Keep only last 6 messages (3 exchanges) to avoid token limits
-    if (conversationHistory.length > 6) {
-        conversationHistory = conversationHistory.slice(-6);
-    }
-
-    return botResponse;
 }
