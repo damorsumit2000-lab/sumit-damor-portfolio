@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sumit Damor - Portfolio</title>
+    <link rel="stylesheet" href="chatbot.css">
     <style>
         * {
             margin: 0;
@@ -473,149 +474,31 @@
             box-shadow: 0 8px 16px var(--shadow-hover);
         }
 
-        /* AI Bot Section */
+        /* AI Bot Section - Inline Chatbot */
         .ai-bot-section {
             padding: 60px 0;
             margin-bottom: 40px;
         }
 
-        .ai-bot-container {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 40px;
-            max-width: 800px;
+        .ai-bot-wrapper {
+            max-width: 900px;
             margin: 0 auto;
-            box-shadow: 0 4px 12px var(--shadow);
-            transition: all 0.3s;
-        }
-
-        .ai-bot-container:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px var(--shadow-hover);
-            border-color: var(--secondary);
         }
 
         .ai-bot-header {
-            display: flex;
-            align-items: center;
-            gap: 20px;
+            text-align: center;
             margin-bottom: 30px;
         }
 
-        .ai-bot-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--secondary), var(--accent));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(77, 159, 255, 0.7);
-            }
-            50% {
-                transform: scale(1.05);
-                box-shadow: 0 0 20px 10px rgba(77, 159, 255, 0);
-            }
-        }
-
-        .ai-bot-title {
-            flex: 1;
-        }
-
-        .ai-bot-title h2 {
-            font-size: 32px;
-            margin-bottom: 8px;
+        .ai-bot-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 12px;
             color: var(--primary);
         }
 
-        .ai-bot-title p {
-            color: var(--text-secondary);
-            font-size: 16px;
-        }
-
-        .ai-chat-interface {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 20px;
-            min-height: 200px;
-        }
-
-        .ai-input-container {
-            display: flex;
-            gap: 12px;
-        }
-
-        .ai-input {
-            flex: 1;
-            padding: 14px 20px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background: var(--bg);
-            color: var(--text);
-            font-size: 16px;
-            transition: all 0.2s;
-        }
-
-        .ai-input:focus {
-            outline: none;
-            border-color: var(--secondary);
-            box-shadow: 0 0 0 3px rgba(77, 159, 255, 0.1);
-        }
-
-        .ai-send-btn {
-            padding: 14px 28px;
-            background: var(--secondary);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .ai-send-btn:hover {
-            background: var(--accent);
-            transform: translateY(-2px);
-        }
-
-        .ai-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-top: 20px;
-        }
-
-        .ai-feature {
-            padding: 16px;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            text-align: center;
-            transition: all 0.2s;
-        }
-
-        .ai-feature:hover {
-            border-color: var(--secondary);
-            transform: translateY(-2px);
-        }
-
-        .ai-feature-icon {
-            font-size: 24px;
-            margin-bottom: 8px;
-        }
-
-        .ai-feature-text {
-            font-size: 14px;
+        .ai-bot-header p {
+            font-size: 18px;
             color: var(--text-secondary);
         }
 
@@ -750,19 +633,6 @@
             .logo {
                 font-size: 22px;
             }
-
-            .ai-bot-container {
-                padding: 24px;
-            }
-
-            .ai-bot-header {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .ai-bot-title h2 {
-                font-size: 24px;
-            }
         }
     </style>
 </head>
@@ -820,40 +690,38 @@
             </div>
         </section>
 
-        <!-- AI Bot Section -->
+        <!-- AI Bot Section with Inline Chatbot -->
         <section id="ai-bot" class="ai-bot-section">
-            <div class="ai-bot-container">
+            <div class="ai-bot-wrapper">
                 <div class="ai-bot-header">
-                    <div class="ai-bot-icon">🤖</div>
-                    <div class="ai-bot-title">
-                        <h2>AI Assistant</h2>
-                        <p>Ask me anything about my work, skills, or projects!</p>
-                    </div>
+                    <h2>🤖 AI Assistant</h2>
+                    <p>Ask me anything about my work, skills, or projects!</p>
                 </div>
                 
-                <div class="ai-chat-interface">
-                    <p style="color: var(--text-secondary); text-align: center; padding: 60px 20px;">
-                        💬 Chat interface coming soon! This AI bot will answer questions about my portfolio, experience, and projects.
-                    </p>
-                </div>
-                
-                <div class="ai-input-container">
-                    <input type="text" class="ai-input" placeholder="Ask me about my projects, skills, or experience..." disabled>
-                    <button class="ai-send-btn" disabled>Send</button>
-                </div>
-
-                <div class="ai-features">
-                    <div class="ai-feature">
-                        <div class="ai-feature-icon">💡</div>
-                        <div class="ai-feature-text">Smart Responses</div>
-                    </div>
-                    <div class="ai-feature">
-                        <div class="ai-feature-icon">⚡</div>
-                        <div class="ai-feature-text">Instant Answers</div>
-                    </div>
-                    <div class="ai-feature">
-                        <div class="ai-feature-icon">🎯</div>
-                        <div class="ai-feature-text">Project Insights</div>
+                <!-- Inline Chatbot Container -->
+                <div class="chatbot-container inline-chatbot">
+                    <div class="chat-window inline-chat-window">
+                        <div class="chat-header">
+                            <div class="chat-header-info">
+                                <h3>Sumit's AI Assistant</h3>
+                                <p class="chat-status">🟢 Online - Ask me anything!</p>
+                            </div>
+                        </div>
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="message bot-message">
+                                <div class="message-content">
+                                    👋 Hey! I'm Sumit's AI assistant. I can answer questions about my work at Groww, education, skills, projects, and more. What would you like to know?
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-input-container">
+                            <input type="text" id="chatInput" class="chat-input" placeholder="Ask about my experience, skills, projects...">
+                            <button id="sendBtn" class="chat-send-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -963,6 +831,7 @@
         <p>&copy; 2024 Sumit Damor. All rights reserved.</p>
     </footer>
 
+    <script src="chatbot.js"></script>
     <script>
         // Theme Toggle
         function toggleTheme() {
