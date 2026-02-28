@@ -1,7 +1,7 @@
 // ─── Proxy URL ────────────────────────────────────────────────────────────────
 // After deploying to Vercel, replace this with your actual Vercel URL
 // e.g. 'https://your-project-name.vercel.app/api/chat'
-const PROXY_URL = 'https://YOUR-VERCEL-PROJECT.vercel.app/api/chat';
+const PROXY_URL = 'https://groq-proxy-phi.vercel.app/api/chat';
 
 // ─── Chat state ───────────────────────────────────────────────────────────────
 let conversationHistory = [];
