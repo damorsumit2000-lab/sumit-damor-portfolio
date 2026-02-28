@@ -1,5 +1,4 @@
 // Groq AI Configuration
-// IMPORTANT: Replace 'YOUR_GROQ_API_KEY_HERE' with your actual Groq API key
 const GROQ_API_KEY = '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';
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
@@ -223,7 +222,7 @@ function addTypingIndicator() {
 async function getGroqResponse(userMessage) {
     try {
         const requestBody = {
-            model: "llama-3.3-70b-versatile", // Using Llama 3.3 70B model
+            model: "llama-3.3-70b-versatile",
             messages: [
                 {
                     role: "system",
@@ -256,7 +255,6 @@ async function getGroqResponse(userMessage) {
 
         const data = await response.json();
         
-        // Extract the response text
         if (data.choices && data.choices.length > 0) {
             return data.choices[0].message.content.trim();
         } else {
