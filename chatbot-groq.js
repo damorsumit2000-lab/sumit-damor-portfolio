@@ -1,6 +1,6 @@
 // Groq AI Configuration
 // IMPORTANT: Replace 'YOUR_GROQ_API_KEY_HERE' with your actual Groq API key
-const GROQ_API_KEY = 'YOUR_GROQ_API_KEY_HERE';
+const GROQ_API_KEY = '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';
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
 // Sumit's CV Data for Training
