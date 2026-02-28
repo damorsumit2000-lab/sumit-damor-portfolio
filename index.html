@@ -721,79 +721,6 @@
             line-height: 1.7;
         }
 
-        /* AI Bot Box */
-        .ai-bot-box {
-            padding: 32px;
-            margin-bottom: 48px;
-            background: linear-gradient(135deg, var(--surface) 0%, var(--bg) 100%);
-            border-radius: 12px;
-            border: 2px solid var(--border);
-            box-shadow: 0 4px 16px var(--shadow);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ai-bot-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--secondary), var(--accent));
-        }
-
-        .ai-bot-box:hover {
-            box-shadow: 0 8px 32px var(--shadow-hover);
-            transform: translateY(-4px);
-            border-color: var(--secondary);
-        }
-
-        .ai-bot-box h3 {
-            font-size: 1.5em;
-            margin-bottom: 16px;
-            color: var(--text);
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .ai-bot-box p {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 20px;
-        }
-
-        .ai-bot-box .bot-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            background: var(--bg);
-            border-radius: 20px;
-            font-size: 0.9em;
-            color: var(--accent);
-            border: 1px solid var(--border);
-        }
-
-        .ai-bot-box .bot-status::before {
-            content: '●';
-            color: #00d084;
-            font-size: 1.2em;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.5;
-            }
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .hamburger {
@@ -841,6 +768,7 @@
     <div class="drawer" id="drawer">
         <div class="drawer-links">
             <a href="#home" onclick="toggleDrawer()">Home</a>
+            <a href="#ai-assistant" onclick="toggleDrawer()">AI Assistant</a>
             <a href="#about" onclick="toggleDrawer()">About</a>
             <a href="#experience" onclick="toggleDrawer()">Experience</a>
             <a href="#projects" onclick="toggleDrawer()">Projects</a>
@@ -856,6 +784,7 @@
             <a href="#" class="logo">SUMIT</a>
             <nav class="nav-links">
                 <a href="#home">Home</a>
+                <a href="#ai-assistant">AI Assistant</a>
                 <a href="#about">About</a>
                 <a href="#experience">Experience</a>
                 <a href="#projects">Projects</a>
@@ -875,42 +804,54 @@
     <div class="container">
         <section id="home" class="header">
             <h1>I'm Sumit Damor</h1>
-            <p class="subtitle">Software Engineer passionate about building scalable systems and solving complex problems</p>
+            <p class="subtitle">Operations professional with experience in corporate client management, subscription lifecycle handling, and revenue operations within a fintech environment at Groww</p>
             <div class="contact-info">
-                <a href="mailto:sumit@example.com">📧 Email</a>
-                <a href="https://linkedin.com/in/sumitdamor" target="_blank">💼 LinkedIn</a>
-                <a href="https://github.com/sumitdamor" target="_blank">🐙 GitHub</a>
+                <a href="mailto:sumitrd22@nsb.edu.in">📧 sumitrd22@nsb.edu.in</a>
+                <a href="tel:+918200168197">📱 (+91) 82001-68197</a>
+                <a href="https://github.com/damorsumit2000-lab" target="_blank">🐙 GitHub</a>
             </div>
         </section>
 
-        <!-- AI Bot Box -->
-        <div class="ai-bot-box">
-            <h3>🤖 AI Assistant</h3>
-            <p>Want to know more about me? Ask my AI assistant anything about my work, skills, education, or projects!</p>
-            <span class="bot-status">Online & Ready</span>
-        </div>
+        <!-- Inline AI Chatbot -->
+        <section id="ai-assistant" class="inline-chatbot">
+            <div class="inline-chat-header">
+                <h2>🤖 Ask My AI Assistant</h2>
+                <p>Ask me anything about my work, skills, education, or projects!</p>
+            </div>
+            <div class="inline-chat-messages" id="inlineChatMessages">
+                <div class="message bot-message">
+                    <div class="message-content">
+                        👋 Hey! I'm Sumit's AI assistant trained on his CV. I can answer questions about his work at Groww, education, skills, projects, and achievements. What would you like to know?
+                    </div>
+                </div>
+            </div>
+            <div class="inline-chat-input-container">
+                <input type="text" id="inlineChatInput" class="inline-chat-input" placeholder="Ask about my experience, skills, projects...">
+                <button id="inlineSendBtn" class="inline-chat-send-btn">Send</button>
+            </div>
+        </section>
 
         <section id="about" class="section">
             <h2>About Me</h2>
-            <p>I'm a Software Engineer with a passion for building scalable, high-performance systems. Currently working at Groww, I specialize in backend development, system design, and creating robust solutions that handle millions of users.</p>
-            <p>My journey in tech has been driven by curiosity and a constant desire to learn. I love tackling complex problems and turning them into elegant, efficient solutions.</p>
+            <p>I'm an Operations professional with experience in corporate client management, subscription lifecycle handling, and revenue operations within a fintech environment at Groww. Currently pursuing an MBA with a background in Economics and strong skills in data analysis and process optimization.</p>
+            <p>My journey combines technical operations expertise with business acumen, allowing me to bridge the gap between technology and business needs effectively.</p>
         </section>
 
         <section id="experience" class="section">
             <h2>Experience</h2>
             
             <div class="experience-card">
-                <h3>Software Engineer</h3>
-                <div class="company">Groww</div>
-                <div class="date">2022 - Present</div>
-                <p class="description">Building scalable backend systems for India's fastest-growing investment platform</p>
+                <h3>Order Processing & Revenue Operations Associate</h3>
+                <div class="company">Groww Invest-Tech Private Limited</div>
+                <div class="date">July 2024 - Present, Bangalore, India</div>
+                <p class="description">Corporate Cloud Subscription Clients</p>
                 <ul>
-                    <li>Developed and maintained microservices handling millions of daily transactions</li>
-                    <li>Optimized database queries reducing response time by 40%</li>
-                    <li>Implemented caching strategies improving system performance</li>
-                    <li>Collaborated with cross-functional teams to deliver features on time</li>
+                    <li>Managed end-to-end corporate client tickets for Groww Cloud subscriptions, supporting brokers, companies, and proprietary traders across onboarding, activation, and ongoing operations</li>
+                    <li>Validated corporate onboarding requests including documentation and account verification, and coordinated subscription provisioning and platform setup in collaboration with technical teams</li>
+                    <li>Acted as the primary support contact for corporate clients, resolving execution issues, system errors, connectivity problems, and account configuration queries within SLA timelines</li>
+                    <li>Supported revenue operations by monitoring subscription usage, renewals, and cancellations, while maintaining dashboards and collaborating with product, engineering, and finance teams to improve workflows and client experience</li>
                 </ul>
-                <div class="tools"><strong>Tools & Technologies:</strong> Java, Spring Boot, MySQL, Redis, Kafka, AWS</div>
+                <div class="tools"><strong>Tools & Platforms:</strong> Groww Cloud, Freshdesk, Jira, Google Sheets, Internal OMS</div>
             </div>
         </section>
 
@@ -918,22 +859,29 @@
             <h2>Projects</h2>
             
             <div class="project-card">
-                <h3>Trading Platform Backend</h3>
-                <div class="date">2023</div>
+                <h3>A study on the impact of website quality on payment modes and online compulsive buying behavior</h3>
+                <div class="date">January 2024 - March 2024</div>
                 <ul>
-                    <li>Built high-performance trading APIs handling 10K+ requests per second</li>
-                    <li>Implemented real-time order matching engine</li>
-                    <li>Designed fault-tolerant system with 99.9% uptime</li>
+                    <li>Identified various factors related to website quality for online purchases</li>
+                    <li>Analyzed the impact of identified website quality factors on compulsive buying behavior</li>
                 </ul>
             </div>
 
             <div class="project-card">
-                <h3>User Analytics Dashboard</h3>
-                <div class="date">2022</div>
+                <h3>A study of Digital India Movement - Market Analysis</h3>
+                <div class="date">February 2022 - March 2022</div>
                 <ul>
-                    <li>Created comprehensive analytics system tracking user behavior</li>
-                    <li>Built data pipeline processing millions of events daily</li>
-                    <li>Developed interactive dashboards for business insights</li>
+                    <li>Aggregated data from authentic sources on the new Digital UPI Platforms</li>
+                    <li>Built visualizations in Tableau to demonstrate which are the main UPI platforms in India</li>
+                </ul>
+            </div>
+
+            <div class="project-card">
+                <h3>MERN Project - News Website</h3>
+                <div class="date">November 2021 - December 2021</div>
+                <ul>
+                    <li>Wrote the code in JavaScript, and used libraries like ReactJS, ExpressJS, NodeJS</li>
+                    <li>Deployed the website on Heroku Server for a specific timeline</li>
                 </ul>
             </div>
         </section>
@@ -943,43 +891,43 @@
             
             <div class="skills-container">
                 <div class="skill-category">
-                    <h3>Languages</h3>
+                    <h3>Technical Tools</h3>
                     <div class="skill-tags">
-                        <span class="skill-tag">Java</span>
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Excel</span>
+                        <span class="skill-tag">Freshdesk</span>
+                        <span class="skill-tag">Jira</span>
+                        <span class="skill-tag">Google Sheets</span>
+                        <span class="skill-tag">Tableau</span>
                     </div>
                 </div>
 
                 <div class="skill-category">
-                    <h3>Frameworks</h3>
+                    <h3>Core Competencies</h3>
                     <div class="skill-tags">
-                        <span class="skill-tag">Spring Boot</span>
-                        <span class="skill-tag">Node.js</span>
-                        <span class="skill-tag">React</span>
-                        <span class="skill-tag">Django</span>
+                        <span class="skill-tag">Critical Thinking</span>
+                        <span class="skill-tag">Logical Thinking</span>
+                        <span class="skill-tag">Data Analysis</span>
+                        <span class="skill-tag">Market Research</span>
                     </div>
                 </div>
 
                 <div class="skill-category">
-                    <h3>Databases</h3>
+                    <h3>Business Skills</h3>
                     <div class="skill-tags">
-                        <span class="skill-tag">MySQL</span>
-                        <span class="skill-tag">PostgreSQL</span>
-                        <span class="skill-tag">MongoDB</span>
-                        <span class="skill-tag">Redis</span>
+                        <span class="skill-tag">Project Management</span>
+                        <span class="skill-tag">Customer Retention</span>
+                        <span class="skill-tag">Sales</span>
+                        <span class="skill-tag">Email Marketing</span>
                     </div>
                 </div>
 
                 <div class="skill-category">
-                    <h3>Tools & Cloud</h3>
+                    <h3>Interests</h3>
                     <div class="skill-tags">
-                        <span class="skill-tag">AWS</span>
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">Kubernetes</span>
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">Kafka</span>
+                        <span class="skill-tag">Stocks</span>
+                        <span class="skill-tag">Investments</span>
+                        <span class="skill-tag">Fintech</span>
+                        <span class="skill-tag">Marketing</span>
                     </div>
                 </div>
             </div>
@@ -989,9 +937,15 @@
             <h2>Education</h2>
             
             <div class="education-card">
-                <h3>Bachelor of Technology in Computer Science</h3>
-                <div class="institution">XYZ University</div>
-                <div class="date">2018 - 2022</div>
+                <h3>Masters of Business Administration (MBA) - Marketing</h3>
+                <div class="institution">National School of Business</div>
+                <div class="date">August 2022 - July 2024, Bangalore, India</div>
+            </div>
+
+            <div class="education-card">
+                <h3>Bachelor of Arts, Economics</h3>
+                <div class="institution">Indira Gandhi National Open School</div>
+                <div class="date">August 2019 - May 2022, New Delhi, India</div>
             </div>
         </section>
 
@@ -999,18 +953,23 @@
             <h2>Achievements</h2>
             
             <div class="achievement-card">
-                <h3>🏆 Best Performance Award</h3>
-                <p>Recognized for exceptional contribution to critical projects at Groww</p>
+                <h3>🏆 AAGMAN - The Marketing Fest</h3>
+                <p>Won the marketing fest AAGMAN at NSB, showcasing my skills and earning the top prize. This accolade highlights my innovative approach and bolsters my confidence in my marketing abilities.</p>
             </div>
 
             <div class="achievement-card">
-                <h3>🎯 Hackathon Winner</h3>
-                <p>Won internal hackathon for building innovative trading feature</p>
+                <h3>♻️ Recycle Mania</h3>
+                <p>Won a product design event using waste materials, showcasing creativity and sustainability. This victory demonstrated my design skills and commitment to environmental responsibility.</p>
+            </div>
+
+            <div class="achievement-card">
+                <h3>🎉 Annual College Fest</h3>
+                <p>Led a team for the college's largest event, overseeing the design and implementation of various games to be featured during the annual college fest. This involved coordinating with team members, ensuring creative and engaging game concepts, and managing the logistics to ensure smooth execution during the event.</p>
             </div>
         </section>
     </div>
 
-    <!-- Floating Chatbot Widget -->
+    <!-- Floating Chatbot Widget (Bottom Right) -->
     <div class="chatbot-container">
         <button class="chat-toggle" id="chatToggle">
             <svg class="chat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1055,6 +1014,85 @@
 
     <script src="chatbot.js"></script>
     <script>
+        // Inline Chatbot Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const inlineSendBtn = document.getElementById('inlineSendBtn');
+            const inlineChatInput = document.getElementById('inlineChatInput');
+
+            if (inlineSendBtn) {
+                inlineSendBtn.addEventListener('click', sendInlineMessage);
+            }
+
+            if (inlineChatInput) {
+                inlineChatInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        sendInlineMessage();
+                    }
+                });
+            }
+        });
+
+        async function sendInlineMessage() {
+            const inlineChatInput = document.getElementById('inlineChatInput');
+            const inlineChatMessages = document.getElementById('inlineChatMessages');
+            const message = inlineChatInput.value.trim();
+
+            if (!message) return;
+
+            // Add user message
+            addInlineMessage(message, 'user');
+            inlineChatInput.value = '';
+
+            // Show typing indicator
+            const typingIndicator = addInlineTypingIndicator();
+
+            try {
+                // Get AI response (reuse the same function from chatbot.js)
+                const response = await getGeminiResponse(message);
+                
+                typingIndicator.remove();
+                addInlineMessage(response, 'bot');
+            } catch (error) {
+                console.error('Error:', error);
+                typingIndicator.remove();
+                addInlineMessage('Sorry, I encountered an error. Please try again.', 'bot');
+            }
+
+            inlineChatMessages.scrollTop = inlineChatMessages.scrollHeight;
+        }
+
+        function addInlineMessage(text, sender) {
+            const inlineChatMessages = document.getElementById('inlineChatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.textContent = text;
+            
+            messageDiv.appendChild(contentDiv);
+            inlineChatMessages.appendChild(messageDiv);
+            inlineChatMessages.scrollTop = inlineChatMessages.scrollHeight;
+            
+            return messageDiv;
+        }
+
+        function addInlineTypingIndicator() {
+            const inlineChatMessages = document.getElementById('inlineChatMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message bot-message typing-indicator';
+            typingDiv.innerHTML = `
+                <div class="message-content">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            `;
+            inlineChatMessages.appendChild(typingDiv);
+            inlineChatMessages.scrollTop = inlineChatMessages.scrollHeight;
+            return typingDiv;
+        }
+
         // Theme Toggle
         function toggleTheme() {
             const html = document.documentElement;
