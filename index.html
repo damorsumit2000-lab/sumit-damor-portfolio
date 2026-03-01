@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sumit Damor - Portfolio</title>
+    <title>Sumit Damor — Portfolio</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23000'/><rect x='1' y='1' width='30' height='30' rx='6' fill='none' stroke='%2300ab6b' stroke-width='1.5'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='monospace' font-weight='700' font-size='13'>SD</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -217,45 +218,61 @@
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 2px;
+            gap: 0;
             position: relative;
+            padding: 6px 12px 6px 8px;
+            border: 1px solid rgba(0, 171, 107, 0.35);
+            border-radius: 6px;
+            background: rgba(0, 171, 107, 0.06);
+            transition: all 0.3s ease;
+            overflow: hidden;
         }
 
-        .logo-s {
+        .logo::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,102,204,0.08) 0%, rgba(0,171,107,0.08) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo:hover::before { opacity: 1; }
+        .logo:hover { border-color: rgba(0,171,107,0.6); }
+
+        .logo-bracket {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 22px;
+            font-size: 13px;
+            font-weight: 400;
+            color: rgba(0,171,107,0.7);
+            letter-spacing: 0;
+            line-height: 1;
+        }
+
+        .logo-initials {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 15px;
             font-weight: 600;
-            color: #00ab6b;
-            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #ffffff 0%, #00ab6b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.12em;
+            padding: 0 4px;
         }
 
-        .logo-name {
+        .logo-full {
             font-family: 'Syne', sans-serif;
-            font-size: 18px;
-            font-weight: 800;
-            color: #ffffff;
-            letter-spacing: 0.18em;
+            font-size: 11px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.45);
+            letter-spacing: 0.22em;
             text-transform: uppercase;
-        }
-
-        .logo-dot {
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: #00ab6b;
-            margin: 0 3px;
-            margin-bottom: -2px;
-            flex-shrink: 0;
-        }
-
-        .logo-tag {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            color: rgba(255,255,255,0.4);
-            letter-spacing: 0.08em;
-            margin-left: 6px;
-            align-self: flex-end;
-            margin-bottom: 2px;
+            margin-left: 8px;
+            padding-left: 8px;
+            border-left: 1px solid rgba(255,255,255,0.12);
+            line-height: 1;
+            align-self: center;
         }
 
         .hamburger {
@@ -688,10 +705,10 @@
             .hamburger { display: flex; }
             .nav-links { display: none; }
             .header h1 { font-size: 2.5em; }
-            .container { padding: 60px 20px 40px; }
+            .container { padding: 100px 20px 40px; }
             .section h2 { font-size: 1.6em; }
             .skills-container { grid-template-columns: 1fr; }
-            .logo { font-size: 22px; }
+            .logo-full { display: none; }
         }
     </style>
 </head>
@@ -723,10 +740,10 @@
     <header class="fixed-header">
         <div class="header-content">
             <a href="#" class="logo">
-                <span class="logo-s">S</span>
-                <span class="logo-dot"></span>
-                <span class="logo-name">UMIT</span>
-                <span class="logo-tag">// dev</span>
+                <span class="logo-bracket">[</span>
+                <span class="logo-initials">SD</span>
+                <span class="logo-bracket">]</span>
+                <span class="logo-full">Sumit</span>
             </a>
             <nav class="nav-links">
                 <a href="#home">Home</a>
