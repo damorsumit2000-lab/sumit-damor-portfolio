@@ -180,29 +180,78 @@
             top: 60px;
             left: 0;
             right: 0;
-            height: 120px;
-            background: radial-gradient(ellipse 100% 100% at center top, 
-                var(--header-glow-intense) 0%, 
-                var(--header-glow) 15%, 
-                rgba(255, 255, 0, 0.4) 35%,
-                rgba(255, 255, 0, 0.2) 55%,
-                rgba(255, 255, 0, 0.05) 75%,
+            height: 180px;
+            background: radial-gradient(ellipse 70% 100% at center top,
+                rgba(255, 220, 40, 1)   0%,
+                rgba(255, 200, 20, 0.7) 15%,
+                rgba(255, 180, 0, 0.35) 35%,
+                rgba(200, 140, 0, 0.12) 60%,
                 transparent 100%);
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease;
-            filter: blur(2px);
+            filter: blur(3px);
         }
 
+        /* Light OFF — stays invisible */
+        [data-theme="light"] .fixed-header::before {
+            opacity: 0;
+            animation: none;
+        }
+
+        /* Light ON — steady breathing after flicker */
         [data-theme="dark"] .fixed-header::before {
+            animation: breathingLight 5s ease-in-out infinite;
+        }
+
+        /* Triggered manually via JS class when switching to dark */
+        .street-light-on .fixed-header::before {
+            animation: streetLampOn 2.6s ease-out forwards !important;
+        }
+
+        /* After flicker finishes, JS adds this class for steady glow */
+        .street-light-steady .fixed-header::before {
             opacity: 1;
-            animation: breathingLight 4s ease-in-out infinite;
+            animation: breathingLight 5s ease-in-out infinite !important;
+        }
+
+        /* Realistic sodium/mercury street lamp flicker sequence */
+        @keyframes streetLampOn {
+            /* Dead */
+            0%    { opacity: 0;    filter: blur(3px) brightness(1);   }
+            /* First weak flash */
+            5%    { opacity: 0.15; filter: blur(4px) brightness(1.4); }
+            8%    { opacity: 0;    filter: blur(3px) brightness(1);   }
+            /* Second flash — slightly stronger */
+            13%   { opacity: 0.25; filter: blur(4px) brightness(1.6); }
+            16%   { opacity: 0;    filter: blur(3px) brightness(1);   }
+            /* Third — warming up */
+            22%   { opacity: 0.4;  filter: blur(4px) brightness(1.8); }
+            25%   { opacity: 0.05; filter: blur(3px) brightness(1);   }
+            /* Fourth — almost there */
+            32%   { opacity: 0.6;  filter: blur(5px) brightness(2);   }
+            35%   { opacity: 0.1;  filter: blur(3px) brightness(1);   }
+            /* Fifth — holds longer */
+            42%   { opacity: 0.75; filter: blur(5px) brightness(2.1); }
+            46%   { opacity: 0.2;  filter: blur(3px) brightness(1);   }
+            /* Sixth — nearly stable */
+            54%   { opacity: 0.85; filter: blur(5px) brightness(2.2); }
+            57%   { opacity: 0.4;  filter: blur(4px) brightness(1.5); }
+            /* Seventh — holds */
+            65%   { opacity: 0.9;  filter: blur(5px) brightness(2.2); }
+            68%   { opacity: 0.6;  filter: blur(4px) brightness(1.8); }
+            /* Eighth — last small flicker */
+            76%   { opacity: 0.95; filter: blur(5px) brightness(2.3); }
+            79%   { opacity: 0.7;  filter: blur(4px) brightness(2);   }
+            /* STABLE — locked on */
+            88%   { opacity: 1;    filter: blur(4px) brightness(2.4); }
+            100%  { opacity: 1;    filter: blur(3px) brightness(2.2); }
         }
 
         @keyframes breathingLight {
-            0% { opacity: 0.7; transform: scaleY(0.95); filter: blur(2px) brightness(0.9); }
-            50% { opacity: 1; transform: scaleY(1.05); filter: blur(3px) brightness(1.1); }
-            100% { opacity: 0.7; transform: scaleY(0.95); filter: blur(2px) brightness(0.9); }
+            0%   { opacity: 0.88; filter: blur(3px) brightness(2);   }
+            40%  { opacity: 1;    filter: blur(4px) brightness(2.3); }
+            70%  { opacity: 0.92; filter: blur(3px) brightness(2.1); }
+            100% { opacity: 0.88; filter: blur(3px) brightness(2);   }
         }
 
         .header-content {
@@ -997,6 +1046,30 @@
             if (desktopBtn) desktopBtn.textContent = buttonText;
             if (mobileBtn) mobileBtn.textContent = buttonText;
             localStorage.setItem('theme', newTheme);
+
+            if (newTheme === 'dark') {
+                triggerStreetLamp();
+            } else {
+                // Turn off — remove all lamp classes
+                html.classList.remove('street-light-on', 'street-light-steady');
+            }
+        }
+
+        function triggerStreetLamp() {
+            const html = document.documentElement;
+            // Reset
+            html.classList.remove('street-light-on', 'street-light-steady');
+
+            // Small delay so dark mode CSS variables are applied first
+            setTimeout(() => {
+                html.classList.add('street-light-on');
+
+                // After flicker animation completes (2.6s), switch to steady breathing
+                setTimeout(() => {
+                    html.classList.remove('street-light-on');
+                    html.classList.add('street-light-steady');
+                }, 2650);
+            }, 60);
         }
 
         // Load saved theme
@@ -1007,6 +1080,11 @@
         const mobileBtn = document.querySelector('.mobile-theme-toggle');
         if (desktopBtn) desktopBtn.textContent = buttonText;
         if (mobileBtn) mobileBtn.textContent = buttonText;
+
+        // Trigger lamp flicker on page load if already in dark mode
+        if (savedTheme === 'dark') {
+            setTimeout(() => triggerStreetLamp(), 600);
+        }
 
         // ─── Drawer ───────────────────────────────────────────────────────────
         function toggleDrawer() {
