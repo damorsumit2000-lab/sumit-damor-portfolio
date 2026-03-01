@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sumit Damor - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="chatbot.css">
     <style>
         * {
@@ -211,34 +214,49 @@
         }
 
         .logo {
-            font-size: 28px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            position: relative;
+        }
+
+        .logo-s {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 22px;
+            font-weight: 600;
+            color: #00ab6b;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 18px;
             font-weight: 800;
             color: #ffffff;
-            text-decoration: none;
-            letter-spacing: 2px;
-            font-family: 'Courier New', monospace;
+            letter-spacing: 0.18em;
             text-transform: uppercase;
-            background: linear-gradient(135deg, #ffffff 0%, #4d9fff 50%, #00d084 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            position: relative;
-            padding: 5px 0;
         }
 
-        .logo::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, #4d9fff, #00d084);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
+        .logo-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #00ab6b;
+            margin: 0 3px;
+            margin-bottom: -2px;
+            flex-shrink: 0;
         }
 
-        .logo:hover::after { transform: scaleX(1); }
+        .logo-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 0.08em;
+            margin-left: 6px;
+            align-self: flex-end;
+            margin-bottom: 2px;
+        }
 
         .hamburger {
             display: none;
@@ -282,14 +300,17 @@
             position: fixed;
             top: 0;
             right: -100%;
-            width: 300px;
+            width: 280px;
             height: 100vh;
             background: var(--surface);
             border-left: 1px solid var(--border);
             z-index: 1002;
             transition: right 0.3s ease;
-            padding: 80px 30px 30px;
+            padding: 70px 24px 24px;
             box-shadow: -5px 0 15px var(--shadow);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
         }
 
         .drawer.active { right: 0; }
@@ -297,17 +318,19 @@
         .drawer-links {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 4px;
+            flex: 1;
         }
 
         .drawer-links a {
             color: var(--text);
             text-decoration: none;
-            font-size: 18px;
+            font-size: 15px;
             font-weight: 500;
-            padding: 12px 16px;
+            padding: 10px 14px;
             border-radius: 8px;
             transition: all 0.2s;
+            letter-spacing: 0.03em;
         }
 
         .drawer-links a:hover {
@@ -351,8 +374,8 @@
         }
 
         .drawer-theme-toggle {
-            margin-top: 30px;
-            padding-top: 20px;
+            margin-top: 16px;
+            padding-top: 16px;
             border-top: 1px solid var(--border);
         }
 
@@ -361,10 +384,10 @@
             background: var(--bg);
             border: 1px solid var(--border);
             color: var(--text);
-            padding: 12px 16px;
+            padding: 10px 14px;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 500;
             transition: all 0.2s;
             display: flex;
@@ -699,7 +722,12 @@
 
     <header class="fixed-header">
         <div class="header-content">
-            <a href="#" class="logo">SUMIT</a>
+            <a href="#" class="logo">
+                <span class="logo-s">S</span>
+                <span class="logo-dot"></span>
+                <span class="logo-name">UMIT</span>
+                <span class="logo-tag">// dev</span>
+            </a>
             <nav class="nav-links">
                 <a href="#home">Home</a>
                 <a href="#ai-assistant">AI Assistant</a>
@@ -732,9 +760,9 @@
 
         <!-- Inline AI Chatbot -->
         <section id="ai-assistant" class="inline-chatbot">
-            <div class="inline-chat-header">
-                <h2>🤖 Ask My AI Assistant</h2>
-                <p>Ask me anything about my work, skills, education, or projects!</p>
+            <div class="inline-chat-header" style="background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); border-bottom: 1px solid rgba(0,171,107,0.25);">
+                <h2 style="color: #ffffff;">Ask My AI Assistant</h2>
+                <p style="color: rgba(255,255,255,0.5);">Ask me anything about my work, skills, education, or projects!</p>
             </div>
             <div class="inline-chat-messages" id="inlineChatMessages">
                 <div class="message bot-message">
@@ -874,47 +902,7 @@
         </section>
     </div>
 
-    <!-- Floating Chatbot Widget -->
-    <div class="chatbot-container">
-        <button class="chat-toggle" id="chatToggle">
-            <svg class="chat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-            </svg>
-            <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="18" y1="6" x2="6" y2="18"/>
-                <line x1="6" y1="6" x2="18" y2="18"/>
-            </svg>
-        </button>
-        <div class="chat-window">
-            <div class="chat-header">
-                <div class="chat-header-info">
-                    <h3>Sumit's AI Assistant</h3>
-                    <p class="chat-status">🟢 Online - Ask me anything!</p>
-                </div>
-                <button class="chat-close-btn" id="chatClose">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="18" y1="6" x2="6" y2="18"/>
-                        <line x1="6" y1="6" x2="18" y2="18"/>
-                    </svg>
-                </button>
-            </div>
-            <div class="chat-messages" id="chatMessages">
-                <div class="message bot-message">
-                    <div class="message-content">
-                        👋 Hey! I'm Sumit's AI assistant. I can answer questions about his work at Groww, education, skills, projects, and more. What would you like to know?
-                    </div>
-                </div>
-            </div>
-            <div class="chat-input-container">
-                <input type="text" id="chatInput" class="chat-input" placeholder="Ask about my experience, skills, projects...">
-                <button id="sendBtn" class="chat-send-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
+
 
     <!-- Load Groq chatbot FIRST so getGroqResponse is available -->
     <script src="chatbot-groq.js"></script>
