@@ -30,21 +30,12 @@
   --ff-mono:'JetBrains Mono',monospace;
 }
 
-/* ═══ LIGHT MODE ═══ */
+/* LIGHT MODE */
 body.light{
-  --bg:#f8f5f0;
-  --bg2:#efe9e0;
-  --surface:rgba(0,0,0,0.03);
-  --surface2:rgba(0,0,0,0.06);
-  --border:rgba(0,0,0,0.1);
-  --border2:rgba(0,0,0,0.18);
-  --text:#1a1814;
-  --text-mid:rgba(26,24,20,0.62);
-  --text-dim:rgba(26,24,20,0.38);
-  --gold:#9a6f1e;
-  --gold2:#b8882a;
-  --gold-dim:rgba(154,111,30,0.12);
-  --gold-glow:rgba(154,111,30,0.07);
+  --bg:#f8f5f0;--bg2:#efe9e0;--surface:rgba(0,0,0,0.03);--surface2:rgba(0,0,0,0.06);
+  --border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.18);--text:#1a1814;
+  --text-mid:rgba(26,24,20,0.62);--text-dim:rgba(26,24,20,0.38);
+  --gold:#9a6f1e;--gold2:#b8882a;--gold-dim:rgba(154,111,30,0.12);--gold-glow:rgba(154,111,30,0.07);
 }
 body.light #bgCanvas{opacity:0.15}
 body.light nav{background:rgba(248,245,240,0.88)!important;border-bottom-color:rgba(0,0,0,0.1)}
@@ -58,7 +49,6 @@ body.light .proj-card{background:rgba(0,0,0,0.03)}
 body.light .pill{background:rgba(0,0,0,0.04);border-color:rgba(0,0,0,0.12)}
 body.light .chip{background:rgba(154,111,30,0.08);border-color:rgba(154,111,30,0.2)}
 
-/* Theme toggle button */
 .theme-toggle{background:none;border:1px solid var(--border2);border-radius:20px;padding:6px 14px;cursor:pointer;display:flex;align-items:center;gap:7px;font-family:var(--ff-mono);font-size:0.6rem;letter-spacing:0.1em;color:var(--text-mid);transition:all 0.2s}
 .theme-toggle:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-glow)}
 .theme-toggle .t-icon{font-size:0.85rem;line-height:1}
@@ -66,10 +56,9 @@ body.light .chip{background:rgba(154,111,30,0.08);border-color:rgba(154,111,30,0
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:var(--ff-body);overflow-x:hidden;min-height:100vh}
 
-/* ═══ CANVAS BG ═══ */
 #bgCanvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 
-/* ═══ NAV ═══ */
+/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 48px;height:72px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(20px);background:rgba(5,5,8,0.7);border-bottom:1px solid var(--border);transition:all 0.4s}
 .nav-logo{font-family:var(--ff-display);font-size:1.5rem;font-weight:600;color:var(--text);text-decoration:none;letter-spacing:0.02em}
 .nav-logo span{color:var(--gold)}
@@ -79,27 +68,24 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 48px;height:72px;d
 .nav-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
 .nav-hire{font-family:var(--ff-mono);font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--bg);background:var(--gold);border:none;border-radius:8px;padding:9px 18px;cursor:pointer;text-decoration:none;transition:all 0.25s;font-weight:500;white-space:nowrap}
 .nav-hire:hover{background:var(--gold2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(201,168,76,0.3)}
-/* hamburger */
 .nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:201;flex-shrink:0}
 .nav-hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:all 0.3s}
 .nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
 .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-/* drawer overlay */
 .drawer-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:150;backdrop-filter:blur(4px)}
 .drawer-overlay.open{display:block}
-/* drawer panel */
 .drawer{position:fixed;top:0;right:0;bottom:0;width:270px;background:var(--bg2);border-left:1px solid var(--border2);z-index:200;display:flex;flex-direction:column;padding:84px 28px 36px;gap:4px;transform:translateX(100%);transition:transform 0.35s cubic-bezier(0.4,0,0.2,1)}
 .drawer.open{transform:translateX(0)}
 .drawer a{font-family:var(--ff-mono);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-mid);text-decoration:none;padding:14px 16px;border-radius:8px;transition:all 0.2s;border:1px solid transparent;display:block}
-.drawer a:hover,.drawer a.active-d{color:var(--gold);background:var(--gold-dim);border-color:rgba(201,168,76,0.2)}
+.drawer a:hover{color:var(--gold);background:var(--gold-dim);border-color:rgba(201,168,76,0.2)}
 .drawer-divider{height:1px;background:var(--border);margin:12px 0}
 .drawer-hire{color:var(--bg)!important;background:var(--gold)!important;border-color:transparent!important;text-align:center;font-weight:600;margin-top:4px}
 .drawer-hire:hover{background:var(--gold2)!important}
 .drawer-theme-btn{display:flex;align-items:center;gap:10px;font-family:var(--ff-mono);font-size:0.7rem;letter-spacing:0.1em;color:var(--text-mid);padding:14px 16px;border-radius:8px;cursor:pointer;border:1px solid var(--border);background:none;width:100%;margin-top:4px;transition:all 0.2s}
 .drawer-theme-btn:hover{color:var(--gold);border-color:rgba(201,168,76,0.3)}
 
-/* ═══ HERO ═══ */
+/* HERO */
 #home{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 24px 60px}
 .hero-eyebrow{font-family:var(--ff-mono);font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;display:flex;align-items:center;justify-content:center;gap:12px;opacity:0;animation:fadeUp 0.8s ease 0.2s forwards}
 .hero-eyebrow::before,.hero-eyebrow::after{content:'';width:40px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
@@ -128,7 +114,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 48px;height:72px;d
 .scroll-label{font-family:var(--ff-mono);font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-dim)}
 @keyframes scrollPulse{0%,100%{opacity:0.4;transform:scaleY(0.8)}50%{opacity:1;transform:scaleY(1)}}
 
-/* ═══ AI CHAT (after hero) ═══ */
+/* AI CHAT */
 #ai-section{position:relative;z-index:1;padding:100px 48px;background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%)}
 .ai-wrap{max-width:980px;margin:0 auto;display:grid;grid-template-columns:1fr 1.5fr;gap:72px;align-items:center}
 .ai-left-label{font-family:var(--ff-mono);font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
@@ -138,8 +124,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 48px;height:72px;d
 .ai-caps{display:flex;flex-direction:column;gap:10px}
 .ai-cap{display:flex;align-items:center;gap:10px;font-family:var(--ff-mono);font-size:0.62rem;color:var(--text-dim);letter-spacing:0.08em}
 .ai-cap-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0}
-
-/* Chat box */
 .ai-chatbox{background:rgba(255,255,255,0.02);border:1px solid var(--border2);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;height:500px;backdrop-filter:blur(10px)}
 .chat-head{background:rgba(201,168,76,0.08);border-bottom:1px solid var(--border);padding:18px 24px;display:flex;align-items:center;gap:14px}
 .chat-head-av{width:40px;height:40px;background:var(--gold-dim);border:1px solid rgba(201,168,76,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
@@ -152,15 +136,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 48px;height:72px;d
 .chat-msgs::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
 .cmsg{max-width:88%;animation:msgIn 0.3s ease}
 @keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.cmsg.bot{align-self:flex-start}
-.cmsg.user{align-self:flex-end}
+.cmsg.bot{align-self:flex-start}.cmsg.user{align-self:flex-end}
 .cmsg-bubble{padding:12px 16px;border-radius:12px;font-size:0.85rem;line-height:1.7}
 .cmsg.bot .cmsg-bubble{background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text);border-bottom-left-radius:3px}
 .cmsg.user .cmsg-bubble{background:var(--gold-dim);border:1px solid rgba(201,168,76,0.25);color:var(--text);border-bottom-right-radius:3px}
 .chat-typing .cmsg-bubble{display:flex;align-items:center;gap:5px;padding:14px 18px}
 .tdot{width:6px;height:6px;border-radius:50%;background:var(--text-dim);animation:tdot 1.2s ease-in-out infinite}
-.tdot:nth-child(2){animation-delay:0.2s}
-.tdot:nth-child(3){animation-delay:0.4s}
+.tdot:nth-child(2){animation-delay:0.2s}.tdot:nth-child(3){animation-delay:0.4s}
 @keyframes tdot{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
 .chat-chips{padding:0 20px 12px;display:flex;flex-wrap:wrap;gap:6px}
 .chip{font-family:var(--ff-mono);font-size:0.58rem;letter-spacing:0.08em;color:var(--gold);background:var(--gold-glow);border:1px solid rgba(201,168,76,0.2);border-radius:20px;padding:6px 14px;cursor:pointer;transition:all 0.2s;white-space:nowrap}
@@ -174,14 +156,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 48px;height:72px;d
 .chat-send-btn svg{width:15px;height:15px;fill:none;stroke:var(--bg);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .chat-send-btn:disabled{opacity:0.4;pointer-events:none}
 
-/* ═══ SECTION BASE ═══ */
+/* SECTIONS */
 .page-section{position:relative;z-index:1;padding:100px 48px;max-width:1100px;margin:0 auto}
 .sec-label{font-family:var(--ff-mono);font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:12px}
 .sec-label::after{content:'';height:1px;width:50px;background:linear-gradient(90deg,var(--gold),transparent)}
 .sec-title{font-family:var(--ff-display);font-size:clamp(2.5rem,5vw,4rem);font-weight:300;color:var(--text);line-height:1.1;margin-bottom:60px;letter-spacing:-0.01em}
 .sec-title em{font-style:italic;color:var(--gold2)}
 
-/* ═══ ABOUT ═══ */
+/* ABOUT */
 #about-section{background:var(--bg2)}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
 .about-body p{font-size:1rem;color:var(--text-mid);line-height:1.95;margin-bottom:20px;font-weight:300}
@@ -192,11 +174,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 48px;height:72px;d
 .pill{font-family:var(--ff-mono);font-size:0.63rem;letter-spacing:0.08em;color:var(--text-mid);background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:7px 16px;transition:all 0.2s;cursor:default}
 .pill:hover{color:var(--gold);border-color:rgba(201,168,76,0.3);background:var(--gold-glow)}
 
-/* ═══ TIMELINE PAGE ═══ */
+/* TIMELINE */
 .timeline-section{position:relative;z-index:1;padding:80px 48px;background:var(--bg)}
-.timeline-section .page-section{padding:0}
 .tl-container{max-width:800px;margin:0 auto;position:relative}
-.tl-line{position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--gold),rgba(201,168,76,0.1));margin-left:0}
+.tl-line{position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--gold),rgba(201,168,76,0.1))}
 .tl-group{margin-bottom:80px}
 .tl-group-label{font-family:var(--ff-mono);font-size:0.65rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);margin-bottom:40px;padding-left:32px;display:flex;align-items:center;gap:12px}
 .tl-group-label::before{content:'';width:20px;height:1px;background:var(--gold);flex-shrink:0;margin-left:-32px}
@@ -209,15 +190,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 48px;height:72px;d
 .tl-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;transition:all 0.3s}
 .tl-item:hover .tl-card{background:var(--surface2);border-color:var(--border2)}
 .tl-card p{font-size:0.9rem;color:var(--text-mid);line-height:1.8;margin-bottom:12px;font-weight:300}
-.tl-card p:last-child{margin-bottom:0}
 .tl-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
 .tl-tag{font-family:var(--ff-mono);font-size:0.58rem;letter-spacing:0.1em;color:var(--gold);background:var(--gold-glow);border:1px solid rgba(201,168,76,0.15);border-radius:12px;padding:4px 12px}
 
-/* ═══ PROJECTS ═══ */
+/* PROJECTS — FIX: pointer-events:none on overlay, z-index on links */
 #projects-section{background:var(--bg2)}
 .proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.proj-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:36px;transition:all 0.35s;cursor:pointer;position:relative;overflow:hidden}
-.proj-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,0.05),transparent);opacity:0;transition:opacity 0.3s}
+.proj-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:36px;transition:all 0.35s;position:relative;overflow:hidden}
+.proj-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,0.05),transparent);opacity:0;transition:opacity 0.3s;pointer-events:none}
 .proj-card:hover{border-color:rgba(201,168,76,0.3);transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,0.4)}
 .proj-card:hover::before{opacity:1}
 .proj-num{font-family:var(--ff-mono);font-size:0.6rem;letter-spacing:0.2em;color:var(--text-dim);margin-bottom:20px}
@@ -227,11 +207,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 48px;height:72px;d
 .proj-desc{font-size:0.88rem;color:var(--text-mid);line-height:1.8;margin-bottom:20px;font-weight:300}
 .proj-stack{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px}
 .stag{font-family:var(--ff-mono);font-size:0.58rem;letter-spacing:0.08em;color:var(--text-dim);background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:4px 12px}
-.proj-link{font-family:var(--ff-mono);font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:gap 0.2s}
-.proj-link:hover{gap:10px}
+.proj-link{position:relative;z-index:2;font-family:var(--ff-mono);font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:gap 0.2s;cursor:pointer}
+.proj-link:hover{gap:10px;color:var(--gold2)}
 .proj-card.featured{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:48px}
 
-/* ═══ CONTACT ═══ */
+/* CONTACT */
 #contact-section{text-align:center;background:var(--bg);position:relative;overflow:hidden}
 .contact-deco{position:absolute;font-family:var(--ff-display);font-size:clamp(120px,18vw,220px);font-weight:700;font-style:italic;color:transparent;-webkit-text-stroke:1px rgba(201,168,76,0.06);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;user-select:none;letter-spacing:-0.04em}
 .contact-inner{position:relative;z-index:2;max-width:600px;margin:0 auto}
@@ -241,27 +221,21 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 48px;height:72px;d
 .clink{font-family:var(--ff-mono);font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-mid);text-decoration:none;border:1px solid var(--border2);border-radius:8px;padding:12px 24px;transition:all 0.25s}
 .clink:hover{color:var(--gold);border-color:rgba(201,168,76,0.3);background:var(--gold-glow)}
 
-/* ═══ FOOTER ═══ */
+/* FOOTER */
 footer{position:relative;z-index:1;background:rgba(0,0,0,0.6);border-top:1px solid var(--border);padding:28px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .footer-logo{font-family:var(--ff-display);font-size:1rem;font-weight:600;color:var(--text-dim)}
 .footer-logo span{color:var(--gold);font-style:italic}
 .footer-copy{font-family:var(--ff-mono);font-size:0.58rem;letter-spacing:0.1em;color:var(--text-dim)}
 
-/* ═══ REVEAL ═══ */
+/* REVEAL */
 .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-delay-1{transition-delay:0.1s}
-.reveal-delay-2{transition-delay:0.2s}
-.reveal-delay-3{transition-delay:0.3s}
-.reveal-delay-4{transition-delay:0.4s}
-
-/* ═══ KEYFRAMES ═══ */
+.reveal-delay-1{transition-delay:0.1s}.reveal-delay-2{transition-delay:0.2s}
+.reveal-delay-3{transition-delay:0.3s}.reveal-delay-4{transition-delay:0.4s}
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.divider{position:relative;z-index:1;height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent)}
 
-/* ═══ SECTION DIVIDER ═══ */
-.divider{position:relative;z-index:1;height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);margin:0}
-
-/* ═══ MOBILE ═══ */
+/* MOBILE */
 @media(max-width:900px){
   nav{padding:0 20px}
   .nav-links{display:none}
@@ -286,24 +260,22 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,0.6);border-top:1px sol
 </head>
 <body>
 
-<!-- ANIMATED BACKGROUND -->
 <canvas id="bgCanvas"></canvas>
 
-<!-- NAV -->
-<!-- Drawer overlay -->
+<!-- Drawer -->
 <div class="drawer-overlay" id="drawerOverlay"></div>
-<!-- Mobile drawer -->
 <div class="drawer" id="drawer">
-  <a href="#home" class="drawer-link">Home</a>
-  <a href="#ai-section" class="drawer-link">AI</a>
-  <a href="#about-section" class="drawer-link">About</a>
-  <a href="#timeline-section" class="drawer-link">Experience</a>
-  <a href="#projects-section" class="drawer-link">Projects</a>
-  <a href="#contact-section" class="drawer-link">Contact</a>
+  <a href="#home">Home</a>
+  <a href="#ai-section">AI</a>
+  <a href="#about-section">About</a>
+  <a href="#timeline-section">Experience</a>
+  <a href="#projects-section">Projects</a>
+  <a href="#contact-section">Contact</a>
   <div class="drawer-divider"></div>
   <button class="drawer-theme-btn" id="drawerTheme"><span id="drawerIcon">🌙</span><span id="drawerLabel">Toggle Dark/Light</span></button>
   <a href="mailto:sumitrd22@nsb.edu.in" class="drawer-hire">Hire Me</a>
 </div>
+
 <nav id="mainNav">
   <a href="#home" class="nav-logo">S<span>.</span>Damor</a>
   <ul class="nav-links">
@@ -315,15 +287,13 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,0.6);border-top:1px sol
     <li><a href="#contact-section">Contact</a></li>
   </ul>
   <div class="nav-right">
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span class="t-icon">🌙</span><span class="t-label">Dark</span></button>
+    <button class="theme-toggle" id="themeToggle"><span class="t-icon">🌙</span><span class="t-label">Dark</span></button>
     <a href="mailto:sumitrd22@nsb.edu.in" class="nav-hire">Hire Me</a>
-    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+    <button class="nav-hamburger" id="navHamburger"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
-<!-- ═══ HERO ═══ -->
+<!-- HERO -->
 <section id="home">
   <div class="hero-eyebrow">Operations · Fintech · Revenue</div>
   <div class="hero-name"><strong>Sumit</strong> <span class="hero-name-gold">Damor.</span></div>
@@ -346,7 +316,7 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,0.6);border-top:1px sol
 
 <div class="divider"></div>
 
-<!-- ═══ AI CHATBOT ═══ -->
+<!-- AI CHATBOT -->
 <section id="ai-section">
   <div class="ai-wrap">
     <div class="ai-left reveal">
@@ -393,7 +363,7 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,0.6);border-top:1px sol
 
 <div class="divider"></div>
 
-<!-- ═══ ABOUT ═══ -->
+<!-- ABOUT -->
 <section id="about-section" style="position:relative;z-index:1;padding:100px 0;background:var(--bg2)">
   <div class="page-section" style="padding-top:0;padding-bottom:0">
     <div class="sec-label reveal">About Me</div>
@@ -424,18 +394,15 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,0.6);border-top:1px sol
 
 <div class="divider"></div>
 
-<!-- ═══ TIMELINE JOURNEY ═══ -->
+<!-- TIMELINE -->
 <section id="timeline-section" class="timeline-section" style="position:relative;z-index:1;padding:100px 48px">
   <div style="max-width:1100px;margin:0 auto">
     <div class="sec-label reveal">My Journey</div>
     <h2 class="sec-title reveal reveal-delay-1">Experience &amp; <em>Education</em></h2>
     <div class="tl-container" style="padding-left:24px">
       <div class="tl-line"></div>
-
-      <!-- WORK -->
       <div class="tl-group reveal">
         <div class="tl-group-label">Work Experience</div>
-
         <div class="tl-item">
           <div class="tl-dot"></div>
           <div class="tl-date">July 2024 — Present</div>
@@ -443,17 +410,12 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,0.6);border-top:1px sol
           <div class="tl-company">Groww Invest-Tech Private Limited · Bangalore, India</div>
           <div class="tl-card">
             <p>End-to-end corporate client management for <strong>Groww Cloud subscriptions</strong> — onboarding, SLA support, renewals &amp; cross-functional ops with product, engineering &amp; finance.</p>
-            <div class="tl-tags">
-              <span class="tl-tag">Groww Cloud</span><span class="tl-tag">Freshdesk</span><span class="tl-tag">Jira</span><span class="tl-tag">OMS</span><span class="tl-tag">Fintech</span>
-            </div>
+            <div class="tl-tags"><span class="tl-tag">Groww Cloud</span><span class="tl-tag">Freshdesk</span><span class="tl-tag">Jira</span><span class="tl-tag">OMS</span><span class="tl-tag">Fintech</span></div>
           </div>
         </div>
       </div>
-
-      <!-- EDUCATION -->
       <div class="tl-group reveal reveal-delay-1">
         <div class="tl-group-label">Education</div>
-
         <div class="tl-item">
           <div class="tl-dot"></div>
           <div class="tl-date">August 2022 — July 2024</div>
@@ -464,7 +426,6 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,0.6);border-top:1px sol
             <div class="tl-tags"><span class="tl-tag">Marketing</span><span class="tl-tag">AAGMAN Winner</span><span class="tl-tag">NSB Bangalore</span></div>
           </div>
         </div>
-
         <div class="tl-item">
           <div class="tl-dot"></div>
           <div class="tl-date">August 2019 — May 2022</div>
@@ -475,7 +436,6 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,0.6);border-top:1px sol
             <div class="tl-tags"><span class="tl-tag">Economics</span><span class="tl-tag">Analytics</span><span class="tl-tag">IGNOU</span></div>
           </div>
         </div>
-
         <div class="tl-item">
           <div class="tl-dot"></div>
           <div class="tl-date">Certificates</div>
@@ -493,7 +453,7 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,0.6);border-top:1px sol
 
 <div class="divider"></div>
 
-<!-- ═══ PROJECTS ═══ -->
+<!-- PROJECTS -->
 <section id="projects-section" style="position:relative;z-index:1;padding:100px 0;background:var(--bg2)">
   <div class="page-section" style="padding-top:0;padding-bottom:0">
     <div class="sec-label reveal">Projects</div>
@@ -507,29 +467,27 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,0.6);border-top:1px sol
           <p class="proj-desc">Converts English text into Roman script for Hindi, Gujarati, Tamil, Kannada, Telugu, Bengali, Marathi, Punjabi, Malayalam &amp; Odia. Built with Gemini 2.5 Flash-Lite + Cloudflare Workers + KV Storage. Features 3 tone modes, dark/light theme, live quota meter &amp; auto API failover.</p>
           <div class="proj-stack"><span class="stag">Gemini 2.5</span><span class="stag">Groq / Llama 3.3</span><span class="stag">Cloudflare Workers</span><span class="stag">KV Storage</span><span class="stag">GitHub Pages</span></div>
         </div>
-        <div style="display:flex;flex-direction:column;justify-content:flex-end;gap:16px">
+        <div style="display:flex;flex-direction:column;justify-content:flex-end;gap:16px;position:relative;z-index:2">
           <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-dim)">1,000 req/day · Auto-failover · Live</div>
-          <a href="https://damorsumit2000-lab.github.io/english-to-roman-translator/" class="proj-link" target="_blank">Live App ↗</a>
-          <a href="https://github.com/damorsumit2000-lab/english-to-roman-translator" class="proj-link" target="_blank">GitHub ↗</a>
+          <a href="https://damorsumit2000-lab.github.io/english-to-roman-translator/" class="proj-link" target="_blank" rel="noopener">Live App ↗</a>
+          <a href="https://github.com/damorsumit2000-lab/english-to-roman-translator" class="proj-link" target="_blank" rel="noopener">GitHub ↗</a>
         </div>
       </div>
-
       <div class="proj-card reveal reveal-delay-1">
         <div class="proj-num">02</div>
         <div class="proj-name" style="font-size:1.5rem">UPI Market <em>Analysis</em></div>
         <div class="proj-sub">Digital India Movement Study</div>
         <p class="proj-desc">Aggregated data on major UPI platforms in India. Built Tableau visualizations showing market share &amp; trends across the UPI ecosystem (Feb–Mar 2022).</p>
         <div class="proj-stack"><span class="stag">Tableau</span><span class="stag">Data Analysis</span><span class="stag">Market Research</span></div>
-        <br><a href="https://github.com/damorsumit2000-lab" class="proj-link" target="_blank">GitHub ↗</a>
+        <br><a href="https://github.com/damorsumit2000-lab" class="proj-link" target="_blank" rel="noopener">GitHub ↗</a>
       </div>
-
       <div class="proj-card reveal reveal-delay-2">
         <div class="proj-num">03</div>
         <div class="proj-name" style="font-size:1.5rem">MERN News <em>Website</em></div>
         <div class="proj-sub">Full-Stack Web Application</div>
         <p class="proj-desc">Full-stack news aggregator built with ReactJS, ExpressJS &amp; NodeJS. Deployed live on Heroku (Nov–Dec 2021).</p>
         <div class="proj-stack"><span class="stag">ReactJS</span><span class="stag">ExpressJS</span><span class="stag">NodeJS</span><span class="stag">Heroku</span></div>
-        <br><a href="https://github.com/damorsumit2000-lab" class="proj-link" target="_blank">GitHub ↗</a>
+        <br><a href="https://github.com/damorsumit2000-lab" class="proj-link" target="_blank" rel="noopener">GitHub ↗</a>
       </div>
     </div>
   </div>
@@ -537,253 +495,123 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,0.6);border-top:1px sol
 
 <div class="divider"></div>
 
-<!-- ═══ CONTACT ═══ -->
+<!-- CONTACT -->
 <section id="contact-section" style="position:relative;z-index:1;padding:120px 48px">
   <div class="contact-deco">Hello.</div>
   <div class="contact-inner">
     <div class="sec-label reveal" style="justify-content:center;"><span style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold)">Get in Touch</span></div>
     <h2 class="sec-title reveal reveal-delay-1" style="text-align:center">Let's work <em>together.</em></h2>
     <p class="reveal reveal-delay-2" style="font-size:1rem;color:var(--text-mid);line-height:1.8;font-weight:300">Open to new opportunities in operations, fintech &amp; product. Based in Bangalore — available on-site and remote.</p>
-    <a href="/cdn-cgi/l/email-protection#057670686c7177613737456b76672b6061702b6c6b" class="contact-email-link reveal reveal-delay-3"><span class="__cf_email__" data-cfemail="fd8e889094898f99cfcfbd938e9fd3989988d39493">[email&#160;protected]</span></a>
+    <a href="mailto:sumitrd22@nsb.edu.in" class="contact-email-link reveal reveal-delay-3">sumitrd22@nsb.edu.in</a>
     <div class="contact-links reveal reveal-delay-4">
-      <a href="https://github.com/damorsumit2000-lab" class="clink" target="_blank">GitHub</a>
-      <a href="https://damorsumit2000-lab.github.io/english-to-roman-translator/" class="clink" target="_blank">Likhavat</a>
+      <a href="https://github.com/damorsumit2000-lab" class="clink" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://damorsumit2000-lab.github.io/english-to-roman-translator/" class="clink" target="_blank" rel="noopener">Likhavat</a>
       <a href="tel:+918200168197" class="clink">+91 82001-68197</a>
-      <a href="/cdn-cgi/l/email-protection#1f6c6a72766b6d7b2d2d5f716c7d317a7b6a317671" class="clink">Email</a>
+      <a href="mailto:sumitrd22@nsb.edu.in" class="clink">Email</a>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-logo">S<span>umit Damor</span></div>
   <div class="footer-copy">© 2025 · Bangalore · MBA · Groww · Builder</div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
-// ═══ DARK / LIGHT THEME TOGGLE ═══
-const themeBtn = document.getElementById('themeToggle');
-const tIcon = themeBtn.querySelector('.t-icon');
-const tLabel = themeBtn.querySelector('.t-label');
-if(localStorage.getItem('theme')==='light'){
-  document.body.classList.add('light');
-  tIcon.textContent='☀️'; tLabel.textContent='Light';
-}
-themeBtn.addEventListener('click',()=>{
-  const isLight = document.body.classList.toggle('light');
-  tIcon.textContent = isLight ? '☀️' : '🌙';
-  tLabel.textContent = isLight ? 'Light' : 'Dark';
-  localStorage.setItem('theme', isLight ? 'light' : 'dark');
-});
-</script><script>
-// ═══ ANIMATED BACKGROUND ═══
-const canvas = document.getElementById('bgCanvas');
-const ctx = canvas.getContext('2d');
-let W, H, particles = [], mouse = {x:0, y:0};
-
-function resize(){
-  W = canvas.width = window.innerWidth;
-  H = canvas.height = window.innerHeight;
-}
+<script>
+// ANIMATED BACKGROUND
+const canvas=document.getElementById('bgCanvas');
+const ctx=canvas.getContext('2d');
+let W,H,particles=[],mouse={x:0,y:0};
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
 resize();
-window.addEventListener('resize', resize);
-window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-
-// Particles
-class Particle {
+window.addEventListener('resize',resize);
+window.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY});
+class Particle{
   constructor(){this.reset()}
-  reset(){
-    this.x = Math.random()*W;
-    this.y = Math.random()*H;
-    this.size = Math.random()*1.5+0.3;
-    this.speedX = (Math.random()-0.5)*0.3;
-    this.speedY = (Math.random()-0.5)*0.3;
-    this.opacity = Math.random()*0.5+0.1;
-    this.gold = Math.random() > 0.85;
-  }
-  update(){
-    this.x += this.speedX;
-    this.y += this.speedY;
-    // mouse attraction (subtle)
-    const dx = mouse.x - this.x, dy = mouse.y - this.y;
-    const dist = Math.sqrt(dx*dx+dy*dy);
-    if(dist < 150){this.x += dx*0.0008; this.y += dy*0.0008;}
-    if(this.x<0||this.x>W||this.y<0||this.y>H) this.reset();
-  }
-  draw(){
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
-    if(this.gold){
-      ctx.fillStyle = `rgba(201,168,76,${this.opacity})`;
-    } else {
-      ctx.fillStyle = `rgba(255,255,255,${this.opacity*0.4})`;
-    }
-    ctx.fill();
-  }
+  reset(){this.x=Math.random()*W;this.y=Math.random()*H;this.size=Math.random()*1.5+0.3;this.speedX=(Math.random()-0.5)*0.3;this.speedY=(Math.random()-0.5)*0.3;this.opacity=Math.random()*0.5+0.1;this.gold=Math.random()>0.85}
+  update(){this.x+=this.speedX;this.y+=this.speedY;const dx=mouse.x-this.x,dy=mouse.y-this.y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<150){this.x+=dx*0.0008;this.y+=dy*0.0008}if(this.x<0||this.x>W||this.y<0||this.y>H)this.reset()}
+  draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fillStyle=this.gold?`rgba(201,168,76,${this.opacity})`:`rgba(255,255,255,${this.opacity*0.4})`;ctx.fill()}
 }
-
-for(let i=0;i<120;i++) particles.push(new Particle());
-
-// Nebula blobs
-const blobs = [
-  {x:0.15,y:0.2,r:350,c:'rgba(124,111,205,0.04)'},
-  {x:0.85,y:0.7,r:400,c:'rgba(201,168,76,0.05)'},
-  {x:0.5,y:0.5,r:500,c:'rgba(10,10,20,0.3)'},
-];
-
+for(let i=0;i<120;i++)particles.push(new Particle());
+const blobs=[{x:0.15,y:0.2,r:350,c:'rgba(124,111,205,0.04)'},{x:0.85,y:0.7,r:400,c:'rgba(201,168,76,0.05)'},{x:0.5,y:0.5,r:500,c:'rgba(10,10,20,0.3)'}];
 function drawBg(){
   ctx.clearRect(0,0,W,H);
-  // Gradient bg
-  const grad = ctx.createLinearGradient(0,0,W,H);
-  grad.addColorStop(0,'#050508');
-  grad.addColorStop(0.5,'#07070e');
-  grad.addColorStop(1,'#050508');
-  ctx.fillStyle = grad;
-  ctx.fillRect(0,0,W,H);
-  // Nebula
-  blobs.forEach(b=>{
-    const rg = ctx.createRadialGradient(b.x*W,b.y*H,0,b.x*W,b.y*H,b.r);
-    rg.addColorStop(0,b.c);
-    rg.addColorStop(1,'transparent');
-    ctx.fillStyle=rg;
-    ctx.fillRect(0,0,W,H);
-  });
-  // Grid lines
-  ctx.strokeStyle='rgba(255,255,255,0.025)';
-  ctx.lineWidth=1;
-  const gs=80;
-  for(let x=0;x<W;x+=gs){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}
-  for(let y=0;y<H;y+=gs){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
-  // Particles
+  const grad=ctx.createLinearGradient(0,0,W,H);grad.addColorStop(0,'#050508');grad.addColorStop(0.5,'#07070e');grad.addColorStop(1,'#050508');ctx.fillStyle=grad;ctx.fillRect(0,0,W,H);
+  blobs.forEach(b=>{const rg=ctx.createRadialGradient(b.x*W,b.y*H,0,b.x*W,b.y*H,b.r);rg.addColorStop(0,b.c);rg.addColorStop(1,'transparent');ctx.fillStyle=rg;ctx.fillRect(0,0,W,H)});
+  ctx.strokeStyle='rgba(255,255,255,0.025)';ctx.lineWidth=1;
+  for(let x=0;x<W;x+=80){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}
+  for(let y=0;y<H;y+=80){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
   particles.forEach(p=>{p.update();p.draw()});
-  // Connection lines
-  for(let i=0;i<particles.length;i++){
-    for(let j=i+1;j<particles.length;j++){
-      const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
-      const d=Math.sqrt(dx*dx+dy*dy);
-      if(d<100){
-        ctx.beginPath();
-        ctx.strokeStyle=`rgba(201,168,76,${(1-d/100)*0.06})`;
-        ctx.lineWidth=0.5;
-        ctx.moveTo(particles[i].x,particles[i].y);
-        ctx.lineTo(particles[j].x,particles[j].y);
-        ctx.stroke();
-      }
-    }
-  }
+  for(let i=0;i<particles.length;i++)for(let j=i+1;j<particles.length;j++){const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<100){ctx.beginPath();ctx.strokeStyle=`rgba(201,168,76,${(1-d/100)*0.06})`;ctx.lineWidth=0.5;ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.stroke()}}
   requestAnimationFrame(drawBg);
 }
 drawBg();
 
-// ═══ TYPEWRITER ═══
+// TYPEWRITER
 const twLines=['Revenue Operations Pro','Fintech Specialist','MBA Marketing · NSB','Builder of Likhavat','Corporate Client Expert'];
 const twEl=document.getElementById('twText');
 let twIdx=0,twChar=0,twDel=false,twPause=0;
-function twStep(){
-  const cur=twLines[twIdx];
-  if(twPause>0){twPause--;setTimeout(twStep,80);return}
-  if(!twDel){twEl.textContent=cur.slice(0,++twChar);if(twChar===cur.length){twDel=true;twPause=25;setTimeout(twStep,80)}else setTimeout(twStep,70)}
-  else{twEl.textContent=cur.slice(0,--twChar);if(twChar===0){twDel=false;twIdx=(twIdx+1)%twLines.length;twPause=6;setTimeout(twStep,80)}else setTimeout(twStep,40)}
-}
+function twStep(){const cur=twLines[twIdx];if(twPause>0){twPause--;setTimeout(twStep,80);return}if(!twDel){twEl.textContent=cur.slice(0,++twChar);if(twChar===cur.length){twDel=true;twPause=25;setTimeout(twStep,80)}else setTimeout(twStep,70)}else{twEl.textContent=cur.slice(0,--twChar);if(twChar===0){twDel=false;twIdx=(twIdx+1)%twLines.length;twPause=6;setTimeout(twStep,80)}else setTimeout(twStep,40)}}
 setTimeout(twStep,1600);
 
-// ═══ STICKY NAV ═══
-window.addEventListener('scroll',()=>{
-  document.getElementById('mainNav').style.background=window.scrollY>60?'rgba(5,5,8,0.95)':'rgba(5,5,8,0.7)';
-});
+// NAV SCROLL
+window.addEventListener('scroll',()=>{document.getElementById('mainNav').style.background=window.scrollY>60?'rgba(5,5,8,0.95)':'rgba(5,5,8,0.7)'});
 
-// ═══ SCROLL REVEAL ═══
+// SCROLL REVEAL
 const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 
-// ═══ AI CHATBOT ═══
+// AI CHATBOT
 const WORKER='https://super-snow-5572.damorsumit2000.workers.dev';
 const chatMsgs=document.getElementById('chatMsgs');
 const chatInput=document.getElementById('chatInput');
 const chatSend=document.getElementById('chatSend');
 const chatChips=document.getElementById('chatChips');
 let chatBusy=false;
-
-chatChips.querySelectorAll('.chip').forEach(c=>{
-  c.addEventListener('click',()=>{sendMsg(c.dataset.p);chatChips.style.display='none'});
-});
+chatChips.querySelectorAll('.chip').forEach(c=>{c.addEventListener('click',()=>{sendMsg(c.dataset.p);chatChips.style.display='none'})});
 chatInput.addEventListener('input',()=>{chatInput.style.height='auto';chatInput.style.height=Math.min(chatInput.scrollHeight,90)+'px'});
 chatInput.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();if(!chatBusy)sendMsg(chatInput.value.trim())}});
 chatSend.addEventListener('click',()=>{if(!chatBusy)sendMsg(chatInput.value.trim())});
-
-function addMsg(role,html){
-  const d=document.createElement('div');
-  d.className='cmsg '+role;
-  d.innerHTML='<div class="cmsg-bubble">'+html+'</div>';
-  chatMsgs.appendChild(d);
-  chatMsgs.scrollTop=chatMsgs.scrollHeight;
-}
-function showTyping(){
-  const d=document.createElement('div');
-  d.className='cmsg bot chat-typing';d.id='typing';
-  d.innerHTML='<div class="cmsg-bubble"><div class="tdot"></div><div class="tdot"></div><div class="tdot"></div></div>';
-  chatMsgs.appendChild(d);chatMsgs.scrollTop=chatMsgs.scrollHeight;
-}
+function addMsg(role,html){const d=document.createElement('div');d.className='cmsg '+role;d.innerHTML='<div class="cmsg-bubble">'+html+'</div>';chatMsgs.appendChild(d);chatMsgs.scrollTop=chatMsgs.scrollHeight}
+function showTyping(){const d=document.createElement('div');d.className='cmsg bot chat-typing';d.id='typing';d.innerHTML='<div class="cmsg-bubble"><div class="tdot"></div><div class="tdot"></div><div class="tdot"></div></div>';chatMsgs.appendChild(d);chatMsgs.scrollTop=chatMsgs.scrollHeight}
 function hideTyping(){const e=document.getElementById('typing');if(e)e.remove()}
 function fmt(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>')}
-
 async function sendMsg(text){
   if(!text||chatBusy)return;
-  chatBusy=true;chatSend.disabled=true;
-  chatInput.value='';chatInput.style.height='auto';
-  chatChips.style.display='none';
+  chatBusy=true;chatSend.disabled=true;chatInput.value='';chatInput.style.height='auto';chatChips.style.display='none';
   addMsg('user',text);showTyping();
   try{
     const r=await fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text})});
     const d=await r.json();hideTyping();
-    // Update API label in chat header
-    if(d.api){
-      const apiLabel=document.getElementById('chatApiLabel');
-      if(apiLabel){
-        if(d.api==='groq') apiLabel.textContent='Online · Groq · Llama 3.3';
-        else if(d.api==='gemini') apiLabel.textContent='Online · Gemini 2.0 Flash';
-        else apiLabel.textContent='Online · AI';
-      }
-    }
+    if(d.api){const lbl=document.getElementById('chatApiLabel');if(lbl){lbl.textContent=d.api==='groq'?'Online · Groq · Llama 3.3':d.api==='gemini'?'Online · Gemini 2.0 Flash':'Online · AI'}}
     addMsg('bot',fmt(d.reply||'No response. Email sumitrd22@nsb.edu.in'));
   }catch{hideTyping();addMsg('bot','Connection error! Try <strong>sumitrd22@nsb.edu.in</strong>')}
   finally{chatBusy=false;chatSend.disabled=false;chatInput.focus()}
 }
 
-// ═══ NAV ACTIVE ═══
+// NAV ACTIVE
 const sections=document.querySelectorAll('section[id]');
 const navLinks=document.querySelectorAll('.nav-links a');
-window.addEventListener('scroll',()=>{
-  let cur='';
-  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)cur=s.id});
-  navLinks.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+cur)});
-});
+window.addEventListener('scroll',()=>{let cur='';sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)cur=s.id});navLinks.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+cur)})});
 
-// ═══ DARK / LIGHT THEME TOGGLE ═══
-// Theme helpers
+// THEME
 function applyTheme(light){
   document.body.classList.toggle('light',light);
   const ni=document.getElementById('themeToggle').querySelector('.t-icon');
   const nl=document.getElementById('themeToggle').querySelector('.t-label');
   const di=document.getElementById('drawerIcon');
   const dl=document.getElementById('drawerLabel');
-  if(ni){ni.textContent=light?'☀️':'🌙'}
-  if(nl){nl.textContent=light?'Light':'Dark'}
-  if(di){di.textContent=light?'☀️':'🌙'}
-  if(dl){dl.textContent=light?'Light Mode':'Dark Mode'}
+  if(ni)ni.textContent=light?'☀️':'🌙';
+  if(nl)nl.textContent=light?'Light':'Dark';
+  if(di)di.textContent=light?'☀️':'🌙';
+  if(dl)dl.textContent=light?'Light Mode':'Dark Mode';
   localStorage.setItem('theme',light?'light':'dark');
 }
-const savedTheme=localStorage.getItem('theme');
-if(savedTheme==='light') applyTheme(true);
+if(localStorage.getItem('theme')==='light')applyTheme(true);
+document.getElementById('themeToggle').addEventListener('click',()=>applyTheme(!document.body.classList.contains('light')));
+document.getElementById('drawerTheme').addEventListener('click',()=>applyTheme(!document.body.classList.contains('light')));
 
-document.getElementById('themeToggle').addEventListener('click',()=>{
-  applyTheme(!document.body.classList.contains('light'));
-});
-document.getElementById('drawerTheme').addEventListener('click',()=>{
-  applyTheme(!document.body.classList.contains('light'));
-});
-
-// Drawer logic
+// DRAWER
 const hamburger=document.getElementById('navHamburger');
 const drawer=document.getElementById('drawer');
 const overlay=document.getElementById('drawerOverlay');
