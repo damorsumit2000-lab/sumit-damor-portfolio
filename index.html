@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sumit Damor — Operations & Fintech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23050508'/%3E%3Ctext x='50%25' y='72%25' text-anchor='middle' font-family='Georgia%2C serif' font-size='20' font-weight='700' fill='%23c9a84c'%3ES%3C/text%3E%3Ccircle cx='22' cy='10' r='3' fill='%23c9a84c' opacity='0.7'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -28,6 +29,40 @@
   --ff-body:'Inter',sans-serif;
   --ff-mono:'JetBrains Mono',monospace;
 }
+
+/* ═══ LIGHT MODE ═══ */
+body.light{
+  --bg:#f8f5f0;
+  --bg2:#efe9e0;
+  --surface:rgba(0,0,0,0.03);
+  --surface2:rgba(0,0,0,0.06);
+  --border:rgba(0,0,0,0.1);
+  --border2:rgba(0,0,0,0.18);
+  --text:#1a1814;
+  --text-mid:rgba(26,24,20,0.62);
+  --text-dim:rgba(26,24,20,0.38);
+  --gold:#9a6f1e;
+  --gold2:#b8882a;
+  --gold-dim:rgba(154,111,30,0.12);
+  --gold-glow:rgba(154,111,30,0.07);
+}
+body.light #bgCanvas{opacity:0.15}
+body.light nav{background:rgba(248,245,240,0.88)!important;border-bottom-color:rgba(0,0,0,0.1)}
+body.light .tl-card{background:rgba(0,0,0,0.03);border-color:rgba(0,0,0,0.1)}
+body.light .ai-chatbox{background:rgba(0,0,0,0.03);border-color:rgba(0,0,0,0.15)}
+body.light .cmsg.bot .cmsg-bubble{background:rgba(0,0,0,0.05);border-color:rgba(0,0,0,0.1)}
+body.light .cmsg.user .cmsg-bubble{background:rgba(154,111,30,0.15)}
+body.light .chat-ta{background:rgba(0,0,0,0.04);border-color:rgba(0,0,0,0.15);color:var(--text)}
+body.light .chat-input-row{background:rgba(0,0,0,0.03)}
+body.light .proj-card{background:rgba(0,0,0,0.03)}
+body.light .pill{background:rgba(0,0,0,0.04);border-color:rgba(0,0,0,0.12)}
+body.light .chip{background:rgba(154,111,30,0.08);border-color:rgba(154,111,30,0.2)}
+
+/* Theme toggle button */
+.theme-toggle{background:none;border:1px solid var(--border2);border-radius:20px;padding:6px 14px;cursor:pointer;display:flex;align-items:center;gap:7px;font-family:var(--ff-mono);font-size:0.6rem;letter-spacing:0.1em;color:var(--text-mid);transition:all 0.2s}
+.theme-toggle:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-glow)}
+.theme-toggle .t-icon{font-size:0.85rem;line-height:1}
+
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:var(--ff-body);overflow-x:hidden;min-height:100vh}
 
@@ -39,11 +74,30 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 48px;height:72px;d
 .nav-logo{font-family:var(--ff-display);font-size:1.5rem;font-weight:600;color:var(--text);text-decoration:none;letter-spacing:0.02em}
 .nav-logo span{color:var(--gold)}
 .nav-links{display:flex;gap:8px;list-style:none}
-.nav-links a{font-family:var(--ff-mono);font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-mid);text-decoration:none;padding:8px 16px;border-radius:6px;transition:all 0.2s}
+.nav-links a{font-family:var(--ff-mono);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-mid);text-decoration:none;padding:7px 12px;border-radius:6px;transition:all 0.2s;white-space:nowrap}
 .nav-links a:hover,.nav-links a.active{color:var(--gold);background:var(--gold-dim)}
-.nav-hire{font-family:var(--ff-mono);font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--bg);background:var(--gold);border:none;border-radius:8px;padding:10px 22px;cursor:pointer;text-decoration:none;transition:all 0.25s;font-weight:500}
+.nav-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.nav-hire{font-family:var(--ff-mono);font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--bg);background:var(--gold);border:none;border-radius:8px;padding:9px 18px;cursor:pointer;text-decoration:none;transition:all 0.25s;font-weight:500;white-space:nowrap}
 .nav-hire:hover{background:var(--gold2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(201,168,76,0.3)}
-.nav-mobile-btn{display:none;background:none;border:none;color:var(--text);font-size:1.4rem;cursor:pointer;padding:8px}
+/* hamburger */
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:201;flex-shrink:0}
+.nav-hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:all 0.3s}
+.nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+/* drawer overlay */
+.drawer-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:150;backdrop-filter:blur(4px)}
+.drawer-overlay.open{display:block}
+/* drawer panel */
+.drawer{position:fixed;top:0;right:0;bottom:0;width:270px;background:var(--bg2);border-left:1px solid var(--border2);z-index:200;display:flex;flex-direction:column;padding:84px 28px 36px;gap:4px;transform:translateX(100%);transition:transform 0.35s cubic-bezier(0.4,0,0.2,1)}
+.drawer.open{transform:translateX(0)}
+.drawer a{font-family:var(--ff-mono);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-mid);text-decoration:none;padding:14px 16px;border-radius:8px;transition:all 0.2s;border:1px solid transparent;display:block}
+.drawer a:hover,.drawer a.active-d{color:var(--gold);background:var(--gold-dim);border-color:rgba(201,168,76,0.2)}
+.drawer-divider{height:1px;background:var(--border);margin:12px 0}
+.drawer-hire{color:var(--bg)!important;background:var(--gold)!important;border-color:transparent!important;text-align:center;font-weight:600;margin-top:4px}
+.drawer-hire:hover{background:var(--gold2)!important}
+.drawer-theme-btn{display:flex;align-items:center;gap:10px;font-family:var(--ff-mono);font-size:0.7rem;letter-spacing:0.1em;color:var(--text-mid);padding:14px 16px;border-radius:8px;cursor:pointer;border:1px solid var(--border);background:none;width:100%;margin-top:4px;transition:all 0.2s}
+.drawer-theme-btn:hover{color:var(--gold);border-color:rgba(201,168,76,0.3)}
 
 /* ═══ HERO ═══ */
 #home{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 24px 60px}
@@ -211,6 +265,9 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,0.6);border-top:1px sol
 @media(max-width:900px){
   nav{padding:0 20px}
   .nav-links{display:none}
+  .theme-toggle{display:none}
+  .nav-hamburger{display:flex}
+  .nav-right{gap:4px}
   #home{padding:100px 20px 60px}
   .hero-stats{gap:32px}
   #ai-section{padding:80px 20px}
@@ -233,17 +290,37 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,0.6);border-top:1px sol
 <canvas id="bgCanvas"></canvas>
 
 <!-- NAV -->
+<!-- Drawer overlay -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<!-- Mobile drawer -->
+<div class="drawer" id="drawer">
+  <a href="#home" class="drawer-link">Home</a>
+  <a href="#ai-section" class="drawer-link">AI</a>
+  <a href="#about-section" class="drawer-link">About</a>
+  <a href="#timeline-section" class="drawer-link">Experience</a>
+  <a href="#projects-section" class="drawer-link">Projects</a>
+  <a href="#contact-section" class="drawer-link">Contact</a>
+  <div class="drawer-divider"></div>
+  <button class="drawer-theme-btn" id="drawerTheme"><span id="drawerIcon">🌙</span><span id="drawerLabel">Toggle Dark/Light</span></button>
+  <a href="mailto:sumitrd22@nsb.edu.in" class="drawer-hire">Hire Me</a>
+</div>
 <nav id="mainNav">
   <a href="#home" class="nav-logo">S<span>.</span>Damor</a>
   <ul class="nav-links">
     <li><a href="#home">Home</a></li>
     <li><a href="#ai-section">AI</a></li>
     <li><a href="#about-section">About</a></li>
-    <li><a href="#timeline-section">Journey</a></li>
+    <li><a href="#timeline-section">Experience</a></li>
     <li><a href="#projects-section">Projects</a></li>
     <li><a href="#contact-section">Contact</a></li>
   </ul>
-  <a href="mailto:sumitrd22@nsb.edu.in" class="nav-hire">Hire Me</a>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span class="t-icon">🌙</span><span class="t-label">Dark</span></button>
+    <a href="mailto:sumitrd22@nsb.edu.in" class="nav-hire">Hire Me</a>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
 <!-- ═══ HERO ═══ -->
@@ -290,7 +367,7 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,0.6);border-top:1px sol
           <div class="chat-head-av">🤖</div>
           <div>
             <div class="chat-head-name">Sumit's AI Assistant</div>
-            <div class="chat-head-status"><div class="status-dot"></div>Online · Powered by Groq</div>
+            <div class="chat-head-status" id="chatStatus"><div class="status-dot"></div><span id="chatApiLabel">Online · Groq · Llama 3.3</span></div>
           </div>
         </div>
         <div class="chat-msgs" id="chatMsgs">
@@ -365,11 +442,9 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,0.6);border-top:1px sol
           <div class="tl-role">Order Processing &amp; Revenue Operations Associate</div>
           <div class="tl-company">Groww Invest-Tech Private Limited · Bangalore, India</div>
           <div class="tl-card">
-            <p>Manages end-to-end corporate client tickets for <strong>Groww Cloud subscriptions</strong> — supporting brokers, companies, and proprietary traders across onboarding, activation, and ongoing operations.</p>
-            <p>Primary support contact resolving execution issues, system errors, and connectivity problems within SLA. Monitors subscription usage, renewals, and cancellations while maintaining dashboards.</p>
-            <p>Collaborates cross-functionally with product, engineering, and finance teams to improve operational workflows and client experience.</p>
+            <p>End-to-end corporate client management for <strong>Groww Cloud subscriptions</strong> — onboarding, SLA support, renewals &amp; cross-functional ops with product, engineering &amp; finance.</p>
             <div class="tl-tags">
-              <span class="tl-tag">Groww Cloud</span><span class="tl-tag">Freshdesk</span><span class="tl-tag">Jira</span><span class="tl-tag">Google Sheets</span><span class="tl-tag">OMS</span><span class="tl-tag">Fintech</span>
+              <span class="tl-tag">Groww Cloud</span><span class="tl-tag">Freshdesk</span><span class="tl-tag">Jira</span><span class="tl-tag">OMS</span><span class="tl-tag">Fintech</span>
             </div>
           </div>
         </div>
@@ -385,8 +460,8 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,0.6);border-top:1px sol
           <div class="tl-role">Masters of Business Administration (MBA) — Marketing</div>
           <div class="tl-company">National School of Business · Bangalore, India</div>
           <div class="tl-card">
-            <p>Specialised in <strong>Marketing &amp; Business Strategy</strong>. Won AAGMAN Marketing Fest — top prize among all participants. Led the Annual College Fest team end-to-end. Won Recycle Mania product design competition.</p>
-            <div class="tl-tags"><span class="tl-tag">Marketing</span><span class="tl-tag">Strategy</span><span class="tl-tag">AAGMAN Winner</span><span class="tl-tag">NSB Bangalore</span></div>
+            <p>Marketing &amp; Strategy. 🏆 Won <strong>AAGMAN Marketing Fest</strong> (top prize) · Won Recycle Mania · Led Annual College Fest.</p>
+            <div class="tl-tags"><span class="tl-tag">Marketing</span><span class="tl-tag">AAGMAN Winner</span><span class="tl-tag">NSB Bangalore</span></div>
           </div>
         </div>
 
@@ -396,8 +471,8 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,0.6);border-top:1px sol
           <div class="tl-role">Bachelor of Arts — Economics</div>
           <div class="tl-company">Indira Gandhi National Open University · New Delhi, India</div>
           <div class="tl-card">
-            <p>Undergraduate studies in <strong>Economics</strong> — developed analytical thinking, data interpretation, and research skills that underpin my approach to business and operations problems today.</p>
-            <div class="tl-tags"><span class="tl-tag">Economics</span><span class="tl-tag">Research</span><span class="tl-tag">Analytics</span><span class="tl-tag">IGNOU</span></div>
+            <p>Foundation in <strong>Economics</strong> — analytical thinking, data interpretation &amp; research methodology.</p>
+            <div class="tl-tags"><span class="tl-tag">Economics</span><span class="tl-tag">Analytics</span><span class="tl-tag">IGNOU</span></div>
           </div>
         </div>
 
@@ -469,12 +544,12 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,0.6);border-top:1px sol
     <div class="sec-label reveal" style="justify-content:center;"><span style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold)">Get in Touch</span></div>
     <h2 class="sec-title reveal reveal-delay-1" style="text-align:center">Let's work <em>together.</em></h2>
     <p class="reveal reveal-delay-2" style="font-size:1rem;color:var(--text-mid);line-height:1.8;font-weight:300">Open to new opportunities in operations, fintech &amp; product. Based in Bangalore — available on-site and remote.</p>
-    <a href="mailto:sumitrd22@nsb.edu.in" class="contact-email-link reveal reveal-delay-3">sumitrd22@nsb.edu.in</a>
+    <a href="/cdn-cgi/l/email-protection#057670686c7177613737456b76672b6061702b6c6b" class="contact-email-link reveal reveal-delay-3"><span class="__cf_email__" data-cfemail="fd8e889094898f99cfcfbd938e9fd3989988d39493">[email&#160;protected]</span></a>
     <div class="contact-links reveal reveal-delay-4">
       <a href="https://github.com/damorsumit2000-lab" class="clink" target="_blank">GitHub</a>
       <a href="https://damorsumit2000-lab.github.io/english-to-roman-translator/" class="clink" target="_blank">Likhavat</a>
       <a href="tel:+918200168197" class="clink">+91 82001-68197</a>
-      <a href="mailto:sumitrd22@nsb.edu.in" class="clink">Email</a>
+      <a href="/cdn-cgi/l/email-protection#1f6c6a72766b6d7b2d2d5f716c7d317a7b6a317671" class="clink">Email</a>
     </div>
   </div>
 </section>
@@ -485,7 +560,22 @@ footer{position:relative;z-index:1;background:rgba(0,0,0,0.6);border-top:1px sol
   <div class="footer-copy">© 2025 · Bangalore · MBA · Groww · Builder</div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+// ═══ DARK / LIGHT THEME TOGGLE ═══
+const themeBtn = document.getElementById('themeToggle');
+const tIcon = themeBtn.querySelector('.t-icon');
+const tLabel = themeBtn.querySelector('.t-label');
+if(localStorage.getItem('theme')==='light'){
+  document.body.classList.add('light');
+  tIcon.textContent='☀️'; tLabel.textContent='Light';
+}
+themeBtn.addEventListener('click',()=>{
+  const isLight = document.body.classList.toggle('light');
+  tIcon.textContent = isLight ? '☀️' : '🌙';
+  tLabel.textContent = isLight ? 'Light' : 'Dark';
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+});
+</script><script>
 // ═══ ANIMATED BACKGROUND ═══
 const canvas = document.getElementById('bgCanvas');
 const ctx = canvas.getContext('2d');
@@ -646,6 +736,15 @@ async function sendMsg(text){
   try{
     const r=await fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text})});
     const d=await r.json();hideTyping();
+    // Update API label in chat header
+    if(d.api){
+      const apiLabel=document.getElementById('chatApiLabel');
+      if(apiLabel){
+        if(d.api==='groq') apiLabel.textContent='Online · Groq · Llama 3.3';
+        else if(d.api==='gemini') apiLabel.textContent='Online · Gemini 2.0 Flash';
+        else apiLabel.textContent='Online · AI';
+      }
+    }
     addMsg('bot',fmt(d.reply||'No response. Email sumitrd22@nsb.edu.in'));
   }catch{hideTyping();addMsg('bot','Connection error! Try <strong>sumitrd22@nsb.edu.in</strong>')}
   finally{chatBusy=false;chatSend.disabled=false;chatInput.focus()}
@@ -659,6 +758,40 @@ window.addEventListener('scroll',()=>{
   sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)cur=s.id});
   navLinks.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+cur)});
 });
+
+// ═══ DARK / LIGHT THEME TOGGLE ═══
+// Theme helpers
+function applyTheme(light){
+  document.body.classList.toggle('light',light);
+  const ni=document.getElementById('themeToggle').querySelector('.t-icon');
+  const nl=document.getElementById('themeToggle').querySelector('.t-label');
+  const di=document.getElementById('drawerIcon');
+  const dl=document.getElementById('drawerLabel');
+  if(ni){ni.textContent=light?'☀️':'🌙'}
+  if(nl){nl.textContent=light?'Light':'Dark'}
+  if(di){di.textContent=light?'☀️':'🌙'}
+  if(dl){dl.textContent=light?'Light Mode':'Dark Mode'}
+  localStorage.setItem('theme',light?'light':'dark');
+}
+const savedTheme=localStorage.getItem('theme');
+if(savedTheme==='light') applyTheme(true);
+
+document.getElementById('themeToggle').addEventListener('click',()=>{
+  applyTheme(!document.body.classList.contains('light'));
+});
+document.getElementById('drawerTheme').addEventListener('click',()=>{
+  applyTheme(!document.body.classList.contains('light'));
+});
+
+// Drawer logic
+const hamburger=document.getElementById('navHamburger');
+const drawer=document.getElementById('drawer');
+const overlay=document.getElementById('drawerOverlay');
+function openDrawer(){hamburger.classList.add('open');drawer.classList.add('open');overlay.classList.add('open');document.body.style.overflow='hidden'}
+function closeDrawer(){hamburger.classList.remove('open');drawer.classList.remove('open');overlay.classList.remove('open');document.body.style.overflow=''}
+hamburger.addEventListener('click',()=>drawer.classList.contains('open')?closeDrawer():openDrawer());
+overlay.addEventListener('click',closeDrawer);
+drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeDrawer));
 </script>
 </body>
 </html>
