@@ -5,1424 +5,284 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sumit Damor — Operations & Product</title>
-<meta name="description" content="Sumit Damor — Operations Professional at Groww, Bangalore. Fintech, client management, revenue operations, product development.">
+<meta name="description" content="Sumit Damor — Operations Professional at Groww, Bangalore.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-
-:root {
-–ink: #0c0c0c;
-–ink2: #1a1a1a;
-–paper: #f2ede6;
-–paper2: #ece6de;
-–paper3: #e4ddd4;
-–gold: #b8962e;
-–gold2: #d4ad45;
-–gold-pale: rgba(184,150,46,0.12);
-–rust: #8b3a2a;
-–text: #1c1a17;
-–text-mid: #5a5248;
-–text-dim: #9a9088;
-–border: rgba(28,26,23,0.1);
-–border-gold: rgba(184,150,46,0.25);
-–font-display: ‘Playfair Display’, Georgia, serif;
-–font-ui: ‘Syne’, sans-serif;
-–font-mono: ‘DM Mono’, monospace;
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-background: var(–paper);
-color: var(–text);
-font-family: var(–font-ui);
-min-height: 100vh;
-overflow-x: hidden;
-cursor: none;
-}
-
-/* ── Custom cursor ── */
-.cursor {
-width: 10px; height: 10px;
-background: var(–gold);
-border-radius: 50%;
-position: fixed;
-top: 0; left: 0;
-pointer-events: none;
-z-index: 9999;
-transform: translate(-50%,-50%);
-transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, background 0.3s;
-mix-blend-mode: multiply;
-}
-.cursor-ring {
-width: 36px; height: 36px;
-border: 1.5px solid var(–gold);
-border-radius: 50%;
-position: fixed;
-top: 0; left: 0;
-pointer-events: none;
-z-index: 9998;
-transform: translate(-50%,-50%);
-transition: transform 0.18s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s;
-opacity: 0.6;
-}
-.cursor.expanded { width: 16px; height: 16px; }
-.cursor-ring.expanded { width: 56px; height: 56px; opacity: 0.3; }
-
-/* ── Grain overlay ── */
-body::before {
-content:’’;
-position:fixed;inset:0;
-background-image:url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 300 300’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘n’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.75’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23n)’ opacity=‘0.035’/%3E%3C/svg%3E”);
-pointer-events:none;z-index:1000;opacity:0.7;
-}
-
-/* ── Typewriter tagline ── */
-.hero-typewriter-wrap {
-display: flex;
-align-items: center;
-gap: 0;
-margin-bottom: 28px;
-min-height: 2rem;
-opacity: 0;
-animation: slideRight 0.9s ease 0.55s forwards;
-}
-.hero-typewriter-prefix {
-font-family: var(–font-mono);
-font-size: 0.72rem;
-color: var(–text-dim);
-letter-spacing: 0.18em;
-text-transform: uppercase;
-margin-right: 10px;
-white-space: nowrap;
-}
-.hero-typewriter-text {
-font-family: var(–font-display);
-font-size: 1.25rem;
-font-weight: 400;
-font-style: italic;
-color: var(–gold);
-letter-spacing: -0.01em;
-white-space: nowrap;
-overflow: hidden;
-}
-.hero-typewriter-cursor {
-display: inline-block;
-width: 2px;
-height: 1.2em;
-background: var(–gold);
-margin-left: 3px;
-vertical-align: middle;
-animation: cursorBlink 0.75s step-end infinite;
-}
-@keyframes cursorBlink {
-0%, 100% { opacity: 1; }
-50% { opacity: 0; }
-}
-
-/* ══════════════════════════════════
-NAV
-══════════════════════════════════ */
-nav {
-position: fixed;
-top: 0; left: 0; right: 0;
-z-index: 500;
-padding: 20px 48px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-transition: background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s;
-}
-nav.scrolled {
-background: rgba(242,237,230,0.88);
-backdrop-filter: blur(16px);
-box-shadow: 0 1px 0 var(–border);
-}
-.nav-logo {
-font-family: var(–font-display);
-font-size: 1.15rem;
-font-weight: 700;
-color: var(–text);
-text-decoration: none;
-letter-spacing: -0.02em;
-}
-.nav-logo span { color: var(–gold); }
-.nav-links {
-display: flex;
-gap: 36px;
-list-style: none;
-}
-.nav-links a {
-font-family: var(–font-mono);
-font-size: 0.65rem;
-font-weight: 400;
-color: var(–text-mid);
-text-decoration: none;
-letter-spacing: 0.18em;
-text-transform: uppercase;
-transition: color 0.2s;
-position: relative;
-}
-.nav-links a::after {
-content:’’;
-position:absolute;
-bottom:-3px;left:0;right:0;
-height:1px;
-background:var(–gold);
-transform:scaleX(0);
-transition:transform 0.25s ease;
-}
-.nav-links a:hover { color: var(–gold); }
-.nav-links a:hover::after { transform: scaleX(1); }
-.nav-cta {
-font-family: var(–font-mono);
-font-size: 0.62rem;
-letter-spacing: 0.15em;
-text-transform: uppercase;
-color: var(–paper);
-background: var(–ink);
-border: none;
-border-radius: 2px;
-padding: 10px 20px;
-cursor: none;
-text-decoration: none;
-transition: background 0.25s, transform 0.2s;
-}
-.nav-cta:hover { background: var(–gold); transform: translateY(-1px); }
-
-/* ══════════════════════════════════
-HERO
-══════════════════════════════════ */
-.hero {
-min-height: 100vh;
-display: grid;
-grid-template-columns: 1fr 1fr;
-position: relative;
-overflow: hidden;
-}
-
-/* Left panel */
-.hero-left {
-padding: 140px 48px 160px 48px;
-display: flex;
-flex-direction: column;
-justify-content: center;
-position: relative;
-z-index: 2;
-}
-
-.hero-tag {
-font-family: var(–font-mono);
-font-size: 0.63rem;
-color: var(–gold);
-letter-spacing: 0.28em;
-text-transform: uppercase;
-margin-bottom: 28px;
-display: flex;
-align-items: center;
-gap: 12px;
-opacity: 0;
-animation: slideRight 0.9s ease 0.2s forwards;
-}
-.hero-tag::before {
-content:’’;width:28px;height:1px;background:var(–gold);
-}
-
-.hero-name {
-font-family: var(–font-display);
-font-size: clamp(4rem, 7vw, 6.5rem);
-font-weight: 900;
-line-height: 0.95;
-letter-spacing: -0.03em;
-color: var(–ink);
-margin-bottom: 8px;
-opacity: 0;
-animation: slideRight 0.9s ease 0.35s forwards;
-}
-.hero-name-italic {
-font-family: var(–font-display);
-font-size: clamp(4rem, 7vw, 6.5rem);
-font-weight: 400;
-font-style: italic;
-line-height: 0.95;
-letter-spacing: -0.02em;
-color: var(–gold);
-margin-bottom: 36px;
-opacity: 0;
-animation: slideRight 0.9s ease 0.48s forwards;
-}
-
-.hero-desc {
-font-size: 1rem;
-font-weight: 400;
-color: var(–text-mid);
-line-height: 1.85;
-max-width: 420px;
-margin-bottom: 52px;
-opacity: 0;
-animation: slideRight 0.9s ease 0.6s forwards;
-border-left: 2px solid var(–border-gold);
-padding-left: 20px;
-}
-
-.hero-actions {
-display: flex;
-gap: 16px;
-opacity: 0;
-animation: slideRight 0.9s ease 0.72s forwards;
-}
-
-.btn-primary {
-font-family: var(–font-mono);
-font-size: 0.65rem;
-font-weight: 500;
-letter-spacing: 0.16em;
-text-transform: uppercase;
-color: var(–paper);
-background: var(–ink);
-border: none;
-border-radius: 2px;
-padding: 14px 28px;
-cursor: none;
-text-decoration: none;
-transition: all 0.25s ease;
-position: relative;
-overflow: hidden;
-}
-.btn-primary::before {
-content:’’;position:absolute;inset:0;background:var(–gold);
-transform:translateX(-100%);transition:transform 0.3s ease;
-}
-.btn-primary:hover::before { transform: translateX(0); }
-.btn-primary span { position:relative;z-index:1; }
-
-.btn-outline {
-font-family: var(–font-mono);
-font-size: 0.65rem;
-letter-spacing: 0.16em;
-text-transform: uppercase;
-color: var(–text-mid);
-background: transparent;
-border: 1px solid var(–border);
-border-radius: 2px;
-padding: 14px 28px;
-cursor: none;
-text-decoration: none;
-transition: all 0.25s ease;
-}
-.btn-outline:hover {
-color: var(–gold);
-border-color: var(–border-gold);
-background: var(–gold-pale);
-}
-
-/* Hero stats strip */
-.hero-stats {
-position: absolute;
-bottom: 48px;
-left: 48px;
-display: flex;
-gap: 48px;
-opacity: 0;
-animation: slideRight 0.9s ease 0.9s forwards;
-}
-.stat-item {}
-.stat-num {
-font-family: var(–font-display);
-font-size: 2rem;
-font-weight: 700;
-color: var(–ink);
-line-height: 1;
-letter-spacing: -0.03em;
-}
-.stat-num sup { font-size: 1rem; vertical-align: super; color: var(–gold); }
-.stat-label {
-font-family: var(–font-mono);
-font-size: 0.58rem;
-color: var(–text-dim);
-letter-spacing: 0.14em;
-text-transform: uppercase;
-margin-top: 4px;
-}
-
-/* Right panel — visual */
-.hero-right {
-position: relative;
-background: var(–ink);
-overflow: hidden;
-display: flex;
-align-items: center;
-justify-content: center;
-}
-
-.hero-right-inner {
-position: relative;
-z-index: 2;
-padding: 60px;
-text-align: center;
-}
-
-/* Big decorative letter */
-.hero-deco-letter {
-font-family: var(–font-display);
-font-size: clamp(200px, 22vw, 320px);
-font-weight: 900;
-font-style: italic;
-color: transparent;
--webkit-text-stroke: 1px rgba(184,150,46,0.15);
-line-height: 1;
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-user-select: none;
-pointer-events: none;
-letter-spacing: -0.05em;
-opacity: 0;
-animation: fadeIn 1.5s ease 0.8s forwards;
-}
-
-.hero-role-stack {
-position: relative;
-z-index: 3;
-opacity: 0;
-animation: fadeIn 1s ease 1s forwards;
-}
-
-.role-badge {
-display: inline-flex;
-align-items: center;
-gap: 8px;
-background: rgba(184,150,46,0.15);
-border: 1px solid rgba(184,150,46,0.2);
-border-radius: 2px;
-padding: 8px 16px;
-font-family: var(–font-mono);
-font-size: 0.62rem;
-color: var(–gold2);
-letter-spacing: 0.16em;
-text-transform: uppercase;
-margin-bottom: 40px;
-}
-.role-dot {
-width: 5px;height:5px;border-radius:50%;background:var(–gold2);
-animation: blink 1.8s ease-in-out infinite;
-}
-@keyframes blink { 0%,100%{opacity:1}50%{opacity:0.2} }
-
-.hero-taglines {
-list-style: none;
-}
-.hero-taglines li {
-font-family: var(–font-display);
-font-size: clamp(1.4rem, 2.5vw, 2rem);
-font-weight: 400;
-font-style: italic;
-color: rgba(242,237,230,0.5);
-margin-bottom: 16px;
-transition: color 0.3s, transform 0.3s;
-cursor: none;
-}
-.hero-taglines li:hover {
-color: rgba(242,237,230,0.9);
-transform: translateX(8px);
-}
-.hero-taglines li.active-line {
-color: var(–paper);
-}
-
-/* Scrolling grid pattern on right */
-.hero-grid {
-position: absolute;
-inset: 0;
-background-image:
-linear-gradient(rgba(184,150,46,0.04) 1px, transparent 1px),
-linear-gradient(90deg, rgba(184,150,46,0.04) 1px, transparent 1px);
-background-size: 40px 40px;
-animation: gridScroll 20s linear infinite;
-}
-@keyframes gridScroll {
-0%{background-position:0 0}
-100%{background-position:40px 40px}
-}
-
-/* ══════════════════════════════════
-MARQUEE
-══════════════════════════════════ */
-.marquee-bar {
-background: var(–gold);
-padding: 14px 0;
-overflow: hidden;
-white-space: nowrap;
-position: relative;
-}
-.marquee-track {
-display: inline-flex;
-animation: marquee 22s linear infinite;
-gap: 0;
-}
-.marquee-track span {
-font-family: var(–font-mono);
-font-size: 0.65rem;
-font-weight: 500;
-letter-spacing: 0.2em;
-text-transform: uppercase;
-color: var(–ink);
-padding: 0 28px;
-}
-.marquee-track .sep {
-color: rgba(12,12,12,0.3);
-padding: 0 0;
-}
-@keyframes marquee {
-0%{transform:translateX(0)}
-100%{transform:translateX(-50%)}
-}
-
-/* ══════════════════════════════════
-SECTIONS COMMON
-══════════════════════════════════ */
-section { position: relative; }
-
-.container {
-max-width: 1100px;
-margin: 0 auto;
-padding: 0 48px;
-}
-
-.section-eyebrow {
-font-family: var(–font-mono);
-font-size: 0.62rem;
-color: var(–gold);
-letter-spacing: 0.28em;
-text-transform: uppercase;
-margin-bottom: 16px;
-display: flex;
-align-items: center;
-gap: 12px;
-}
-.section-eyebrow::after {
-content:’’;flex:1;height:1px;background:var(–border-gold);max-width:60px;
-}
-
-.section-title {
-font-family: var(–font-display);
-font-size: clamp(2.4rem, 5vw, 4rem);
-font-weight: 700;
-color: var(–ink);
-line-height: 1.05;
-letter-spacing: -0.025em;
-margin-bottom: 8px;
-}
-.section-title em {
-font-style: italic;
-font-weight: 400;
-color: var(–gold);
-}
-
-/* ══════════════════════════════════
-ABOUT
-══════════════════════════════════ */
-#about {
-padding: 120px 0;
-background: var(–paper2);
-}
-
-.about-grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 80px;
-align-items: start;
-}
-
-.about-left .section-title { margin-bottom: 32px; }
-
-.about-body p {
-font-size: 1rem;
-font-weight: 400;
-color: var(–text-mid);
-line-height: 1.9;
-margin-bottom: 20px;
-}
-
-.about-body p strong {
-color: var(–text);
-font-weight: 600;
-}
-
-.about-right {}
-
-/* Skills pills */
-.skills-group { margin-bottom: 32px; }
-.skills-group-label {
-font-family: var(–font-mono);
-font-size: 0.6rem;
-color: var(–text-dim);
-letter-spacing: 0.2em;
-text-transform: uppercase;
-margin-bottom: 12px;
-}
-.skills-pills {
-display: flex;
-flex-wrap: wrap;
-gap: 8px;
-}
-.pill {
-font-family: var(–font-mono);
-font-size: 0.65rem;
-letter-spacing: 0.1em;
-color: var(–text-mid);
-background: var(–paper);
-border: 1px solid var(–border);
-border-radius: 2px;
-padding: 6px 14px;
-transition: all 0.2s;
-cursor: none;
-}
-.pill:hover {
-color: var(–gold);
-border-color: var(–border-gold);
-background: var(–gold-pale);
-transform: translateY(-2px);
-}
-
-/* Timeline */
-.timeline { position: relative; padding-left: 24px; }
-.timeline::before {
-content:’’;
-position:absolute;
-left:0;top:0;bottom:0;
-width:1px;
-background:linear-gradient(to bottom, var(–gold), transparent);
-}
-.tl-item {
-position: relative;
-margin-bottom: 36px;
-opacity: 0;
-transform: translateX(-16px);
-transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.tl-item.visible { opacity:1; transform:translateX(0); }
-.tl-item::before {
-content:’’;
-position:absolute;
-left:-28px;top:6px;
-width:8px;height:8px;
-border-radius:50%;
-background:var(–gold);
-border:2px solid var(–paper2);
-box-shadow:0 0 0 3px rgba(184,150,46,0.2);
-}
-.tl-date {
-font-family: var(–font-mono);
-font-size: 0.58rem;
-color: var(–gold);
-letter-spacing: 0.14em;
-text-transform: uppercase;
-margin-bottom: 4px;
-}
-.tl-role {
-font-family: var(–font-display);
-font-size: 1.1rem;
-font-weight: 600;
-color: var(–ink);
-margin-bottom: 2px;
-}
-.tl-company {
-font-family: var(–font-mono);
-font-size: 0.65rem;
-color: var(–text-mid);
-letter-spacing: 0.1em;
-margin-bottom: 8px;
-}
-.tl-desc {
-font-size: 0.88rem;
-color: var(–text-mid);
-line-height: 1.75;
-}
-
-/* ══════════════════════════════════
-EXPERIENCE (full width)
-══════════════════════════════════ */
-#experience {
-padding: 120px 0;
-background: var(–ink);
-color: var(–paper);
-}
-
-#experience .section-title { color: var(–paper); }
-#experience .section-eyebrow { color: var(–gold2); }
-
-.exp-header {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 60px;
-align-items: end;
-margin-bottom: 72px;
-}
-
-.exp-intro {
-font-size: 1rem;
-font-weight: 400;
-color: rgba(242,237,230,0.6);
-line-height: 1.85;
-padding-top: 12px;
-}
-
-.exp-cards {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 2px;
-background: rgba(255,255,255,0.04);
-}
-
-.exp-card {
-background: #141414;
-padding: 44px 36px;
-position: relative;
-overflow: hidden;
-transition: background 0.3s;
-cursor: none;
-}
-
-.exp-card::before {
-content:’’;
-position:absolute;
-top:0;left:0;right:0;
-height:2px;
-background:var(–gold);
-transform:scaleX(0);
-transform-origin:left;
-transition:transform 0.4s ease;
-}
-.exp-card:hover { background: #1a1a1a; }
-.exp-card:hover::before { transform: scaleX(1); }
-
-.exp-card-num {
-font-family: var(–font-display);
-font-size: 3.5rem;
-font-weight: 900;
-color: rgba(184,150,46,0.1);
-line-height: 1;
-margin-bottom: 20px;
-letter-spacing: -0.04em;
-transition: color 0.3s;
-}
-.exp-card:hover .exp-card-num { color: rgba(184,150,46,0.2); }
-
-.exp-card-title {
-font-family: var(–font-display);
-font-size: 1.3rem;
-font-weight: 600;
-color: var(–paper);
-margin-bottom: 10px;
-line-height: 1.3;
-}
-
-.exp-card-company {
-font-family: var(–font-mono);
-font-size: 0.63rem;
-color: var(–gold2);
-letter-spacing: 0.14em;
-text-transform: uppercase;
-margin-bottom: 16px;
-}
-
-.exp-card-desc {
-font-size: 0.88rem;
-color: rgba(242,237,230,0.5);
-line-height: 1.75;
-}
-
-.exp-card-tags {
-margin-top: 24px;
-display: flex;
-flex-wrap: wrap;
-gap: 6px;
-}
-
-.exp-tag {
-font-family: var(–font-mono);
-font-size: 0.58rem;
-letter-spacing: 0.1em;
-color: rgba(184,150,46,0.7);
-background: rgba(184,150,46,0.08);
-border: 1px solid rgba(184,150,46,0.12);
-border-radius: 2px;
-padding: 4px 10px;
-}
-
-/* ══════════════════════════════════
-PROJECTS
-══════════════════════════════════ */
-#projects {
-padding: 120px 0;
-background: var(–paper);
-}
-
-.projects-header {
-display: flex;
-align-items: end;
-justify-content: space-between;
-margin-bottom: 60px;
-flex-wrap: wrap;
-gap: 24px;
-}
-
-.projects-grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 24px;
-}
-
-.project-card {
-border: 1px solid var(–border);
-border-radius: 4px;
-overflow: hidden;
-transition: all 0.35s ease;
-cursor: none;
-position: relative;
-background: var(–paper2);
-}
-
-.project-card:hover {
-border-color: var(–border-gold);
-transform: translateY(-6px);
-box-shadow: 0 24px 60px rgba(12,12,12,0.12);
-}
-
-.project-card-top {
-padding: 36px 36px 0;
-position: relative;
-}
-
-.project-num {
-font-family: var(–font-mono);
-font-size: 0.6rem;
-color: var(–text-dim);
-letter-spacing: 0.2em;
-margin-bottom: 20px;
-}
-
-.project-name {
-font-family: var(–font-display);
-font-size: 1.9rem;
-font-weight: 700;
-color: var(–ink);
-letter-spacing: -0.02em;
-margin-bottom: 6px;
-line-height: 1.1;
-}
-
-.project-name em {
-font-style: italic;
-font-weight: 400;
-color: var(–gold);
-}
-
-.project-tagline {
-font-family: var(–font-mono);
-font-size: 0.63rem;
-color: var(–text-dim);
-letter-spacing: 0.12em;
-text-transform: uppercase;
-margin-bottom: 20px;
-}
-
-.project-desc {
-font-size: 0.9rem;
-color: var(–text-mid);
-line-height: 1.8;
-margin-bottom: 24px;
-}
-
-.project-stack {
-display: flex;
-flex-wrap: wrap;
-gap: 6px;
-margin-bottom: 0;
-}
-
-.stack-tag {
-font-family: var(–font-mono);
-font-size: 0.58rem;
-letter-spacing: 0.1em;
-color: var(–text-mid);
-background: var(–paper3);
-border: 1px solid var(–border);
-border-radius: 2px;
-padding: 4px 10px;
-}
-
-.project-card-bottom {
-padding: 20px 36px 28px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-border-top: 1px solid var(–border);
-margin-top: 28px;
-}
-
-.project-link {
-font-family: var(–font-mono);
-font-size: 0.62rem;
-letter-spacing: 0.14em;
-text-transform: uppercase;
-color: var(–gold);
-text-decoration: none;
-display: flex;
-align-items: center;
-gap: 6px;
-transition: gap 0.2s;
-}
-.project-link:hover { gap: 10px; }
-
-.project-arrow {
-font-size: 1rem;
-transition: transform 0.2s;
-}
-.project-card:hover .project-arrow { transform: translate(3px,-3px); }
-
-/* Featured card (spans 2 cols) */
-.project-card.featured {
-grid-column: 1 / -1;
-display: grid;
-grid-template-columns: 1fr 1fr;
-}
-.project-card.featured .project-card-top {
-padding: 48px;
-border-right: 1px solid var(–border);
-}
-.project-card.featured .project-card-bottom {
-flex-direction: column;
-align-items: flex-start;
-justify-content: center;
-padding: 48px;
-border-top: none;
-margin-top: 0;
-gap: 24px;
-}
-.project-card.featured .project-name { font-size: 2.8rem; }
-
-/* ══════════════════════════════════
-EDUCATION
-══════════════════════════════════ */
-#education {
-padding: 100px 0;
-background: var(–paper2);
-}
-
-.edu-grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 24px;
-margin-top: 56px;
-}
-
-.edu-card {
-background: var(–paper);
-border: 1px solid var(–border);
-border-radius: 4px;
-padding: 36px;
-position: relative;
-transition: all 0.3s;
-cursor: none;
-overflow: hidden;
-}
-.edu-card::after {
-content:’’;
-position:absolute;
-bottom:0;left:0;right:0;
-height:2px;
-background:var(–gold);
-transform:scaleX(0);
-transition:transform 0.3s ease;
-}
-.edu-card:hover { border-color: var(–border-gold); transform: translateY(-4px); }
-.edu-card:hover::after { transform: scaleX(1); }
-
-.edu-icon {
-font-size: 2rem;
-margin-bottom: 20px;
-display: block;
-}
-.edu-degree {
-font-family: var(–font-display);
-font-size: 1.3rem;
-font-weight: 600;
-color: var(–ink);
-margin-bottom: 4px;
-}
-.edu-school {
-font-family: var(–font-mono);
-font-size: 0.63rem;
-color: var(–gold);
-letter-spacing: 0.14em;
-text-transform: uppercase;
-margin-bottom: 8px;
-}
-.edu-year {
-font-family: var(–font-mono);
-font-size: 0.6rem;
-color: var(–text-dim);
-letter-spacing: 0.1em;
-}
-
-/* ══════════════════════════════════
-CONTACT
-══════════════════════════════════ */
-#contact {
-padding: 140px 0;
-background: var(–ink);
-text-align: center;
-position: relative;
-overflow: hidden;
-}
-
-.contact-deco {
-position: absolute;
-font-family: var(–font-display);
-font-size: clamp(160px, 20vw, 280px);
-font-weight: 900;
-font-style: italic;
-color: transparent;
--webkit-text-stroke: 1px rgba(184,150,46,0.08);
-top: 50%;left:50%;
-transform: translate(-50%,-50%);
-white-space: nowrap;
-pointer-events: none;
-user-select: none;
-letter-spacing: -0.04em;
-}
-
-#contact .section-eyebrow { justify-content: center; }
-#contact .section-eyebrow::after { display: none; }
-#contact .section-title { color: var(–paper); margin-bottom: 16px; }
-
-.contact-sub {
-font-size: 1rem;
-color: rgba(242,237,230,0.5);
-line-height: 1.8;
-max-width: 480px;
-margin: 0 auto 52px;
-}
-
-.contact-email {
-font-family: var(–font-display);
-font-size: clamp(1.4rem, 3vw, 2.2rem);
-font-weight: 400;
-font-style: italic;
-color: var(–gold2);
-text-decoration: none;
-display: block;
-margin-bottom: 48px;
-transition: color 0.2s;
-}
-.contact-email:hover { color: var(–paper); }
-
-.contact-links {
-display: flex;
-gap: 16px;
-justify-content: center;
-flex-wrap: wrap;
-}
-
-.contact-link {
-font-family: var(–font-mono);
-font-size: 0.63rem;
-letter-spacing: 0.16em;
-text-transform: uppercase;
-color: rgba(242,237,230,0.5);
-text-decoration: none;
-border: 1px solid rgba(255,255,255,0.1);
-border-radius: 2px;
-padding: 12px 24px;
-transition: all 0.25s;
-}
-.contact-link:hover {
-color: var(–gold2);
-border-color: rgba(184,150,46,0.3);
-background: rgba(184,150,46,0.06);
-}
-
-/* ══════════════════════════════════
-FOOTER
-══════════════════════════════════ */
-footer {
-background: #080808;
-padding: 28px 48px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-border-top: 1px solid rgba(255,255,255,0.05);
-flex-wrap: wrap;
-gap: 12px;
-}
-.footer-brand {
-font-family: var(–font-display);
-font-size: 1rem;
-font-weight: 700;
-color: rgba(242,237,230,0.3);
-}
-.footer-brand span { color: var(–gold); font-style: italic; }
-.footer-copy {
-font-family: var(–font-mono);
-font-size: 0.58rem;
-color: rgba(242,237,230,0.2);
-letter-spacing: 0.1em;
-}
-
-/* ══════════════════════════════════
-SCROLL REVEAL
-══════════════════════════════════ */
-.reveal {
-opacity: 0;
-transform: translateY(28px);
-transition: opacity 0.8s ease, transform 0.8s ease;
-}
-.reveal.visible {
-opacity: 1;
-transform: translateY(0);
-}
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
-
-/* ── Keyframes ── */
-@keyframes slideRight {
-from { opacity:0; transform:translateX(-30px); }
-to   { opacity:1; transform:translateX(0); }
-}
-@keyframes fadeIn {
-from { opacity:0; }
-to   { opacity:1; }
-}
-
-/* ══════════════════════════════════
-MOBILE
-══════════════════════════════════ */
-@media (max-width: 900px) {
-nav { padding: 18px 24px; }
-.nav-links { display: none; }
-
-/* ── Hero mobile fix ── */
-.hero {
-grid-template-columns: 1fr;
-min-height: auto;
-}
-.hero-right { display: none; }
-.hero-left {
-padding: 110px 24px 60px;
-min-height: auto;
-}
-/* Stats: un-absolute on mobile so they flow in the document */
-.hero-stats {
-position: relative;
-bottom: auto;
-left: auto;
-gap: 28px;
-margin-top: 40px;
-flex-wrap: wrap;
-}
-.hero-typewriter-wrap { margin-bottom: 20px; }
-
-.container { padding: 0 24px; }
-.about-grid { grid-template-columns: 1fr; gap: 48px; }
-.exp-cards { grid-template-columns: 1fr; }
-.exp-header { grid-template-columns: 1fr; }
-.projects-grid { grid-template-columns: 1fr; }
-.project-card.featured { grid-template-columns: 1fr; }
-.project-card.featured .project-card-top { border-right: none; border-bottom: 1px solid var(–border); }
-.project-card.featured .project-card-bottom { border-top: none; }
-.edu-grid { grid-template-columns: 1fr; }
-.ai-layout { grid-template-columns: 1fr; gap: 40px; }
-.ai-chat-box { height: 420px; }
-footer { padding: 20px 24px; }
-body { cursor: auto; }
-.cursor, .cursor-ring { display: none; }
-}
-
-/* ══════════════════════════════════
-AI ASSISTANT SECTION
-══════════════════════════════════ */
-#ai-assistant {
-padding: 120px 0;
-background: var(–paper2);
-position: relative;
-overflow: hidden;
-}
-
-#ai-assistant::before {
-content: ‘AI’;
-position: absolute;
-font-family: var(–font-display);
-font-size: clamp(180px, 22vw, 300px);
-font-weight: 900;
-font-style: italic;
-color: transparent;
--webkit-text-stroke: 1px rgba(184,150,46,0.07);
-right: -40px;
-top: 50%;
-transform: translateY(-50%);
-pointer-events: none;
-user-select: none;
-letter-spacing: -0.05em;
-}
-
-.ai-layout {
-display: grid;
-grid-template-columns: 1fr 1.4fr;
-gap: 72px;
-align-items: start;
-}
-
-.ai-left {}
-.ai-left .section-title { margin-bottom: 20px; }
-
-.ai-left-desc {
-font-size: 0.92rem;
-color: var(–text-mid);
-line-height: 1.85;
-margin-bottom: 32px;
-border-left: 2px solid var(–border-gold);
-padding-left: 18px;
-}
-
-.ai-capabilities {
-display: flex;
-flex-direction: column;
-gap: 10px;
-}
-
-.ai-cap-item {
-display: flex;
-align-items: center;
-gap: 12px;
-font-family: var(–font-mono);
-font-size: 0.63rem;
-color: var(–text-mid);
-letter-spacing: 0.1em;
-}
-
-.ai-cap-dot {
-width: 6px; height: 6px;
-border-radius: 50%;
-background: var(–gold);
-flex-shrink: 0;
-}
-
-/* Chat box */
-.ai-chat-box {
-background: var(–paper);
-border: 1px solid var(–border-gold);
-border-radius: 8px;
-overflow: hidden;
-box-shadow: 0 16px 60px rgba(28,26,23,0.1);
-display: flex;
-flex-direction: column;
-height: 520px;
-}
-
-.ai-chat-header {
-background: var(–ink);
-padding: 18px 24px;
-display: flex;
-align-items: center;
-gap: 12px;
-flex-shrink: 0;
-}
-
-.ai-chat-avatar {
-width: 36px; height: 36px;
-background: rgba(184,150,46,0.15);
-border: 1px solid rgba(184,150,46,0.25);
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 1rem;
-flex-shrink: 0;
-}
-
-.ai-chat-title {
-font-family: var(–font-ui);
-font-size: 0.88rem;
-font-weight: 600;
-color: var(–paper);
-line-height: 1.2;
-}
-
-.ai-chat-subtitle {
-font-family: var(–font-mono);
-font-size: 0.55rem;
-color: rgba(242,237,230,0.4);
-letter-spacing: 0.12em;
-text-transform: uppercase;
-display: flex;
-align-items: center;
-gap: 6px;
-margin-top: 2px;
-}
-
-.ai-status-dot {
-width: 5px; height: 5px;
-border-radius: 50%;
-background: #4ade80;
-animation: aiPulse 2s ease-in-out infinite;
-}
-@keyframes aiPulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-/* Messages */
-.ai-messages {
-flex: 1;
-overflow-y: auto;
-padding: 20px;
-display: flex;
-flex-direction: column;
-gap: 14px;
-scroll-behavior: smooth;
-}
-.ai-messages::-webkit-scrollbar { width: 4px; }
-.ai-messages::-webkit-scrollbar-thumb { background: var(–border); border-radius: 2px; }
-
-.ai-msg { max-width: 86%; animation: aiMsgIn 0.3s ease; }
-@keyframes aiMsgIn {
-from { opacity:0; transform:translateY(10px); }
-to   { opacity:1; transform:translateY(0); }
-}
-.ai-msg.bot { align-self: flex-start; }
-.ai-msg.user { align-self: flex-end; }
-
-.ai-msg-bubble {
-padding: 11px 15px;
-border-radius: 8px;
-font-size: 0.85rem;
-line-height: 1.7;
-}
-.ai-msg.bot .ai-msg-bubble {
-background: var(–paper2);
-border: 1px solid var(–border);
-color: var(–text);
-border-bottom-left-radius: 2px;
-}
-.ai-msg.user .ai-msg-bubble {
-background: var(–ink);
-color: var(–paper);
-border-bottom-right-radius: 2px;
-}
-
-/* Typing */
-.ai-typing .ai-msg-bubble {
-display: flex;
-align-items: center;
-gap: 5px;
-padding: 14px 16px;
-}
-.ai-dot {
-width: 6px; height: 6px;
-border-radius: 50%;
-background: var(–text-dim);
-animation: aiDotBounce 1.2s ease-in-out infinite;
-}
-.ai-dot:nth-child(2) { animation-delay: 0.2s; }
-.ai-dot:nth-child(3) { animation-delay: 0.4s; }
-@keyframes aiDotBounce {
-0%,60%,100% { transform: translateY(0); }
-30% { transform: translateY(-6px); }
-}
-
-/* Quick prompts */
-.ai-quick-prompts {
-padding: 0 20px 12px;
-display: flex;
-flex-wrap: wrap;
-gap: 6px;
-flex-shrink: 0;
-}
-
-.ai-quick-btn {
-font-family: var(–font-mono);
-font-size: 0.58rem;
-letter-spacing: 0.08em;
-color: var(–gold);
-background: var(–gold-pale);
-border: 1px solid var(–border-gold);
-border-radius: 2px;
-padding: 5px 11px;
-cursor: pointer;
-transition: all 0.2s;
-white-space: nowrap;
-}
-.ai-quick-btn:hover {
-background: var(–gold);
-color: var(–ink);
-border-color: var(–gold);
-}
-
-/* Input */
-.ai-input-row {
-padding: 12px 16px;
-border-top: 1px solid var(–border);
-display: flex;
-gap: 8px;
-align-items: flex-end;
-background: var(–paper2);
-flex-shrink: 0;
-}
-
-.ai-input {
-flex: 1;
-background: var(–paper);
-border: 1px solid var(–border);
-border-radius: 4px;
-padding: 9px 14px;
-font-family: var(–font-ui);
-font-size: 0.83rem;
-color: var(–text);
-outline: none;
-transition: border-color 0.2s;
-resize: none;
-max-height: 80px;
-line-height: 1.5;
-}
-.ai-input:focus { border-color: var(–border-gold); }
-.ai-input::placeholder { color: var(–text-dim); }
-
-.ai-send {
-width: 38px; height: 38px;
-background: var(–ink);
-border: none;
-border-radius: 4px;
-display: flex;
-align-items: center;
-justify-content: center;
-cursor: pointer;
-transition: background 0.2s, transform 0.15s;
-flex-shrink: 0;
-}
-.ai-send:hover { background: var(–gold); transform: scale(1.05); }
-.ai-send svg { width:14px;height:14px;fill:none;stroke:var(–paper);stroke-width:2;stroke-linecap:round;stroke-linejoin:round; }
-.ai-send:disabled { opacity: 0.4; pointer-events: none; }
-
-@media (max-width: 900px) {
-.ai-layout { grid-template-columns: 1fr; gap: 40px; }
-.ai-chat-box { height: 420px; }
-#ai-assistant::before { display: none; }
+:root{
+  --ink:#0c0c0c;--ink2:#1a1a1a;--paper:#f2ede6;--paper2:#ece6de;--paper3:#e4ddd4;
+  --gold:#b8962e;--gold2:#d4ad45;--gold-pale:rgba(184,150,46,0.12);
+  --text:#1c1a17;--text-mid:#5a5248;--text-dim:#9a9088;
+  --border:rgba(28,26,23,0.1);--border-gold:rgba(184,150,46,0.25);
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-ui:'Syne',sans-serif;--font-mono:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--text);font-family:var(--font-ui);min-height:100vh;overflow-x:hidden;cursor:none}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:0.7}
+
+/* CURSOR */
+.cursor{width:10px;height:10px;background:var(–gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s;mix-blend-mode:multiply}
+.cursor-ring{width:36px;height:36px;border:1.5px solid var(–gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s,opacity 0.3s;opacity:0.6}
+.cursor.expanded{width:16px;height:16px}
+.cursor-ring.expanded{width:56px;height:56px;opacity:0.3}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;transition:background 0.4s,backdrop-filter 0.4s,box-shadow 0.4s}
+nav.scrolled{background:rgba(242,237,230,0.88);backdrop-filter:blur(16px);box-shadow:0 1px 0 var(–border)}
+.nav-logo{font-family:var(–font-display);font-size:1.15rem;font-weight:700;color:var(–text);text-decoration:none;letter-spacing:-0.02em}
+.nav-logo span{color:var(–gold)}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-family:var(–font-mono);font-size:0.65rem;color:var(–text-mid);text-decoration:none;letter-spacing:0.18em;text-transform:uppercase;transition:color 0.2s;position:relative}
+.nav-links a::after{content:’’;position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(–gold);transform:scaleX(0);transition:transform 0.25s}
+.nav-links a:hover{color:var(–gold)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-cta{font-family:var(–font-mono);font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(–paper);background:var(–ink);border:none;border-radius:2px;padding:10px 20px;cursor:none;text-decoration:none;transition:background 0.25s,transform 0.2s}
+.nav-cta:hover{background:var(–gold);transform:translateY(-1px)}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
+.hero-left{padding:140px 48px 160px 48px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2}
+.hero-tag{font-family:var(–font-mono);font-size:0.63rem;color:var(–gold);letter-spacing:0.28em;text-transform:uppercase;margin-bottom:28px;display:flex;align-items:center;gap:12px;opacity:0;animation:slideRight 0.9s ease 0.2s forwards}
+.hero-tag::before{content:’’;width:28px;height:1px;background:var(–gold)}
+.hero-name{font-family:var(–font-display);font-size:clamp(4rem,7vw,6.5rem);font-weight:900;line-height:0.95;letter-spacing:-0.03em;color:var(–ink);margin-bottom:8px;opacity:0;animation:slideRight 0.9s ease 0.35s forwards}
+.hero-name-italic{font-family:var(–font-display);font-size:clamp(4rem,7vw,6.5rem);font-weight:400;font-style:italic;line-height:0.95;letter-spacing:-0.02em;color:var(–gold);margin-bottom:24px;opacity:0;animation:slideRight 0.9s ease 0.48s forwards}
+
+/* TYPEWRITER */
+.hero-typewriter-wrap{display:flex;align-items:center;gap:0;margin-bottom:28px;min-height:2rem;opacity:0;animation:slideRight 0.9s ease 0.55s forwards}
+.hero-typewriter-prefix{font-family:var(–font-mono);font-size:0.72rem;color:var(–text-dim);letter-spacing:0.18em;text-transform:uppercase;margin-right:10px;white-space:nowrap}
+.hero-typewriter-text{font-family:var(–font-display);font-size:1.25rem;font-weight:400;font-style:italic;color:var(–gold);letter-spacing:-0.01em;white-space:nowrap}
+.hero-typewriter-cursor{display:inline-block;width:2px;height:1.2em;background:var(–gold);margin-left:3px;vertical-align:middle;animation:cursorBlink 0.75s step-end infinite}
+@keyframes cursorBlink{0%,100%{opacity:1}50%{opacity:0}}
+
+.hero-desc{font-size:1rem;color:var(–text-mid);line-height:1.85;max-width:420px;margin-bottom:52px;opacity:0;animation:slideRight 0.9s ease 0.6s forwards;border-left:2px solid var(–border-gold);padding-left:20px}
+.hero-actions{display:flex;gap:16px;opacity:0;animation:slideRight 0.9s ease 0.72s forwards}
+.btn-primary{font-family:var(–font-mono);font-size:0.65rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(–paper);background:var(–ink);border:none;border-radius:2px;padding:14px 28px;cursor:none;text-decoration:none;transition:all 0.25s;position:relative;overflow:hidden}
+.btn-primary::before{content:’’;position:absolute;inset:0;background:var(–gold);transform:translateX(-100%);transition:transform 0.3s}
+.btn-primary:hover::before{transform:translateX(0)}
+.btn-primary span{position:relative;z-index:1}
+.btn-outline{font-family:var(–font-mono);font-size:0.65rem;letter-spacing:0.16em;text-transform:uppercase;color:var(–text-mid);background:transparent;border:1px solid var(–border);border-radius:2px;padding:14px 28px;cursor:none;text-decoration:none;transition:all 0.25s}
+.btn-outline:hover{color:var(–gold);border-color:var(–border-gold);background:var(–gold-pale)}
+.hero-stats{position:absolute;bottom:48px;left:48px;display:flex;gap:48px;opacity:0;animation:slideRight 0.9s ease 0.9s forwards}
+.stat-num{font-family:var(–font-display);font-size:2rem;font-weight:700;color:var(–ink);line-height:1;letter-spacing:-0.03em}
+.stat-num sup{font-size:1rem;vertical-align:super;color:var(–gold)}
+.stat-label{font-family:var(–font-mono);font-size:0.58rem;color:var(–text-dim);letter-spacing:0.14em;text-transform:uppercase;margin-top:4px}
+
+/* HERO RIGHT */
+.hero-right{position:relative;background:var(–ink);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.hero-right-inner{position:relative;z-index:2;padding:60px;text-align:center}
+.hero-deco-letter{font-family:var(–font-display);font-size:clamp(200px,22vw,320px);font-weight:900;font-style:italic;color:transparent;-webkit-text-stroke:1px rgba(184,150,46,0.15);line-height:1;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);user-select:none;pointer-events:none;letter-spacing:-0.05em;opacity:0;animation:fadeIn 1.5s ease 0.8s forwards}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(184,150,46,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(184,150,46,0.04) 1px,transparent 1px);background-size:40px 40px;animation:gridScroll 20s linear infinite}
+@keyframes gridScroll{0%{background-position:0 0}100%{background-position:40px 40px}}
+.hero-role-stack{position:relative;z-index:3;opacity:0;animation:fadeIn 1s ease 1s forwards}
+.role-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(184,150,46,0.15);border:1px solid rgba(184,150,46,0.2);border-radius:2px;padding:8px 16px;font-family:var(–font-mono);font-size:0.62rem;color:var(–gold2);letter-spacing:0.16em;text-transform:uppercase;margin-bottom:40px}
+.role-dot{width:5px;height:5px;border-radius:50%;background:var(–gold2);animation:blink 1.8s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+.hero-taglines{list-style:none}
+.hero-taglines li{font-family:var(–font-display);font-size:clamp(1.4rem,2.5vw,2rem);font-weight:400;font-style:italic;color:rgba(242,237,230,0.5);margin-bottom:16px;transition:color 0.3s,transform 0.3s;cursor:none}
+.hero-taglines li:hover{color:rgba(242,237,230,0.9);transform:translateX(8px)}
+.hero-taglines li.active-line{color:var(–paper)}
+
+/* MARQUEE */
+.marquee-bar{background:var(–gold);padding:14px 0;overflow:hidden;white-space:nowrap}
+.marquee-track{display:inline-flex;animation:marquee 22s linear infinite}
+.marquee-track span{font-family:var(–font-mono);font-size:0.65rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(–ink);padding:0 28px}
+.marquee-track .sep{color:rgba(12,12,12,0.3);padding:0}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* SECTIONS */
+section{position:relative}
+.container{max-width:1100px;margin:0 auto;padding:0 48px}
+.section-eyebrow{font-family:var(–font-mono);font-size:0.62rem;color:var(–gold);letter-spacing:0.28em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.section-eyebrow::after{content:’’;flex:1;height:1px;background:var(–border-gold);max-width:60px}
+.section-title{font-family:var(–font-display);font-size:clamp(2.4rem,5vw,4rem);font-weight:700;color:var(–ink);line-height:1.05;letter-spacing:-0.025em;margin-bottom:8px}
+.section-title em{font-style:italic;font-weight:400;color:var(–gold)}
+
+/* ABOUT */
+#about{padding:120px 0;background:var(–paper2)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.about-left .section-title{margin-bottom:32px}
+.about-body p{font-size:1rem;color:var(–text-mid);line-height:1.9;margin-bottom:20px}
+.about-body p strong{color:var(–text);font-weight:600}
+.skills-group{margin-bottom:32px}
+.skills-group-label{font-family:var(–font-mono);font-size:0.6rem;color:var(–text-dim);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:12px}
+.skills-pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{font-family:var(–font-mono);font-size:0.65rem;letter-spacing:0.1em;color:var(–text-mid);background:var(–paper);border:1px solid var(–border);border-radius:2px;padding:6px 14px;transition:all 0.2s;cursor:none}
+.pill:hover{color:var(–gold);border-color:var(–border-gold);background:var(–gold-pale);transform:translateY(-2px)}
+.timeline{position:relative;padding-left:24px}
+.timeline::before{content:’’;position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(–gold),transparent)}
+.tl-item{position:relative;margin-bottom:36px;opacity:0;transform:translateX(-16px);transition:opacity 0.6s,transform 0.6s}
+.tl-item.visible{opacity:1;transform:translateX(0)}
+.tl-item::before{content:’’;position:absolute;left:-28px;top:6px;width:8px;height:8px;border-radius:50%;background:var(–gold);border:2px solid var(–paper2);box-shadow:0 0 0 3px rgba(184,150,46,0.2)}
+.tl-date{font-family:var(–font-mono);font-size:0.58rem;color:var(–gold);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:4px}
+.tl-role{font-family:var(–font-display);font-size:1.1rem;font-weight:600;color:var(–ink);margin-bottom:2px}
+.tl-company{font-family:var(–font-mono);font-size:0.65rem;color:var(–text-mid);letter-spacing:0.1em;margin-bottom:8px}
+.tl-desc{font-size:0.88rem;color:var(–text-mid);line-height:1.75}
+
+/* EXPERIENCE */
+#experience{padding:120px 0;background:var(–ink);color:var(–paper)}
+#experience .section-title{color:var(–paper)}
+#experience .section-eyebrow{color:var(–gold2)}
+.exp-header{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:72px}
+.exp-intro{font-size:1rem;color:rgba(242,237,230,0.6);line-height:1.85;padding-top:12px}
+.exp-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,0.04)}
+.exp-card{background:#141414;padding:44px 36px;position:relative;overflow:hidden;transition:background 0.3s;cursor:none}
+.exp-card::before{content:’’;position:absolute;top:0;left:0;right:0;height:2px;background:var(–gold);transform:scaleX(0);transform-origin:left;transition:transform 0.4s}
+.exp-card:hover{background:#1a1a1a}
+.exp-card:hover::before{transform:scaleX(1)}
+.exp-card-num{font-family:var(–font-display);font-size:3.5rem;font-weight:900;color:rgba(184,150,46,0.1);line-height:1;margin-bottom:20px;letter-spacing:-0.04em;transition:color 0.3s}
+.exp-card:hover .exp-card-num{color:rgba(184,150,46,0.2)}
+.exp-card-title{font-family:var(–font-display);font-size:1.3rem;font-weight:600;color:var(–paper);margin-bottom:10px;line-height:1.3}
+.exp-card-company{font-family:var(–font-mono);font-size:0.63rem;color:var(–gold2);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:16px}
+.exp-card-desc{font-size:0.88rem;color:rgba(242,237,230,0.5);line-height:1.75}
+.exp-card-tags{margin-top:24px;display:flex;flex-wrap:wrap;gap:6px}
+.exp-tag{font-family:var(–font-mono);font-size:0.58rem;letter-spacing:0.1em;color:rgba(184,150,46,0.7);background:rgba(184,150,46,0.08);border:1px solid rgba(184,150,46,0.12);border-radius:2px;padding:4px 10px}
+
+/* AI ASSISTANT */
+#ai-assistant{padding:120px 0;background:var(–paper2);position:relative;overflow:hidden}
+#ai-assistant::before{content:‘AI’;position:absolute;font-family:var(–font-display);font-size:clamp(180px,22vw,300px);font-weight:900;font-style:italic;color:transparent;-webkit-text-stroke:1px rgba(184,150,46,0.07);right:-40px;top:50%;transform:translateY(-50%);pointer-events:none;user-select:none;letter-spacing:-0.05em}
+.ai-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:72px;align-items:start}
+.ai-left .section-title{margin-bottom:20px}
+.ai-left-desc{font-size:0.92rem;color:var(–text-mid);line-height:1.85;margin-bottom:32px;border-left:2px solid var(–border-gold);padding-left:18px}
+.ai-capabilities{display:flex;flex-direction:column;gap:10px}
+.ai-cap-item{display:flex;align-items:center;gap:12px;font-family:var(–font-mono);font-size:0.63rem;color:var(–text-mid);letter-spacing:0.1em}
+.ai-cap-dot{width:6px;height:6px;border-radius:50%;background:var(–gold);flex-shrink:0}
+.ai-chat-box{background:var(–paper);border:1px solid var(–border-gold);border-radius:8px;overflow:hidden;box-shadow:0 16px 60px rgba(28,26,23,0.1);display:flex;flex-direction:column;height:520px}
+.ai-chat-header{background:var(–ink);padding:18px 24px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.ai-chat-avatar{width:36px;height:36px;background:rgba(184,150,46,0.15);border:1px solid rgba(184,150,46,0.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.ai-chat-title{font-family:var(–font-ui);font-size:0.88rem;font-weight:600;color:var(–paper);line-height:1.2}
+.ai-chat-subtitle{font-family:var(–font-mono);font-size:0.55rem;color:rgba(242,237,230,0.4);letter-spacing:0.12em;text-transform:uppercase;display:flex;align-items:center;gap:6px;margin-top:2px}
+.ai-status-dot{width:5px;height:5px;border-radius:50%;background:#4ade80;animation:aiPulse 2s ease-in-out infinite}
+@keyframes aiPulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.ai-messages{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px;scroll-behavior:smooth}
+.ai-messages::-webkit-scrollbar{width:4px}
+.ai-messages::-webkit-scrollbar-thumb{background:var(–border);border-radius:2px}
+.ai-msg{max-width:86%;animation:aiMsgIn 0.3s ease}
+@keyframes aiMsgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.ai-msg.bot{align-self:flex-start}
+.ai-msg.user{align-self:flex-end}
+.ai-msg-bubble{padding:11px 15px;border-radius:8px;font-size:0.85rem;line-height:1.7}
+.ai-msg.bot .ai-msg-bubble{background:var(–paper2);border:1px solid var(–border);color:var(–text);border-bottom-left-radius:2px}
+.ai-msg.user .ai-msg-bubble{background:var(–ink);color:var(–paper);border-bottom-right-radius:2px}
+.ai-typing .ai-msg-bubble{display:flex;align-items:center;gap:5px;padding:14px 16px}
+.ai-dot{width:6px;height:6px;border-radius:50%;background:var(–text-dim);animation:aiDotBounce 1.2s ease-in-out infinite}
+.ai-dot:nth-child(2){animation-delay:0.2s}
+.ai-dot:nth-child(3){animation-delay:0.4s}
+@keyframes aiDotBounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+.ai-quick-prompts{padding:0 20px 12px;display:flex;flex-wrap:wrap;gap:6px;flex-shrink:0}
+.ai-quick-btn{font-family:var(–font-mono);font-size:0.58rem;letter-spacing:0.08em;color:var(–gold);background:var(–gold-pale);border:1px solid var(–border-gold);border-radius:2px;padding:5px 11px;cursor:pointer;transition:all 0.2s;white-space:nowrap}
+.ai-quick-btn:hover{background:var(–gold);color:var(–ink);border-color:var(–gold)}
+.ai-input-row{padding:12px 16px;border-top:1px solid var(–border);display:flex;gap:8px;align-items:flex-end;background:var(–paper2);flex-shrink:0}
+.ai-input{flex:1;background:var(–paper);border:1px solid var(–border);border-radius:4px;padding:9px 14px;font-family:var(–font-ui);font-size:0.83rem;color:var(–text);outline:none;transition:border-color 0.2s;resize:none;max-height:80px;line-height:1.5}
+.ai-input:focus{border-color:var(–border-gold)}
+.ai-input::placeholder{color:var(–text-dim)}
+.ai-send{width:38px;height:38px;background:var(–ink);border:none;border-radius:4px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.2s,transform 0.15s;flex-shrink:0}
+.ai-send:hover{background:var(–gold);transform:scale(1.05)}
+.ai-send svg{width:14px;height:14px;fill:none;stroke:var(–paper);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ai-send:disabled{opacity:0.4;pointer-events:none}
+
+/* PROJECTS */
+#projects{padding:120px 0;background:var(–paper)}
+.projects-header{display:flex;align-items:end;justify-content:space-between;margin-bottom:60px;flex-wrap:wrap;gap:24px}
+.projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.project-card{border:1px solid var(–border);border-radius:4px;overflow:hidden;transition:all 0.35s;cursor:none;position:relative;background:var(–paper2)}
+.project-card:hover{border-color:var(–border-gold);transform:translateY(-6px);box-shadow:0 24px 60px rgba(12,12,12,0.12)}
+.project-card-top{padding:36px 36px 0;position:relative}
+.project-num{font-family:var(–font-mono);font-size:0.6rem;color:var(–text-dim);letter-spacing:0.2em;margin-bottom:20px}
+.project-name{font-family:var(–font-display);font-size:1.9rem;font-weight:700;color:var(–ink);letter-spacing:-0.02em;margin-bottom:6px;line-height:1.1}
+.project-name em{font-style:italic;font-weight:400;color:var(–gold)}
+.project-tagline{font-family:var(–font-mono);font-size:0.63rem;color:var(–text-dim);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:20px}
+.project-desc{font-size:0.9rem;color:var(–text-mid);line-height:1.8;margin-bottom:24px}
+.project-stack{display:flex;flex-wrap:wrap;gap:6px}
+.stack-tag{font-family:var(–font-mono);font-size:0.58rem;letter-spacing:0.1em;color:var(–text-mid);background:var(–paper3);border:1px solid var(–border);border-radius:2px;padding:4px 10px}
+.project-card-bottom{padding:20px 36px 28px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(–border);margin-top:28px}
+.project-link{font-family:var(–font-mono);font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(–gold);text-decoration:none;display:flex;align-items:center;gap:6px;transition:gap 0.2s}
+.project-link:hover{gap:10px}
+.project-arrow{font-size:1rem;transition:transform 0.2s}
+.project-card:hover .project-arrow{transform:translate(3px,-3px)}
+.project-card.featured{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr}
+.project-card.featured .project-card-top{padding:48px;border-right:1px solid var(–border)}
+.project-card.featured .project-card-bottom{flex-direction:column;align-items:flex-start;justify-content:center;padding:48px;border-top:none;margin-top:0;gap:24px}
+.project-card.featured .project-name{font-size:2.8rem}
+
+/* EDUCATION */
+#education{padding:100px 0;background:var(–paper2)}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:56px}
+.edu-card{background:var(–paper);border:1px solid var(–border);border-radius:4px;padding:36px;position:relative;transition:all 0.3s;cursor:none;overflow:hidden}
+.edu-card::after{content:’’;position:absolute;bottom:0;left:0;right:0;height:2px;background:var(–gold);transform:scaleX(0);transition:transform 0.3s}
+.edu-card:hover{border-color:var(–border-gold);transform:translateY(-4px)}
+.edu-card:hover::after{transform:scaleX(1)}
+.edu-icon{font-size:2rem;margin-bottom:20px;display:block}
+.edu-degree{font-family:var(–font-display);font-size:1.3rem;font-weight:600;color:var(–ink);margin-bottom:4px}
+.edu-school{font-family:var(–font-mono);font-size:0.63rem;color:var(–gold);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:8px}
+.edu-year{font-family:var(–font-mono);font-size:0.6rem;color:var(–text-dim);letter-spacing:0.1em}
+
+/* CONTACT */
+#contact{padding:140px 0;background:var(–ink);text-align:center;position:relative;overflow:hidden}
+.contact-deco{position:absolute;font-family:var(–font-display);font-size:clamp(160px,20vw,280px);font-weight:900;font-style:italic;color:transparent;-webkit-text-stroke:1px rgba(184,150,46,0.08);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;user-select:none;letter-spacing:-0.04em}
+#contact .section-eyebrow{justify-content:center}
+#contact .section-eyebrow::after{display:none}
+#contact .section-title{color:var(–paper);margin-bottom:16px}
+.contact-sub{font-size:1rem;color:rgba(242,237,230,0.5);line-height:1.8;max-width:480px;margin:0 auto 52px}
+.contact-email{font-family:var(–font-display);font-size:clamp(1.4rem,3vw,2.2rem);font-weight:400;font-style:italic;color:var(–gold2);text-decoration:none;display:block;margin-bottom:48px;transition:color 0.2s}
+.contact-email:hover{color:var(–paper)}
+.contact-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.contact-link{font-family:var(–font-mono);font-size:0.63rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(242,237,230,0.5);text-decoration:none;border:1px solid rgba(255,255,255,0.1);border-radius:2px;padding:12px 24px;transition:all 0.25s}
+.contact-link:hover{color:var(–gold2);border-color:rgba(184,150,46,0.3);background:rgba(184,150,46,0.06)}
+
+/* FOOTER */
+footer{background:#080808;padding:28px 48px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.05);flex-wrap:wrap;gap:12px}
+.footer-brand{font-family:var(–font-display);font-size:1rem;font-weight:700;color:rgba(242,237,230,0.3)}
+.footer-brand span{color:var(–gold);font-style:italic}
+.footer-copy{font-family:var(–font-mono);font-size:0.58rem;color:rgba(242,237,230,0.2);letter-spacing:0.1em}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s,transform 0.8s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.2s}
+.reveal-delay-3{transition-delay:0.3s}
+.reveal-delay-4{transition-delay:0.4s}
+
+/* KEYFRAMES */
+@keyframes slideRight{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* MOBILE */
+@media(max-width:900px){
+nav{padding:18px 24px}
+.nav-links{display:none}
+.hero{grid-template-columns:1fr;min-height:auto}
+.hero-right{display:none}
+.hero-left{padding:110px 24px 60px}
+.hero-stats{position:relative;bottom:auto;left:auto;gap:28px;margin-top:40px;flex-wrap:wrap}
+.container{padding:0 24px}
+.about-grid{grid-template-columns:1fr;gap:48px}
+.exp-cards{grid-template-columns:1fr}
+.exp-header{grid-template-columns:1fr}
+.projects-grid{grid-template-columns:1fr}
+.project-card.featured{grid-template-columns:1fr}
+.project-card.featured .project-card-top{border-right:none;border-bottom:1px solid var(–border)}
+.project-card.featured .project-card-bottom{border-top:none}
+.edu-grid{grid-template-columns:1fr}
+.ai-layout{grid-template-columns:1fr;gap:40px}
+.ai-chat-box{height:420px}
+#ai-assistant::before{display:none}
+footer{padding:20px 24px}
+body{cursor:auto}
+.cursor,.cursor-ring{display:none}
 }
 </style>
 
 </head>
 <body>
 
-<!-- Custom cursor -->
-
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
-<!-- ═══ NAV ═══ -->
+<!-- NAV -->
 
 <nav id="mainNav">
   <a href="#" class="nav-logo">S<span>.</span>Damor</a>
@@ -1434,22 +294,22 @@ flex-shrink: 0;
     <li><a href="#education">Education</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="/cdn-cgi/l/email-protection#691a1c04001d1b0d5b5b29071a0b470c0d1c470007" class="nav-cta">Hire Me</a>
+  <a href="mailto:sumitrd22@nsb.edu.in" class="nav-cta">Hire Me</a>
 </nav>
 
-<!-- ═══ HERO ═══ -->
+<!-- HERO -->
 
 <section class="hero" id="home">
   <div class="hero-left">
-    <div class="hero-tag">Operations & Product</div>
+    <div class="hero-tag">Operations &amp; Product</div>
     <div class="hero-name">Sumit</div>
     <div class="hero-name-italic">Damor.</div>
     <div class="hero-typewriter-wrap">
       <span class="hero-typewriter-prefix">I am a</span>
-      <span class="hero-typewriter-text" id="typewriterText"></span><span class="hero-typewriter-cursor" id="typewriterCursor"></span>
+      <span class="hero-typewriter-text" id="typewriterText"></span><span class="hero-typewriter-cursor"></span>
     </div>
     <p class="hero-desc">
-      Operations & Revenue Associate at <strong>Groww</strong> — India's leading fintech platform. MBA in Marketing from NSB Bangalore. Specialising in corporate client management, subscription lifecycle, and revenue operations.
+      Operations &amp; Revenue Associate at <strong>Groww</strong> — India's leading fintech platform. MBA in Marketing from NSB Bangalore. Specialising in corporate client management, subscription lifecycle, and revenue operations.
     </p>
     <div class="hero-actions">
       <a href="#contact" class="btn-primary"><span>Get in Touch</span></a>
@@ -1475,10 +335,7 @@ flex-shrink: 0;
     <div class="hero-deco-letter">S</div>
     <div class="hero-right-inner">
       <div class="hero-role-stack">
-        <div class="role-badge">
-          <div class="role-dot"></div>
-          Available for opportunities
-        </div>
+        <div class="role-badge"><div class="role-dot"></div>Available for opportunities</div>
         <ul class="hero-taglines">
           <li class="active-line">Operations Specialist</li>
           <li>Revenue Management</li>
@@ -1491,32 +348,15 @@ flex-shrink: 0;
   </div>
 </section>
 
-<!-- ═══ MARQUEE ═══ -->
+<!-- MARQUEE -->
 
 <div class="marquee-bar">
   <div class="marquee-track">
-    <span>Operations</span><span class="sep">·</span>
-    <span>Fintech</span><span class="sep">·</span>
-    <span>Client Management</span><span class="sep">·</span>
-    <span>Revenue Operations</span><span class="sep">·</span>
-    <span>Groww</span><span class="sep">·</span>
-    <span>Product Development</span><span class="sep">·</span>
-    <span>Bangalore</span><span class="sep">·</span>
-    <span>AI Tools</span><span class="sep">·</span>
-    <span>Indian Languages</span><span class="sep">·</span>
-    <span>Operations</span><span class="sep">·</span>
-    <span>Fintech</span><span class="sep">·</span>
-    <span>Client Management</span><span class="sep">·</span>
-    <span>Revenue Operations</span><span class="sep">·</span>
-    <span>Groww</span><span class="sep">·</span>
-    <span>Product Development</span><span class="sep">·</span>
-    <span>Bangalore</span><span class="sep">·</span>
-    <span>AI Tools</span><span class="sep">·</span>
-    <span>Indian Languages</span><span class="sep">·</span>
+    <span>Operations</span><span class="sep">·</span><span>Fintech</span><span class="sep">·</span><span>Client Management</span><span class="sep">·</span><span>Revenue Operations</span><span class="sep">·</span><span>Groww</span><span class="sep">·</span><span>Product Development</span><span class="sep">·</span><span>Bangalore</span><span class="sep">·</span><span>AI Tools</span><span class="sep">·</span><span>Indian Languages</span><span class="sep">·</span><span>Operations</span><span class="sep">·</span><span>Fintech</span><span class="sep">·</span><span>Client Management</span><span class="sep">·</span><span>Revenue Operations</span><span class="sep">·</span><span>Groww</span><span class="sep">·</span><span>Product Development</span><span class="sep">·</span><span>Bangalore</span><span class="sep">·</span><span>AI Tools</span><span class="sep">·</span><span>Indian Languages</span><span class="sep">·</span>
   </div>
 </div>
 
-<!-- ═══ ABOUT ═══ -->
+<!-- ABOUT -->
 
 <section id="about">
   <div class="container">
@@ -1525,81 +365,56 @@ flex-shrink: 0;
         <div class="section-eyebrow reveal">Who I Am</div>
         <div class="section-title reveal reveal-delay-1">Built for <em>impact,</em><br>driven by craft.</div>
         <div class="about-body">
-          <p class="reveal reveal-delay-2">
-            I'm Sumit Damor — an operations professional based in <strong>Bangalore, India</strong>, currently working at <strong>Groww</strong>, one of India's fastest-growing fintech platforms with over 10 million active investors.
-          </p>
-          <p class="reveal reveal-delay-3">
-            My work spans <strong>order processing</strong>, corporate client ticketing for Groww Cloud subscriptions, and revenue operations — supporting brokers, companies, and proprietary traders with onboarding, SLA management, and system issue resolution.
-          </p>
-          <p class="reveal reveal-delay-4">
-            Beyond operations, I build tools that solve real problems — most recently <strong>Likhavat</strong>, an AI-powered transliteration engine supporting 10 Indian languages, built with Gemini AI and deployed on Cloudflare.
-          </p>
+          <p class="reveal reveal-delay-2">I'm Sumit Damor — an <strong>Order Processing &amp; Revenue Operations Associate</strong> at <strong>Groww Invest-Tech Pvt Ltd</strong>, Bangalore, since July 2024. Groww is one of India's fastest-growing fintech platforms with over 10 million active investors.</p>
+          <p class="reveal reveal-delay-3">I manage end-to-end <strong>corporate client tickets</strong> for Groww Cloud subscriptions — supporting brokers, companies, and proprietary traders across onboarding, documentation, and account verification. Primary support contact for execution issues and system errors within SLA.</p>
+          <p class="reveal reveal-delay-4">I hold an <strong>MBA in Marketing</strong> from National School of Business, Bangalore (2022–2024), and a BA in Economics from IGNOU. I also build side projects — most recently <strong>Likhavat</strong>, an AI transliteration engine for 10 Indian languages.</p>
         </div>
       </div>
       <div class="about-right">
         <div class="skills-group reveal">
           <div class="skills-group-label">Core Skills</div>
           <div class="skills-pills">
-            <span class="pill">Client Management</span>
-            <span class="pill">Revenue Operations</span>
-            <span class="pill">Subscription Lifecycle</span>
-            <span class="pill">Fintech Operations</span>
-            <span class="pill">Process Optimisation</span>
-            <span class="pill">Stakeholder Management</span>
+            <span class="pill">Client Management</span><span class="pill">Revenue Operations</span><span class="pill">Subscription Lifecycle</span><span class="pill">Fintech Operations</span><span class="pill">Process Optimisation</span><span class="pill">Stakeholder Management</span>
           </div>
         </div>
         <div class="skills-group reveal reveal-delay-1">
-          <div class="skills-group-label">Technical</div>
+          <div class="skills-group-label">Tools</div>
           <div class="skills-pills">
-            <span class="pill">Excel</span>
-            <span class="pill">Freshdesk</span>
-            <span class="pill">Jira</span>
-            <span class="pill">Tableau</span>
-            <span class="pill">GitHub Pages</span>
-            <span class="pill">KV Storage</span>
+            <span class="pill">Excel</span><span class="pill">Freshdesk</span><span class="pill">Jira</span><span class="pill">Tableau</span><span class="pill">Google Sheets</span><span class="pill">Groww Cloud</span>
           </div>
         </div>
         <div class="skills-group reveal reveal-delay-2">
           <div class="skills-group-label">Business Skills</div>
           <div class="skills-pills">
-            <span class="pill">Data Analysis</span>
-            <span class="pill">Market Research</span>
-            <span class="pill">Customer Retention</span>
-            <span class="pill">Email Marketing</span>
-            <span class="pill">Project Management</span>
-            <span class="pill">Sales</span>
+            <span class="pill">Data Analysis</span><span class="pill">Market Research</span><span class="pill">Customer Retention</span><span class="pill">Email Marketing</span><span class="pill">Project Management</span><span class="pill">Sales</span>
           </div>
         </div>
-
-```
-    <div class="timeline reveal reveal-delay-3" style="margin-top:40px;">
-      <div class="tl-item">
-        <div class="tl-date">July 2024 — Present</div>
-        <div class="tl-role">Order Processing &amp; Revenue Operations Associate</div>
-        <div class="tl-company">Groww · Bangalore</div>
-        <div class="tl-desc">Manages end-to-end corporate client tickets for Groww Cloud subscriptions. Supports brokers, companies and proprietary traders with onboarding, documentation validation and account verification.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-date">2022 — 2024</div>
-        <div class="tl-role">MBA — Marketing</div>
-        <div class="tl-company">National School of Business · Bangalore</div>
-        <div class="tl-desc">Won AAGMAN Marketing Fest — top prize. Led the Annual College Fest team. Won Recycle Mania product design competition.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-date">2025</div>
-        <div class="tl-role">Builder · Likhavat</div>
-        <div class="tl-company">Independent · Open Source</div>
-        <div class="tl-desc">Built Likhavat — an AI transliteration engine for 10 Indian languages using Gemini 2.5 Flash-Lite, Cloudflare Workers + KV, and GitHub Pages.</div>
+        <div class="timeline reveal reveal-delay-3" style="margin-top:40px">
+          <div class="tl-item">
+            <div class="tl-date">July 2024 — Present</div>
+            <div class="tl-role">Order Processing &amp; Revenue Operations Associate</div>
+            <div class="tl-company">Groww · Bangalore</div>
+            <div class="tl-desc">Manages end-to-end corporate client tickets for Groww Cloud subscriptions. Supports brokers, companies and proprietary traders with onboarding, documentation validation and account verification.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">Aug 2022 — June 2024</div>
+            <div class="tl-role">MBA — Marketing</div>
+            <div class="tl-company">National School of Business · Bangalore</div>
+            <div class="tl-desc">Won AAGMAN Marketing Fest — top prize. Led the Annual College Fest team. Won Recycle Mania product design competition.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">2025</div>
+            <div class="tl-role">Builder · Likhavat</div>
+            <div class="tl-company">Independent · Open Source</div>
+            <div class="tl-desc">Built Likhavat — an AI transliteration engine for 10 Indian languages using Gemini 2.5 Flash-Lite, Cloudflare Workers + KV, and GitHub Pages.</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-```
-
-  </div>
 </section>
 
-<!-- ═══ EXPERIENCE ═══ -->
+<!-- EXPERIENCE -->
 
 <section id="experience">
   <div class="container">
@@ -1608,134 +423,87 @@ flex-shrink: 0;
         <div class="section-eyebrow reveal">Experience</div>
         <div class="section-title reveal reveal-delay-1">Where I've<br><em>made impact.</em></div>
       </div>
-      <p class="exp-intro reveal reveal-delay-2">
-        Deep experience in financial services operations — managing the entire lifecycle of high-value client relationships, subscription management, and cross-functional revenue initiatives.
-      </p>
+      <p class="exp-intro reveal reveal-delay-2">Deep experience in financial services operations — managing the entire lifecycle of high-value client relationships, subscription management, and cross-functional revenue initiatives.</p>
     </div>
-
-```
-<div class="exp-cards">
-  <div class="exp-card reveal">
-    <div class="exp-card-num">01</div>
-    <div class="exp-card-title">Corporate Client Management</div>
-    <div class="exp-card-company">Groww · July 2024–Present</div>
-    <div class="exp-card-desc">Manages end-to-end corporate client tickets for Groww Cloud subscriptions — validates onboarding requests, documentation and account verification. Primary support contact resolving execution issues, system errors and connectivity problems within SLA.</div>
-    <div class="exp-card-tags">
-      <span class="exp-tag">CRM</span>
-      <span class="exp-tag">Client Relations</span>
-      <span class="exp-tag">Escalations</span>
-      <span class="exp-tag">Fintech</span>
+    <div class="exp-cards">
+      <div class="exp-card reveal">
+        <div class="exp-card-num">01</div>
+        <div class="exp-card-title">Corporate Client Management</div>
+        <div class="exp-card-company">Groww · July 2024–Present</div>
+        <div class="exp-card-desc">Manages end-to-end corporate client tickets for Groww Cloud subscriptions — validates onboarding requests, documentation and account verification. Primary support contact resolving execution issues, system errors and connectivity problems within SLA.</div>
+        <div class="exp-card-tags"><span class="exp-tag">CRM</span><span class="exp-tag">Client Relations</span><span class="exp-tag">Escalations</span><span class="exp-tag">Fintech</span></div>
+      </div>
+      <div class="exp-card reveal reveal-delay-1">
+        <div class="exp-card-num">02</div>
+        <div class="exp-card-title">Subscription Lifecycle</div>
+        <div class="exp-card-company">Groww Cloud · Subscriptions</div>
+        <div class="exp-card-desc">Monitors subscription usage, renewals and cancellations for Groww Cloud. Maintains dashboards tracking active subscriptions, escalations and SLA adherence across the corporate client base.</div>
+        <div class="exp-card-tags"><span class="exp-tag">Subscriptions</span><span class="exp-tag">Renewals</span><span class="exp-tag">SLA Management</span><span class="exp-tag">Dashboards</span></div>
+      </div>
+      <div class="exp-card reveal reveal-delay-2">
+        <div class="exp-card-num">03</div>
+        <div class="exp-card-title">Revenue Operations</div>
+        <div class="exp-card-company">Groww · Operations Team</div>
+        <div class="exp-card-desc">Collaborates with product, engineering and finance teams to improve operational workflows. Tracks KPIs across subscription metrics, renewal rates, and SLA adherence to drive operational efficiency.</div>
+        <div class="exp-card-tags"><span class="exp-tag">Revenue</span><span class="exp-tag">Churn Reduction</span><span class="exp-tag">Analytics</span><span class="exp-tag">Cross-functional</span></div>
+      </div>
     </div>
-  </div>
-  <div class="exp-card reveal reveal-delay-1">
-    <div class="exp-card-num">02</div>
-    <div class="exp-card-title">Subscription Lifecycle</div>
-    <div class="exp-card-company">Groww Cloud · Subscriptions</div>
-    <div class="exp-card-desc">Monitors subscription usage, renewals and cancellations for Groww Cloud. Maintains dashboards tracking active subscriptions, escalations and SLA adherence across the corporate client base.</div>
-    <div class="exp-card-tags">
-      <span class="exp-tag">Subscriptions</span>
-      <span class="exp-tag">Mutual Funds</span>
-      <span class="exp-tag">SLA Management</span>
-      <span class="exp-tag">Demat</span>
-    </div>
-  </div>
-  <div class="exp-card reveal reveal-delay-2">
-    <div class="exp-card-num">03</div>
-    <div class="exp-card-title">Revenue Operations</div>
-    <div class="exp-card-company">Groww · Operations Team</div>
-    <div class="exp-card-desc">Collaborates with product, engineering and finance teams to improve operational workflows. Tracks KPIs across subscription metrics, renewal rates, and SLA adherence to drive operational efficiency.</div>
-    <div class="exp-card-tags">
-      <span class="exp-tag">Revenue</span>
-      <span class="exp-tag">Churn Reduction</span>
-      <span class="exp-tag">Conversion</span>
-      <span class="exp-tag">Analytics</span>
-    </div>
-  </div>
-</div>
-```
-
   </div>
 </section>
 
-<!-- ═══ AI ASSISTANT ═══ -->
+<!-- AI ASSISTANT -->
 
 <section id="ai-assistant">
   <div class="container">
     <div class="ai-layout">
-
-```
-  <!-- Left: intro -->
-  <div class="ai-left">
-    <div class="section-eyebrow reveal">AI Assistant</div>
-    <div class="section-title reveal reveal-delay-1">Ask me <em>anything.</em></div>
-    <p class="ai-left-desc reveal reveal-delay-2">
-      I've trained an AI on my complete CV, work history, projects, and achievements. Ask it anything — from my daily tools at Groww to how I built Likhavat.
-    </p>
-    <div class="ai-capabilities reveal reveal-delay-3">
-      <div class="ai-cap-item"><div class="ai-cap-dot"></div>Current role &amp; responsibilities at Groww</div>
-      <div class="ai-cap-item"><div class="ai-cap-dot"></div>Education — MBA, BA Economics</div>
-      <div class="ai-cap-item"><div class="ai-cap-dot"></div>Projects — Likhavat, MERN, Tableau</div>
-      <div class="ai-cap-item"><div class="ai-cap-dot"></div>Skills — Tools, business &amp; technical</div>
-      <div class="ai-cap-item"><div class="ai-cap-dot"></div>Achievements — AAGMAN, Recycle Mania</div>
-      <div class="ai-cap-item"><div class="ai-cap-dot"></div>Certificates &amp; interests</div>
-    </div>
-  </div>
-
-  <!-- Right: chat box -->
-  <div class="reveal reveal-delay-2">
-    <div class="ai-chat-box">
-
-      <div class="ai-chat-header">
-        <div class="ai-chat-avatar">🤖</div>
-        <div>
-          <div class="ai-chat-title">Sumit's AI Assistant</div>
-          <div class="ai-chat-subtitle">
-            <div class="ai-status-dot"></div>
-            Trained on my CV · Powered by Groq
+      <div class="ai-left">
+        <div class="section-eyebrow reveal">AI Assistant</div>
+        <div class="section-title reveal reveal-delay-1">Ask me <em>anything.</em></div>
+        <p class="ai-left-desc reveal reveal-delay-2">I've trained an AI on my complete CV, work history, projects, and achievements. Ask it anything — from my daily tools at Groww to how I built Likhavat.</p>
+        <div class="ai-capabilities reveal reveal-delay-3">
+          <div class="ai-cap-item"><div class="ai-cap-dot"></div>Current role &amp; responsibilities at Groww</div>
+          <div class="ai-cap-item"><div class="ai-cap-dot"></div>Education — MBA, BA Economics</div>
+          <div class="ai-cap-item"><div class="ai-cap-dot"></div>Projects — Likhavat, MERN, Tableau</div>
+          <div class="ai-cap-item"><div class="ai-cap-dot"></div>Skills — Tools, business &amp; technical</div>
+          <div class="ai-cap-item"><div class="ai-cap-dot"></div>Achievements — AAGMAN, Recycle Mania</div>
+          <div class="ai-cap-item"><div class="ai-cap-dot"></div>Certificates &amp; interests</div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="ai-chat-box">
+          <div class="ai-chat-header">
+            <div class="ai-chat-avatar">🤖</div>
+            <div>
+              <div class="ai-chat-title">Sumit's AI Assistant</div>
+              <div class="ai-chat-subtitle"><div class="ai-status-dot"></div>Trained on my CV · Powered by Groq</div>
+            </div>
+          </div>
+          <div class="ai-messages" id="aiMessages">
+            <div class="ai-msg bot">
+              <div class="ai-msg-bubble">Hey there! 👋 I'm Sumit's AI assistant trained on his full CV. Ask me anything about his career at Groww, education, skills, projects, or achievements!</div>
+            </div>
+          </div>
+          <div class="ai-quick-prompts" id="aiQuickPrompts">
+            <button class="ai-quick-btn" data-p="Where does Sumit work?">💼 Work</button>
+            <button class="ai-quick-btn" data-p="Tell me about his education">🎓 Education</button>
+            <button class="ai-quick-btn" data-p="What projects has he built?">🚀 Projects</button>
+            <button class="ai-quick-btn" data-p="What are his skills?">⚡ Skills</button>
+            <button class="ai-quick-btn" data-p="Tell me about his achievements">🏆 Wins</button>
+            <button class="ai-quick-btn" data-p="What certificates does he have?">📜 Certs</button>
+          </div>
+          <div class="ai-input-row">
+            <textarea class="ai-input" id="aiInput" placeholder="Ask about Sumit's work, skills, projects…" rows="1" maxlength="400"></textarea>
+            <button class="ai-send" id="aiSend" aria-label="Send">
+              <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
           </div>
         </div>
       </div>
-
-      <div class="ai-messages" id="aiMessages">
-        <div class="ai-msg bot">
-          <div class="ai-msg-bubble">
-            Hey there! 👋 I'm Sumit's AI assistant trained on his full CV. Ask me anything about his career at Groww, education, skills, projects, or achievements!
-          </div>
-        </div>
-      </div>
-
-      <div class="ai-quick-prompts" id="aiQuickPrompts">
-        <button class="ai-quick-btn" data-p="Where does Sumit work?">💼 Work</button>
-        <button class="ai-quick-btn" data-p="Tell me about his education">🎓 Education</button>
-        <button class="ai-quick-btn" data-p="What projects has he built?">🚀 Projects</button>
-        <button class="ai-quick-btn" data-p="What are his skills?">⚡ Skills</button>
-        <button class="ai-quick-btn" data-p="Tell me about his achievements">🏆 Wins</button>
-        <button class="ai-quick-btn" data-p="What certificates does he have?">📜 Certs</button>
-      </div>
-
-      <div class="ai-input-row">
-        <textarea
-          class="ai-input"
-          id="aiInput"
-          placeholder="Ask about Sumit's work, skills, projects…"
-          rows="1"
-          maxlength="400"
-        ></textarea>
-        <button class="ai-send" id="aiSend" aria-label="Send">
-          <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-        </button>
-      </div>
-
     </div>
-  </div>
-
-</div>
-```
-
   </div>
 </section>
 
-<!-- ═══ PROJECTS ═══ -->
+<!-- PROJECTS -->
 
 <section id="projects">
   <div class="container">
@@ -1745,85 +513,46 @@ flex-shrink: 0;
         <div class="section-title reveal reveal-delay-1">Things I've <em>built.</em></div>
       </div>
     </div>
-
-```
-<div class="projects-grid">
-  <!-- Featured project -->
-  <div class="project-card featured reveal">
-    <div class="project-card-top">
-      <div class="project-num">Featured — 01</div>
-      <div class="project-name">Lik<em>havat</em></div>
-      <div class="project-tagline">English → Roman Script Transliterator</div>
-      <p class="project-desc">
-        An AI-powered transliteration engine that converts English text into Roman script of 10 major Indian languages — Hindi, Gujarati, Tamil, Kannada, Telugu, Bengali, Marathi, Punjabi, Malayalam, and Odia. Features 3 tone modes (Formal / Standard / Casual), dark/light theme, live quota meter, and auto API failover between Gemini and Groq.
-      </p>
-      <div class="project-stack">
-        <span class="stack-tag">Gemini 2.5 Flash-Lite</span>
-        <span class="stack-tag">Groq / Llama 3.3</span>
-        <span class="stack-tag">Cloudflare Workers</span>
-        <span class="stack-tag">KV Storage</span>
-        <span class="stack-tag">GitHub Pages</span>
+    <div class="projects-grid">
+      <div class="project-card featured reveal">
+        <div class="project-card-top">
+          <div class="project-num">Featured — 01</div>
+          <div class="project-name">Lik<em>havat</em></div>
+          <div class="project-tagline">English → Roman Script Transliterator</div>
+          <p class="project-desc">An AI-powered transliteration engine that converts English text into Roman script of 10 major Indian languages — Hindi, Gujarati, Tamil, Kannada, Telugu, Bengali, Marathi, Punjabi, Malayalam, and Odia. Features 3 tone modes, dark/light theme, live quota meter, and auto API failover between Gemini and Groq.</p>
+          <div class="project-stack"><span class="stack-tag">Gemini 2.5 Flash-Lite</span><span class="stack-tag">Groq / Llama 3.3</span><span class="stack-tag">Cloudflare Workers</span><span class="stack-tag">KV Storage</span><span class="stack-tag">GitHub Pages</span></div>
+        </div>
+        <div class="project-card-bottom">
+          <div style="font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--text-dim);letter-spacing:0.12em;text-transform:uppercase">10 Languages · 1,000 req/day · Auto-failover</div>
+          <a href="https://damorsumit2000-lab.github.io/english-to-roman-translator/" class="project-link" target="_blank">Live App <span class="project-arrow">↗</span></a>
+          <a href="https://github.com/damorsumit2000-lab/english-to-roman-translator" class="project-link" target="_blank">GitHub <span class="project-arrow">↗</span></a>
+        </div>
+      </div>
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-card-top">
+          <div class="project-num">02</div>
+          <div class="project-name" style="font-size:1.6rem">UPI Market <em>Analysis</em></div>
+          <div class="project-tagline">Digital India Movement Study</div>
+          <p class="project-desc">Aggregated data from authentic sources on major Digital UPI Platforms in India. Built Tableau visualizations to demonstrate market share and trends across the UPI ecosystem.</p>
+          <div class="project-stack"><span class="stack-tag">Tableau</span><span class="stack-tag">Data Analysis</span><span class="stack-tag">Market Research</span></div>
+        </div>
+        <div class="project-card-bottom"><a href="https://github.com/damorsumit2000-lab" class="project-link" target="_blank">View on GitHub <span class="project-arrow">↗</span></a></div>
+      </div>
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-card-top">
+          <div class="project-num">03</div>
+          <div class="project-name" style="font-size:1.6rem">MERN News <em>Website</em></div>
+          <div class="project-tagline">Full-Stack Web Application</div>
+          <p class="project-desc">Built a full-stack news website using ReactJS, ExpressJS and NodeJS. Deployed live on Heroku server. Features real-time news aggregation and responsive design.</p>
+          <div class="project-stack"><span class="stack-tag">ReactJS</span><span class="stack-tag">ExpressJS</span><span class="stack-tag">NodeJS</span><span class="stack-tag">Heroku</span></div>
+        </div>
+        <div class="project-card-bottom"><a href="https://github.com/damorsumit2000-lab" class="project-link" target="_blank">View on GitHub <span class="project-arrow">↗</span></a></div>
       </div>
     </div>
-    <div class="project-card-bottom">
-      <div style="font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--text-dim);letter-spacing:0.12em;text-transform:uppercase;">10 Languages · 1,000 req/day · Auto-failover</div>
-      <a href="https://damorsumit2000-lab.github.io/english-to-roman-translator/" class="project-link" target="_blank">
-        Live App <span class="project-arrow">↗</span>
-      </a>
-      <a href="https://github.com/damorsumit2000-lab/english-to-roman-translator" class="project-link" target="_blank">
-        GitHub <span class="project-arrow">↗</span>
-      </a>
-    </div>
-  </div>
-
-  <!-- Portfolio project -->
-  <div class="project-card reveal reveal-delay-1">
-    <div class="project-card-top">
-      <div class="project-num">02</div>
-      <div class="project-name" style="font-size:1.6rem;">This Portfolio</div>
-      <div class="project-tagline">Personal Brand & CV</div>
-      <p class="project-desc">A handcrafted portfolio website with editorial typography, custom cursor, scroll-triggered animations, and a dark/light editorial aesthetic. Built entirely in vanilla HTML/CSS/JS.</p>
-      <div class="project-stack">
-        <span class="stack-tag">HTML / CSS / JS</span>
-        <span class="stack-tag">GitHub Pages</span>
-        <span class="stack-tag">Playfair Display</span>
-        <span class="stack-tag">Syne</span>
-      </div>
-    </div>
-    <div class="project-card-bottom">
-      <a href="https://github.com/damorsumit2000-lab/sumit-damor-portfolio" class="project-link" target="_blank">
-        View Source <span class="project-arrow">↗</span>
-      </a>
-    </div>
-  </div>
-
-  <!-- Groww chatbot -->
-  <div class="project-card reveal reveal-delay-2">
-    <div class="project-card-top">
-      <div class="project-num">03</div>
-      <div class="project-name" style="font-size:1.6rem;">Portfolio <em>Chatbot</em></div>
-      <div class="project-tagline">AI-Powered Portfolio Assistant</div>
-      <p class="project-desc">An interactive portfolio assistant powered by Cloudflare Workers AI, featuring frosted glass UI, street lamp animation, and snow particle effects for an immersive experience.</p>
-      <div class="project-stack">
-        <span class="stack-tag">Cloudflare AI</span>
-        <span class="stack-tag">Workers</span>
-        <span class="stack-tag">CSS Animations</span>
-        <span class="stack-tag">GitHub Pages</span>
-      </div>
-    </div>
-    <div class="project-card-bottom">
-      <a href="https://github.com/damorsumit2000-lab" class="project-link" target="_blank">
-        View on GitHub <span class="project-arrow">↗</span>
-      </a>
-    </div>
-  </div>
-</div>
-```
-
   </div>
 </section>
 
-<!-- ═══ EDUCATION ═══ -->
+<!-- EDUCATION -->
 
 <section id="education">
   <div class="container">
@@ -1834,235 +563,163 @@ flex-shrink: 0;
         <span class="edu-icon">🎓</span>
         <div class="edu-degree">MBA — Marketing</div>
         <div class="edu-school">National School of Business · Bangalore</div>
-        <div class="edu-year">2022 – June 2024 · Won AAGMAN Marketing Fest</div>
+        <div class="edu-year">Aug 2022 – June 2024 · Won AAGMAN Marketing Fest</div>
       </div>
       <div class="edu-card reveal reveal-delay-2">
         <span class="edu-icon">🏛️</span>
         <div class="edu-degree">BA — Economics</div>
-        <div class="edu-school">Indira Gandhi National Open University · New Delhi</div>
+        <div class="edu-school">Indira Gandhi National Open University · Delhi</div>
         <div class="edu-year">2019 – 2022</div>
       </div>
       <div class="edu-card reveal reveal-delay-3">
-        <span class="edu-icon">⚡</span>
-        <div class="edu-degree">Digital Marketing Certificate</div>
+        <span class="edu-icon">📜</span>
+        <div class="edu-degree">Digital Marketing + CRM Certificates</div>
         <div class="edu-school">Curtin University · Online</div>
-        <div class="edu-year">Certified · CRM for Marketers + Project Management</div>
+        <div class="edu-year">Digital Marketing · CRM for Marketers · Project Management</div>
       </div>
       <div class="edu-card reveal reveal-delay-4">
         <span class="edu-icon">🌐</span>
         <div class="edu-degree">Fintech Ecosystem</div>
-        <div class="edu-school">Industry Experience</div>
-        <div class="edu-year">July 2024 – Present · Cloud Subscriptions, OMS, Fintech</div>
+        <div class="edu-school">Industry Experience · Groww</div>
+        <div class="edu-year">July 2024 – Present · Cloud Subscriptions · OMS · Fintech</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ CONTACT ═══ -->
+<!-- CONTACT -->
 
 <section id="contact">
   <div class="contact-deco">Hello.</div>
-  <div class="container" style="position:relative;z-index:2;">
+  <div class="container" style="position:relative;z-index:2">
     <div class="section-eyebrow reveal">Get in Touch</div>
     <div class="section-title reveal reveal-delay-1">Let's work<br><em>together.</em></div>
-    <p class="contact-sub reveal reveal-delay-2">
-      Open to new opportunities in operations, fintech, and product. Based in Bangalore — available for both on-site and remote roles.
-    </p>
-    <a href="/cdn-cgi/l/email-protection#0d7e786064797f693f3f4d637e6f23686978236463" class="contact-email reveal reveal-delay-3"><span class="__cf_email__" data-cfemail="a0d3d5cdc9d4d2c49292e0ced3c28ec5c4d58ec9ce">[email&#160;protected]</span></a>
+    <p class="contact-sub reveal reveal-delay-2">Open to new opportunities in operations, fintech, and product. Based in Bangalore — available for both on-site and remote roles.</p>
+    <a href="mailto:sumitrd22@nsb.edu.in" class="contact-email reveal reveal-delay-3">sumitrd22@nsb.edu.in</a>
     <div class="contact-links reveal reveal-delay-4">
       <a href="https://github.com/damorsumit2000-lab" class="contact-link" target="_blank">GitHub</a>
       <a href="https://damorsumit2000-lab.github.io/english-to-roman-translator/" class="contact-link" target="_blank">Likhavat</a>
-      <a href="/cdn-cgi/l/email-protection#c9babca4a0bdbbadfbfb89a7baabe7acadbce7a0a7" class="contact-link">Email</a>
+      <a href="mailto:sumitrd22@nsb.edu.in" class="contact-link">Email</a>
     </div>
   </div>
 </section>
 
-<!-- ═══ FOOTER ═══ -->
+<!-- FOOTER -->
 
 <footer>
   <div class="footer-brand">S<span>umit Damor</span></div>
   <div class="footer-copy">© 2025 · Bangalore, India · MBA · Groww · Builder</div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-
-// ── Custom cursor ──
-const cursor = document.getElementById(‘cursor’);
-const cursorRing = document.getElementById(‘cursorRing’);
-let mx = 0, my = 0, rx = 0, ry = 0;
-
-document.addEventListener(‘mousemove’, e => {
-mx = e.clientX; my = e.clientY;
-cursor.style.left = mx + ‘px’;
-cursor.style.top  = my + ‘px’;
-});
-
-function animateRing() {
-rx += (mx - rx) * 0.12;
-ry += (my - ry) * 0.12;
-cursorRing.style.left = rx + ‘px’;
-cursorRing.style.top  = ry + ‘px’;
-requestAnimationFrame(animateRing);
-}
+<script>
+// CURSOR
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px'});
+function animateRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;cursorRing.style.left=rx+'px';cursorRing.style.top=ry+'px';requestAnimationFrame(animateRing)}
 animateRing();
-
-document.querySelectorAll(‘a, button, .pill, .exp-card, .project-card, .edu-card, .ai-quick-btn’).forEach(el => {
-el.addEventListener(‘mouseenter’, () => {
-cursor.classList.add(‘expanded’);
-cursorRing.classList.add(‘expanded’);
-});
-el.addEventListener(‘mouseleave’, () => {
-cursor.classList.remove(‘expanded’);
-cursorRing.classList.remove(‘expanded’);
-});
+document.querySelectorAll('a,button,.pill,.exp-card,.project-card,.edu-card,.ai-quick-btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.classList.add('expanded');cursorRing.classList.add('expanded')});
+  el.addEventListener('mouseleave',()=>{cursor.classList.remove('expanded');cursorRing.classList.remove('expanded')});
 });
 
-// ── Sticky nav ──
-window.addEventListener(‘scroll’, () => {
-document.getElementById(‘mainNav’).classList.toggle(‘scrolled’, window.scrollY > 40);
-});
+// STICKY NAV
+window.addEventListener('scroll',()=>{document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>40)});
 
-// ── Scroll reveal ──
-const revealObserver = new IntersectionObserver(entries => {
-entries.forEach(e => {
-if (e.isIntersecting) {
-e.target.classList.add(‘visible’);
-revealObserver.unobserve(e.target);
+// SCROLL REVEAL
+const revealObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target)}})},{threshold:0.12,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.reveal,.tl-item').forEach(el=>revealObs.observe(el));
+
+// HERO TAGLINES ROTATOR
+const lines=document.querySelectorAll('.hero-taglines li');
+let activeIdx=0;
+setInterval(()=>{lines[activeIdx].classList.remove('active-line');activeIdx=(activeIdx+1)%lines.length;lines[activeIdx].classList.add('active-line')},2200);
+
+// TYPEWRITER
+const twLines=['Revenue Operations Pro','Fintech Specialist','MBA in Marketing','Builder of Likhavat','Corporate Client Expert'];
+const twEl=document.getElementById('typewriterText');
+let twIdx=0,twCharIdx=0,twDeleting=false,twPause=0;
+function typeStep(){
+  const cur=twLines[twIdx];
+  if(twPause>0){twPause--;setTimeout(typeStep,80);return}
+  if(!twDeleting){
+    twEl.textContent=cur.slice(0,++twCharIdx);
+    if(twCharIdx===cur.length){twDeleting=true;twPause=22;setTimeout(typeStep,80)}
+    else setTimeout(typeStep,68);
+  }else{
+    twEl.textContent=cur.slice(0,--twCharIdx);
+    if(twCharIdx===0){twDeleting=false;twIdx=(twIdx+1)%twLines.length;twPause=5;setTimeout(typeStep,80)}
+    else setTimeout(typeStep,38);
+  }
 }
-});
-}, { threshold: 0.12, rootMargin: ‘0px 0px -50px 0px’ });
-document.querySelectorAll(’.reveal, .tl-item’).forEach(el => revealObserver.observe(el));
+setTimeout(typeStep,1400);
 
-// ── Hero taglines rotator ──
-const lines = document.querySelectorAll(’.hero-taglines li’);
-let activeIdx = 0;
-setInterval(() => {
-lines[activeIdx].classList.remove(‘active-line’);
-activeIdx = (activeIdx + 1) % lines.length;
-lines[activeIdx].classList.add(‘active-line’);
-}, 2200);
-
-// ── Typewriter effect ──
-const twLines = [
-‘Revenue Operations Pro’,
-‘Fintech Specialist’,
-‘MBA in Marketing’,
-‘Builder of Likhavat’,
-‘Corporate Client Expert’,
-];
-const twEl = document.getElementById(‘typewriterText’);
-let twIdx = 0, twCharIdx = 0, twDeleting = false, twPause = 0;
-
-function typeStep() {
-const current = twLines[twIdx];
-if (twPause > 0) { twPause–; setTimeout(typeStep, 80); return; }
-if (!twDeleting) {
-twEl.textContent = current.slice(0, ++twCharIdx);
-if (twCharIdx === current.length) { twDeleting = true; twPause = 22; setTimeout(typeStep, 80); }
-else setTimeout(typeStep, 68);
-} else {
-twEl.textContent = current.slice(0, –twCharIdx);
-if (twCharIdx === 0) { twDeleting = false; twIdx = (twIdx + 1) % twLines.length; twPause = 5; setTimeout(typeStep, 80); }
-else setTimeout(typeStep, 38);
-}
-}
-setTimeout(typeStep, 1400);
-
-// ── Smooth scroll ──
-document.querySelectorAll(‘a[href^=”#”]’).forEach(a => {
-a.addEventListener(‘click’, e => {
-const target = document.querySelector(a.getAttribute(‘href’));
-if (target) { e.preventDefault(); target.scrollIntoView({ behavior:‘smooth’, block:‘start’ }); }
-});
-});
-
-// ══════════════════════════════
-//  AI ASSISTANT SECTION
-// ══════════════════════════════
-const AI_WORKER = ‘https://super-snow-5572.damorsumit2000.workers.dev’;
-
-const aiMessages    = document.getElementById(‘aiMessages’);
-const aiInput       = document.getElementById(‘aiInput’);
-const aiSend        = document.getElementById(‘aiSend’);
-const aiQuickPrompts= document.getElementById(‘aiQuickPrompts’);
-let aiLoading = false;
-
-// Quick prompt chips
-aiQuickPrompts.querySelectorAll(’.ai-quick-btn’).forEach(btn => {
-btn.addEventListener(‘click’, () => {
-aiSubmit(btn.dataset.p);
-aiQuickPrompts.style.display = ‘none’;
-});
-});
-
-// Auto-resize textarea
-aiInput.addEventListener(‘input’, () => {
-aiInput.style.height = ‘auto’;
-aiInput.style.height = Math.min(aiInput.scrollHeight, 100) + ‘px’;
-});
-
-// Enter to send
-aiInput.addEventListener(‘keydown’, e => {
-if (e.key === ‘Enter’ && !e.shiftKey) {
-e.preventDefault();
-if (!aiLoading) aiSubmit(aiInput.value.trim());
-}
-});
-
-aiSend.addEventListener(‘click’, () => {
-if (!aiLoading) aiSubmit(aiInput.value.trim());
-});
-
-function aiAddMsg(role, html) {
-const div = document.createElement(‘div’);
-div.className = `ai-msg ${role}`;
-div.innerHTML = `<div class="ai-msg-bubble">${html}</div>`;
-aiMessages.appendChild(div);
-aiMessages.scrollTop = aiMessages.scrollHeight;
-}
-
-function aiShowTyping() {
-const div = document.createElement(‘div’);
-div.className = ‘ai-msg bot ai-typing’;
-div.id = ‘aiTypingIndicator’;
-div.innerHTML = `<div class="ai-msg-bubble"> <div class="ai-dot"></div><div class="ai-dot"></div><div class="ai-dot"></div> </div>`;
-aiMessages.appendChild(div);
-aiMessages.scrollTop = aiMessages.scrollHeight;
-}
-
-function aiHideTyping() {
-const el = document.getElementById(‘aiTypingIndicator’);
-if (el) el.remove();
-}
-
-function aiFormat(text) {
-return text
-.replace(/&/g, ‘&’)
-.replace(/</g, ‘<’)
-.replace(/>/g, ‘>’)
-.replace(/**(.*?)**/g, ‘<strong>$1</strong>’)
-.replace(/\n/g, ‘<br>’);
-}
-
-async function aiSubmit(text) {
-if (!text || aiLoading) return;
-aiLoading = true;
-aiSend.disabled = true;
-aiInput.value = ‘’;
-aiInput.style.height = ‘auto’;
-aiQuickPrompts.style.display = ‘none’;
-
-```
-aiAddMsg('user', text);
-aiShowTyping();
-
-try {
-  const res = await fetch(AI_WORKER, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message: text })
+// SMOOTH SCROLL
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
   });
-  const data = await res.json();
-  aiHideTyping();
-  aiAddMsg('bot', aiFormat(d
-```
+});
+
+// AI ASSISTANT
+const AI_WORKER='https://super-snow-5572.damorsumit2000.workers.dev';
+const aiMessages=document.getElementById('aiMessages');
+const aiInput=document.getElementById('aiInput');
+const aiSend=document.getElementById('aiSend');
+const aiQuickPrompts=document.getElementById('aiQuickPrompts');
+let aiLoading=false;
+
+aiQuickPrompts.querySelectorAll('.ai-quick-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{aiSubmit(btn.dataset.p);aiQuickPrompts.style.display='none'});
+});
+
+aiInput.addEventListener('input',()=>{aiInput.style.height='auto';aiInput.style.height=Math.min(aiInput.scrollHeight,100)+'px'});
+aiInput.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();if(!aiLoading)aiSubmit(aiInput.value.trim())}});
+aiSend.addEventListener('click',()=>{if(!aiLoading)aiSubmit(aiInput.value.trim())});
+
+function aiAddMsg(role,html){
+  const d=document.createElement('div');
+  d.className='ai-msg '+role;
+  d.innerHTML='<div class="ai-msg-bubble">'+html+'</div>';
+  aiMessages.appendChild(d);
+  aiMessages.scrollTop=aiMessages.scrollHeight;
+}
+
+function aiShowTyping(){
+  const d=document.createElement('div');
+  d.className='ai-msg bot ai-typing';d.id='aiTyping';
+  d.innerHTML='<div class="ai-msg-bubble"><div class="ai-dot"></div><div class="ai-dot"></div><div class="ai-dot"></div></div>';
+  aiMessages.appendChild(d);aiMessages.scrollTop=aiMessages.scrollHeight;
+}
+
+function aiHideTyping(){const e=document.getElementById('aiTyping');if(e)e.remove()}
+
+function aiFormat(t){
+  return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+}
+
+async function aiSubmit(text){
+  if(!text||aiLoading)return;
+  aiLoading=true;aiSend.disabled=true;
+  aiInput.value='';aiInput.style.height='auto';
+  aiQuickPrompts.style.display='none';
+  aiAddMsg('user',text);aiShowTyping();
+  try{
+    const res=await fetch(AI_WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text})});
+    const data=await res.json();
+    aiHideTyping();
+    aiAddMsg('bot',aiFormat(data.reply||'No response. Email sumitrd22@nsb.edu.in'));
+  }catch(err){
+    aiHideTyping();
+    aiAddMsg('bot','Connection error! Try emailing <strong>sumitrd22@nsb.edu.in</strong>');
+  }finally{
+    aiLoading=false;aiSend.disabled=false;aiInput.focus();
+  }
+}
+</script>
+
+</body>
+</html>
